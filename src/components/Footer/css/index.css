@@ -1,0 +1,28 @@
+
+/* Footer */
+
+.App-Footer {
+  padding: 10px;
+  background: linear-gradient(to top,#fff, cornflowerblue);
+
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  z-index: 3;
+}
+
+.App-Footer-div {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.App-Footer-div-redes {
+  width: 100%;
+  max-width: 300px;
+
+  display: flex;
+  justify-content: space-around;
+}

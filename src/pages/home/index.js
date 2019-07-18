@@ -6,10 +6,10 @@ import './css/index.css'
 // Componentes
 import Nav from '../../components/Menu'
 import Footer from '../../components/Footer'
-import Inicio from '../../components/Start/Inicio'
-import Fakes from '../../components/Start/Fakes'
-import Parts from '../../components/Start/Parts'
-import HowPlay from '../../components/Start/HowPlay'
+import Inicio from '../../components/Home/Inicio'
+import Fakes from '../../components/Home/Fakes'
+import Parts from '../../components/Home/Parts'
+import HowPlay from '../../components/Home/HowPlay'
 
 
 export default props =>

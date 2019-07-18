@@ -51,7 +51,7 @@ function renderProducts(my, toBuy, gold) {
           <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>{part.resistance}</span>
         </div>
         <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>T. atual.</span>
+          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>Taxa de Atualização</span>
           <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>
             <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value-update'>
               <span>Resis.<span> </span>+{part.update_config.resistance}</span>

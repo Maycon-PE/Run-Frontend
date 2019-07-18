@@ -1,0 +1,69 @@
+.Dashboard-Aprimorator {
+  background: orange;
+  position: relative;
+  height: 500px;
+}
+
+.Dashboard-Aprimorator-parts {
+  padding-top: 5px;
+}
+
+.Dashboard-Aprimorator-parts ul { 
+  margin: 0px;
+  width: 100%; 
+  height: 45px;
+  position: relative;
+  border-bottom: 1px solid #fff4;
+
+  display: flex;
+  flex-direction: row wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.Dashboard-Aprimorator-parts ul li {
+  display: flex;
+  height: 100%;
+  border: 1.5px solid transparent;
+  border-radius: 15px;
+  padding: 10px 2px; 
+}
+
+.Dashboard-Aprimorator-parts ul li:hover {
+  border-top: 1.5px solid #fff !important;
+  border-bottom: 1.5px solid #fff !important;
+  cursor: pointer;
+}
+
+.Dashboard-Aprimorator-parts_selected {
+  border-top: 1px solid #fff9;
+  border-bottom: 1px solid #fff9;
+}
+
+.Dashboard-Aprimorator-buttonsBase button:hover { cursor: pointer }
+
+.Dashboard-Aprimorator-buttonsBase button {
+  border-radius: 50%;
+  padding: 0px;
+  font-size: 50px;
+  border: none;
+  background: transparent;
+}
+
+.Dashboard-Aprimorator-buttonsBase {
+  position: fixed;
+  bottom: 10px;
+  padding: 0px 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.Dashboard-Aprimorator-buttonsBase-btnLoja i { color: green !important; }
+
+.Dashboard-Aprimorator-buttonsBase-btnExit i { color: red !important; }
+
+.Dashboard-Aprimorator-content {
+  background: yellow;
+  height: 450px;
+}

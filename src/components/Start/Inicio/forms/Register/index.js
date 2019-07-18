@@ -27,9 +27,15 @@ export default class Register extends Component {
       return
     }  
 
-    if (!Number.isNaN(Number.parseInt(this.nickname))) {
+    if (!Number.isNaN(Number.parseInt(this.nickname)) || this.nickname.length < 4) {
       this.state.invalid('nickname-register')
       this.setState({ message: 'Nickname inválido' })
+      return
+    }
+
+    if (!Number.isNaN(Number.parseInt(this.carName)) || this.carName.length < 4) {
+      this.state.invalid('model-register')
+      this.setState({ message: 'Nome do carro inválido' })
       return
     }
 
@@ -47,7 +53,7 @@ export default class Register extends Component {
     const formData = { 
       name: this.name, email: this.email,
       password: this.password, nickname: this.nickname,
-      genre, country, xp: 1, nvl: 1, src: 'default'
+      genre, country, model: this.carName
     }
 
     const xhr = new XMLHttpRequest()
@@ -57,9 +63,12 @@ export default class Register extends Component {
         const res = JSON.parse(xhr.responseText)
 
         if (!res.status) {
-          const key = res.message.slice(res.message.indexOf('key') + 5, res.message.length - 1)
-          this.setState({ message: key + ' já existe' })
-          this.state.invalid(`${key}-register`)
+          if (res.error) {
+            const key = res.error.slice(res.error.indexOf('key') + 5, res.error.length - 1)
+            this.state.invalid(`${key}-register`)
+            this.setState({ message: key + ' já existe' })
+          } else { this.setState({ message: res.message }) }
+          
           return
         } 
 
@@ -68,7 +77,7 @@ export default class Register extends Component {
       }
     }
 
-    xhr.open('post', 'http://localhost:3001/insert/users', true)
+    xhr.open('post', 'http://localhost:3001/api/v2/createAccount', true)
 
     xhr.setRequestHeader('Content-type', 'application/Json')
 
@@ -92,19 +101,23 @@ export default class Register extends Component {
           <label className='App-Inicio-form-inputs-form-header-label'>Cadastro <span className='App-Inicio-form-inputs-form-header-label-span'>{this.state.message}</span></label>
         </div>
         <form className='App-Inicio-form-inputs-form' onSubmit={e => e.preventDefault()}>
+          <div className='App-Inicio-form-inputs-form-area-input'>
+            <label htmlFor='nome-register'>Nome</label>
+            <input id='nome-register' type='text' name='name' onChange={e => this.name = e.target.value} placeholder='Primeiro e segundo nome' required />  
+          </div>
+          <div className='App-Inicio-form-inputs-form-area-input'>
+            <label htmlFor='email-register'>Email</label>
+            <input id='email-register' type='email' name='email' onChange={e => this.email = e.target.value} placeholder='...@...' required />  
+          </div>
           <div className='App-Inicio-form-inputs-form-area-inputs'>
             <div className='App-Inicio-form-inputs-form-area-input'>
-              <label htmlFor='nome-register'>Nome</label>
-              <input id='nome-register' type='text' name='name' onChange={e => this.name = e.target.value} placeholder='Primeiro e segundo nome' required />  
+              <label htmlFor='model-register'>Nome do carro</label>
+              <input id='model-register' type='text' name='carName' onChange={e => this.carName = e.target.value} placeholder='Nomeie seu carro' required />  
             </div>
             <div className='App-Inicio-form-inputs-form-area-input'>
               <label htmlFor='nickname-register'>Nickname</label>
               <input id='nickname-register' type='text' name='nickname' onChange={e => this.nickname = e.target.value} placeholder='Seu nome no jogo' required />  
             </div>
-          </div>
-          <div className='App-Inicio-form-inputs-form-area-input'>
-            <label htmlFor='email-register'>Email</label>
-            <input id='email-register' type='email' name='email' onChange={e => this.email = e.target.value} placeholder='...@...' required />  
           </div>
           <div className='App-Inicio-form-inputs-form-area-inputs'>
             <div className='App-Inicio-form-inputs-form-area-input'>
@@ -119,16 +132,16 @@ export default class Register extends Component {
           <div className='App-Inicio-form-inputs-form-area-selects'>
             <div className='App-Inicio-form-inputs-form-area-select'>
               <label htmlFor='genre-register'>Gênero</label>
-              <select name='genre' id='genre-register' required>
+              <select name='genre' id='genre-register' onChange={e => this.genre = e.target.value} required>
                 <optgroup label='Gêneros'>
-                  <option value='M'>Masculino</option>
-                  <option value='F'>Feminino</option>
+                  <option value='Masculino'>Masculino</option>
+                  <option value='Femilino'>Feminino</option>
                 </optgroup>
               </select>
             </div>
             <div className='App-Inicio-form-inputs-form-area-select'>
               <label htmlFor='country-register'>Pais *Fictício</label>
-              <select name='country' id='country-register' required>
+              <select name='country' id='country-register' onChange={e => this.country = e.target.value} required>
                 <optgroup label='América'>
                   {this.renderOptions('AM')}
                 </optgroup>

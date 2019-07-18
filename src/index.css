@@ -1,4 +1,6 @@
-* { box-sizing: border-box; }
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+* { box-sizing: border-box; font-family: 'Roboto', sans-serif; }
 
 body { padding: 0; margin: 0px; background-color: cornflowerblue; }
 
@@ -6,4 +8,4 @@ a { color: inherit; text-decoration: none; }
 
 input[type='checkbox'] { display: none; }
 
-ul { list-style: none; }
+ul { list-style: none; padding: 0px; margin: 0px; }

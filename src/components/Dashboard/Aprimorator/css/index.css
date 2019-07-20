@@ -52,12 +52,14 @@
 
 .Dashboard-Aprimorator-buttonsBase {
   position: fixed;
-  bottom: 10px;
+  bottom: 0px;
   padding: 0px 5px;
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
+
+.Dashboard-Aprimorator-buttonsBase button { outline: none; }
 
 .Dashboard-Aprimorator-buttonsBase-btnLoja i { color: green !important; }
 

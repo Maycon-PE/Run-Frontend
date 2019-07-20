@@ -33,156 +33,157 @@
   -ms-animation: rotating 5s linear infinite;
   -o-animation: rotating 5s linear infinite;
   animation: rotating 5s linear infinite;
+
+  cursor: pointer;
 }
 
 
-@media (min-width: 769px) {
-  /*===========================================================================================================*/
-  /* NAV DA HOMEPAGE */
-  .App-Menu {
+.Header {
+  position: fixed;
+  width: 100%;
+  z-index: 5;
+  top: 10px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Header-limit {
+  width: 100%;
+  max-width: 1100px;
+  background: #222;
+  margin: auto;
+  height: 59px;
+  position: relative;
+  border: 1px solid white;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px black;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LEFT */
+
+.Header-limit-left {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.Header-limit-left div { margin: 0px 5px; }
+
+.Header-limit-left-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Header-limit-left-img img {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+.Header-limit-left-fastInfos {
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* RIGHT */
+.Header-limit-right {
+  margin-right: 10px;
+  font-size: 30px;
+  color: white;
+}
+
+.Header-limit-right i { z-index: 5; }
+.Header-limit-right i:hover { cursor: pointer; }
+
+
+.Header-limit-right-menu span:hover { 
+  cursor: pointer;
+}
+
+@media (min-width: 510px) {
+  .Header-limit { overflow: hidden; }
+
+  .Header-limit-right {
     position: relative;
-    background: linear-gradient(to bottom, white, cornflowerblue);
-    position: fixed;
-    width: 100vw;
-    z-index: 5;
-  
+    height: 100%;
+    width: 300px;
+  }
+
+  .Header-limit-right-limitMenu {
+    position: absolute;
+    left: 0%;
+    top: 10px;
+    
     display: flex;
-    flex-direction: row;
+    transition: all .7s linear;
+  }
+
+  .Header-limit-right-menu { 
+    width: 258px; 
+    margin-left: 10px;
+
+    display: flex;
     justify-content: space-around;
     align-items: center;
   }
-  
-  .App-Menu-ul {
-    padding: 0px; 
-    box-shadow: 0px 10px 10px #fff9;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    height: 40px;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+  .Header-limit-right-menu span {
+    font-size: 16px;
   }
 
-  .App-Menu-ul:hover li a { filter: blur(2px); }
-  
-  .App-Menu-ul li {
-    display: inline-block;
-    margin: 0px 15px;
-    transition: filter .3s ease-in;
-  }
-  
-  .App-Menu-ul li a {
-    position: relative;
-    padding: 5px 20px;
-    display: flex;
-    align-items: center;
-  }
-
-  .App-Menu-ul li a i { opacity: 0; margin-right: 10px; font-size: 26px; }
-
-  .App-Menu-ul li a:hover { filter: blur(0); color: rgb(218, 211, 211); }
-
-  .App-Menu-ul li a:hover i { opacity: 1; }
-
-  .App-Menu-ul li a:before {
-    content: '';
-    position: absolute;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    top: 0px;
-    border-radius: 10px;
-    background: #222;
-    transform-origin: left;
-
-    transform: scaleX(0);
-    z-index: -1;
-    transition: all .5s ease;
-  }
-
-  .App-Menu-ul li a:hover:before {
-    transform-origin: right;
-    transform: scaleX(1);
-  }
-  
-  .App-Menu-labelNav { display: none }
-  /*FIM DA NAV DA HOMEPAGE*/
-  /*===========================================================================================================*/
+  #open-settings:checked ~ .Header-limit-right-limitMenu {  left: 90%; }
 }
 
-@media (max-width: 768px) {
-  /* NAV DA HOMEPAGE */
-  /*===========================================================================================================*/
-
-  .App-Menu { 
-    z-index: 5;
-    padding-right: 10px;
-    position: fixed;
-    width: 95vw;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .App-Menu-labelNav {
-    font-size: 60px;
-    padding: 0px 20px;
-    display: block;
-    cursor: pointer;
-  }
-
-  .App-Menu-labelNav:active {
-    color: gray;
-  }
-  
-  .App-Menu-ul {
-    padding: 0px;
-    position: absolute;
-    top: -350px;
-    left: 5px;
-    opacity: 0;
-  
-    transition: all 1s ease-in;
-  }
-
-  .App-Menu-ul li {
+@media (max-width: 509px) {
+  .Header-limit-right {
     position: relative;
-    border-radius: 9px;
-    box-shadow: 0px 0px 10px #f5f5f5;
-    background: cornflowerblue;
-
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-  }
-
-
-  .App-Menu-ul a {
-    width: 100%;
     height: 100%;
+    width: 100px;
+  }
+
+  .Header-limit-right-limitMenu {
+    position: absolute;
+    left: 0%;
+    top: -155px;
+    
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    transition: all .7s linear;
+  }
+
+  .Header-limit-right-menu { 
+    width: 100px;
+    margin-bottom: 20px;
+    background: #222; 
+    border-radius: 10px;
 
     display: flex;
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
   }
-  
-  .App-Menu-ul li i {
-    font-size: 40px;
-    padding: 5px;
-    border-radius: 30%;
+
+  .Header-limit-right-menu span {
+    font-size: 16px;
+    padding: 8px 5px;
   }
-  
-  .App-Menu-ul li:not(:last-child) {
-    margin-bottom: 20px;
+
+  .Header-limit-right-menu span:not(:last-child) {
+    border-bottom: 1px solid white;
   }
-  
-  #App-Menu-toggleNav:checked ~ .App-Menu-ul {
-    top: 50px;
-    opacity: 1;
-  }
-  /*FIM DA NAV DA HOMEPAGE*/
-  /*===========================================================================================================*/
+
+  #open-settings:checked ~ .Header-limit-right-limitMenu { top: 0%; display: flex; }
 }

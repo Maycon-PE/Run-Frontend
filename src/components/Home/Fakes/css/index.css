@@ -1,0 +1,8 @@
+.Home-Fakes {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Home-Fakes h1 { color: white; }

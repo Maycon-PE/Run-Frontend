@@ -2,19 +2,25 @@ import React from 'react'
 
 import './css/index.css'
 
-export default () =>
-  <nav className='App-Menu'>
-    <div className='App-Menu-navegacao'>
-      <label htmlFor='App-Menu-toggleNav' className='App-Menu-labelNav'><i className="fa fa-sort"></i></label>
-      <input type='checkbox' id='App-Menu-toggleNav' />
-      <ul className='App-Menu-ul'>
-        <li><a href='#inicio' rel="noopener noreferrer"><i className="fa fa-github-square"></i> <span>Início</span></a></li>
-        <li><a href='#fakes' rel="noopener noreferrer"><i className="fa fa-github-square"></i> <span>Fakes</span></a></li>
-        <li><a href='#parts' rel="noopener noreferrer"><i className="fa fa-github-square"></i> <span>Peças</span></a></li>
-        <li><a href='#how-play' rel="noopener noreferrer"><i className="fa fa-github-square"></i> <span>Como jogar</span></a></li>
-      </ul>
+export default ({ changeBody }) =>
+  <header className='Header'>
+    <div className='Header-limit'>
+      <div className='Header-limit-left'>
+        <div className='Header-limit-left-img'>
+          <img onClick={() => changeBody('inicio')} className='rotating' src='./image/react-logo.png' alt='Logo ReactJs' />
+        </div>
+      </div>
+      <div className='Header-limit-right'>
+        <input type='checkbox' id='open-settings' />
+        <div className='Header-limit-right-limitMenu'>
+          <label htmlFor='open-settings'><i className="fa fa-bars"></i></label>
+          <div className='Header-limit-right-menu'>
+            <span onClick={() => changeBody('inicio')}>Inicio</span>
+            <span onClick={() => changeBody('bots')}>Bots</span>
+            <span onClick={() => changeBody('parts')}>Peças</span>
+            <span onClick={() => changeBody('help')}>Ajuda</span>
+          </div>
+        </div>
+      </div>
     </div>
-    <div className='App-Menu-header'>
-      <img className='rotating' src='./image/react-logo.png' alt='Logo do ReactJs' />
-    </div>
-  </nav>
+  </header>

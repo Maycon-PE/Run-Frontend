@@ -1,19 +1,10 @@
-function ajaxUpdate(obj = Object, part = String) {
+import api from '../../requests'
+
+function updateMyCar(obj = Object, part = String) {
   return new Promise(resolve => {
-    const xhr = new XMLHttpRequest()
-
-    xhr.onreadystatechange = e => {
-      if (xhr.readyState === 4) {
-        resolve(JSON.parse(xhr.responseText))
-      }
-    }
-
-    xhr.open('put', `http://localhost:3001/api/v2/auth/car/${part}`, true)
-
-    xhr.setRequestHeader('Content-type', 'application/json')
-    xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'))
-
-    xhr.send(JSON.stringify(obj))
+    api.put(`/auth/car/${part}`, obj, { headers: { 'Authorization': sessionStorage.getItem('token') } })
+      .then(res => resolve(res.data))
+      .catch(e => console.log(e))
   })
 }
 
@@ -23,44 +14,9 @@ function changePart(part = String, table = String, field = String, gold = Number
   return new Promise(resolve => {
     const form = { field, part, costs: gold - price }
 
-    const xhr = new XMLHttpRequest()
-
-    xhr.onreadystatechange = e => {
-      if (xhr.readyState === 4) {
-        resolve(JSON.parse(xhr.responseText))
-      }
-    }
-
-    xhr.open('put', `http://localhost:3001/api/v2/auth/changePart/${table}`, true)
-
-    xhr.setRequestHeader('Content-type', 'application/json')
-    xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'))
-
-    xhr.send(JSON.stringify(form))
-  })
-}
-
-function getAllParts() {
-  const xhr = new XMLHttpRequest()
-
-  xhr.onreadystatechange = e => {
-    if (xhr.readyState === 4) {
-      putInSessionStorage(JSON.parse(xhr.responseText))
-    }
-  }
-
-  xhr.open('get', `http://localhost:3001/getAllParts`, true)
-
-  xhr.setRequestHeader('Content-type', 'application/json')
-  // xhr.setRequestHeader('Authorization', sessionStorage.getItem('token'))
-
-  xhr.send()
-}
-
-function putInSessionStorage(parts) {
-  const partsWaited = ['engines', 'transmissions', 'cylinders', 'whells', 'protections']
-  partsWaited.forEach(name => {
-    sessionStorage.setItem(name, JSON.stringify(parts.data[name]))
+    api.put(`/auth/changePart/${table}`, form, { headers: { 'Authorization': sessionStorage.getItem('token') } })
+      .then(res => resolve(res.data))
+      .catch(e => console.log(e))
   })
 }
 
@@ -91,26 +47,14 @@ function reverseString(str){
 
 function auth() {
   return new Promise(resolve => {
-    const token = sessionStorage.getItem('token')
-
-    const xhr = new XMLHttpRequest()
-
-    xhr.onreadystatechange = e => {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        
-        const res = JSON.parse(xhr.responseText)
-        console.log(res)
-        resolve(res)
-      }
-    }
-
-    xhr.open('post', 'http://localhost:3001/auth', false)
-
-    xhr.setRequestHeader('Content-type', 'application/json')
-    xhr.setRequestHeader('Authorization', token)
-
-    xhr.send()
+    api.post('/auth', {}, { headers: { 'Authorization': sessionStorage.getItem('token') } })
+      .then(res => resolve(res.data))
+      .catch(e => console.log(e))
   })
 }
 
-module.exports = { ajaxUpdate, transformAsCoint, reverseString, auth, getAllParts, changePart }
+function firstLitterToUpperCase(word = String) {
+  return word.charAt(0).toUpperCase() + word.slice(1, word.length)
+}
+
+export { updateMyCar, transformAsCoint, reverseString, auth, changePart, firstLitterToUpperCase  }

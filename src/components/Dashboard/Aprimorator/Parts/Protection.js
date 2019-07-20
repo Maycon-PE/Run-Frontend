@@ -4,7 +4,8 @@ import { AwesomeButton } from "react-awesome-button"
 import "react-awesome-button/dist/styles.css"
 import './index.css'
 
-import { transformAsCoint, setEffect } from '../functions'
+import { setEffect } from '../functions'
+import { transformAsCoint } from '../../../../pages/Dashboard/functions'
 
 import Attributes from '../subComponents/Attributes'
 import Sale from '../subComponents/Sale'

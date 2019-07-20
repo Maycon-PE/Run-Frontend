@@ -2,17 +2,26 @@
 /* Footer */
 
 .App-Footer {
-  padding: 10px;
-  background: linear-gradient(to top,#fff, cornflowerblue);
-
   position: fixed;
   bottom: 0px;
   left: 0px;
-  right: 0px;
-  z-index: 3;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 5;
 }
 
 .App-Footer-div {
+  width: 100%;
+  max-width: 1100px;
+  height: 59px;
+  color: white;
+  border: 1px solid white;
+  border-radius: 10px;
+  background: #222;
+  box-shadow: 0px 0px 10px black;
+  margin: auto;
   display: flex;
   flex-flow: column wrap;
   justify-content: space-between;

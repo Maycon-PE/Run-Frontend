@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
-import { AwesomeButton } from "react-awesome-button";
-import "react-awesome-button/dist/styles.css";
+import { AwesomeButton } from "react-awesome-button"
+import "react-awesome-button/dist/styles.css"
+
+import { login } from '../../functions'
 
 export default class Login extends Component {
 
@@ -30,12 +32,8 @@ export default class Login extends Component {
 
     const formData = { email: this.email, password: this.password }
 
-    const xhr = new XMLHttpRequest()
-
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        const res = JSON.parse(xhr.responseText)
-
+    login(formData)
+      .then(res => {
         if (!res.status) {
           if (res.message.indexOf('Senha') !== -1) {
             this.state.invalid('password-login')
@@ -48,32 +46,25 @@ export default class Login extends Component {
 
         sessionStorage.setItem('token', res.message)
         this.state.history.push('/dashboard')
-      }
-    }
-
-    xhr.open('post', 'http://localhost:3001/login', true)
-
-    xhr.setRequestHeader('Content-type', 'application/Json')
-
-    xhr.send(JSON.stringify(formData))
+      })
   }
 
   render() {
     return (
-      <div className='App-Inicio-form-inputs-area-form'>
-        <div className='App-Inicio-form-inputs-form-header'>
-          <label className='App-Inicio-form-inputs-form-header-label'>Login <span className='App-Inicio-form-inputs-form-header-label-span'>{this.state.message}</span></label>
+      <div className='Inicio-form-inputs-area-form'>
+        <div className='Inicio-form-inputs-form-header'>
+          <label className='Inicio-form-inputs-form-header-label'>Login <span className='Inicio-form-inputs-form-header-label-span'>{this.state.message}</span></label>
         </div>
-        <form className='App-Inicio-form-inputs-form' onSubmit={e => e.preventDefault()}>
-          <div className='App-Inicio-form-inputs-form-area-input'>
+        <form className='Inicio-form-inputs-form' onSubmit={e => e.preventDefault()}>
+          <div className='Inicio-form-inputs-form-area-input'>
             <label htmlFor='email-login'>Email</label>
             <input id='email-login' type='email' name='email' onChange={e => this.email = e.target.value} placeholder='Coloque seu email' required />  
           </div>
-          <div className='App-Inicio-form-inputs-form-area-input'>
+          <div className='Inicio-form-inputs-form-area-input'>
             <label htmlFor='password-login'>Senha</label>
             <input id='password-login' type='password' name='password' onChange={e => this.password = e.target.value } placeholder='Coloque sua senha' minLength='5' maxLength='15'  required />
           </div>
-          <AwesomeButton className='App-Inicio-form-inputs-form-btn-submit' size='medium' type='primary' ripple action={this.sign}>Entrar</AwesomeButton>
+          <AwesomeButton className='Inicio-form-inputs-form-btn-submit' size='medium' type='primary' ripple action={this.sign}>Entrar</AwesomeButton>
         </form>
       </div>
     )

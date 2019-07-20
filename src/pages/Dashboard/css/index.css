@@ -1,3 +1,24 @@
+.Dashboard-loading {
+  width: 200px;
+  margin: auto;
+  padding: 0px;
+}
+
 .Dashboard-Aprimorator-content-inside {
   height: 389px;
+}
+
+.Dashboard-content {
+  border: 1px solid white;
+  widows: 100%;
+  max-width: 1200px;
+  margin: auto;
+  border-radius: 10px;
+  background: #222;
+  box-shadow: 0px 0px 10px black;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

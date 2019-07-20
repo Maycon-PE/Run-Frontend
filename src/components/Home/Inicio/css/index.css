@@ -2,7 +2,7 @@
   border: 1px solid red !important;
 }
 
-.App-Inicio-form-inputs-area-form  {
+.Inicio-form-inputs-area-form  {
   border: 1px solid #999;
   width: 422px;;
   
@@ -16,18 +16,18 @@
   align-items: center;
 }
 
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form,
-.container-App-Inicio-form-inputs .App-Inicio-form-inputs-message {
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form,
+.container-Inicio-form-inputs .Inicio-form-inputs-message {
   width: 90vw;
   max-width: 400px;
 }
 
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form .App-Inicio-form-inputs-form-btn-submit {
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form .Inicio-form-inputs-form-btn-submit {
   width: 100%;
   margin: 7px 0px;
 }
 
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form-header {
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form-header {
   border-bottom: 1px solid #aaa;
   width: 100%;
 
@@ -38,7 +38,7 @@
   padding: 5px;
 }
 
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form-header .App-Inicio-form-inputs-form-header-label {
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form-header .Inicio-form-inputs-form-header-label {
   font-size: 25px;
 
   display: flex;
@@ -46,17 +46,17 @@
   justify-content: center;
 }
 
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form-header .App-Inicio-form-inputs-form-header-label .App-Inicio-form-inputs-form-header-label-span {
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form-header .Inicio-form-inputs-form-header-label .Inicio-form-inputs-form-header-label-span {
   font-size: 15px;
 }
 
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form .App-Inicio-form-inputs-form-area-input label,
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form .App-Inicio-form-inputs-form-area-selects label {
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form .Inicio-form-inputs-form-area-input label,
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form .Inicio-form-inputs-form-area-selects label {
   padding: 5px;
 }
 
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form .App-Inicio-form-inputs-form-area-input input,
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form .App-Inicio-form-inputs-form-area-selects select {
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form .Inicio-form-inputs-form-area-input input,
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form .Inicio-form-inputs-form-area-selects select {
   border-radius: 5px;
   padding: 10px;
   border: 1px solid rgb(139, 153, 231);
@@ -64,44 +64,44 @@
   min-width: 191px;
 }
 
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form .App-Inicio-form-inputs-form-area-input input.valueInvalid {
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form .Inicio-form-inputs-form-area-input input.valueInvalid {
   border: 1px solid red;
 }
 
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form .App-Inicio-form-inputs-form-area-input input:focus {
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form .Inicio-form-inputs-form-area-input input:focus {
   box-shadow: 0px  0px 2px rgb(139, 153, 231);
 }
 
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form .App-Inicio-form-inputs-form-area-inputs,
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form .App-Inicio-form-inputs-form-area-selects {
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form .Inicio-form-inputs-form-area-inputs,
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form .Inicio-form-inputs-form-area-selects {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form .App-Inicio-form-inputs-form-area-selects { justify-content: space-around; }
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form .Inicio-form-inputs-form-area-selects { justify-content: space-around; }
 
 
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form .App-Inicio-form-inputs-form-area-input,
-.App-Inicio-form-inputs-area-form .App-Inicio-form-inputs-form .App-Inicio-form-inputs-form-area-select {
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form .Inicio-form-inputs-form-area-input,
+.Inicio-form-inputs-area-form .Inicio-form-inputs-form .Inicio-form-inputs-form-area-select {
   margin: 5px 0px;
 
   display: flex;
   flex-direction: column;
 }
 
-.App-Inicio {
+.Inicio {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.App-Inicio-form:not(:last-child) {
+.Inicio-form:not(:last-child) {
   border-bottom: 1px solid #fff4;
 }
 
-.App-Inicio-form {
+.Inicio-form {
   padding: 9px 0px;
   width: 100%;
 }
@@ -112,16 +112,19 @@
   align-items: center;
 }
 
-.App-Inicio-form-desc {
+.Inicio-form-desc {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: white;
+  padding: 5px 10px;
 }
+.Inicio-form-desc p { text-indent: 20px; text-align: center; }
 
 @media (min-width: 769px) {
 
-  .App-Inicio-form {
+  .Inicio-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
@@ -136,7 +139,7 @@
 
 @media (max-width: 768px) {
 
-  .App-Inicio-form {
+  .Inicio-form {
     display: flex;
     flex-direction: column;
     justify-content: center;

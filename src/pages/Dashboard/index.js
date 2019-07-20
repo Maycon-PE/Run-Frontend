@@ -1,22 +1,16 @@
 import React, { Component } from 'react'
 import Modal from 'react-awesome-modal'
 
-import { ajaxUpdate, auth, getAllParts, changePart } from './functions'
+import { updateMyCar, auth, changePart } from './functions'
 
 import './css/index.css'
 
 import Header from '../../components/Dashboard/Header'
+import Footer from '../../components/Footer'
 import Aprimorator from '../../components/Dashboard/Aprimorator'
+import Play from '../../components/Dashboard/Play'
+import Profile from '../../components/Dashboard/Profile'
 
-// function update(obj = Object, field = String) {
-//   return new Promise(resolve => {
-//     ajaxUpdate(obj, field)
-//     .then(res => {
-//       resolve(res)
-//       // this.setState({ car: res.data.car, gold: res.data.gold })
-//     })
-//   })
-// }
 
 const initialScreenAprimore = {
   engine: false,
@@ -26,6 +20,10 @@ const initialScreenAprimore = {
   protection: false
 }
 
+const initialBody = {
+  play: false,
+  profile: false
+}
 
 export default class Dashboard extends Component {
 
@@ -35,14 +33,20 @@ export default class Dashboard extends Component {
     this.state = { 
       ready: false, 
       auth: {}, 
-      updateState: (obj, field) => ajaxUpdate(obj, field).then(res => this.setState({ auth: res })),
+      updatePart: (obj, field) => updateMyCar(obj, field).then(res => this.setState({ auth: res })),
       buyPart: (part, table, field, price) => {
           if (part === this.state.auth.car[field]) return
           changePart(part, table, field, this.state.auth.user.gold, price).then(res => this.setState({ auth: res }))
         },
+      changeBody: content => {
+        const body = { ...initialBody }
+        body[content] = true
+        this.setState({ body })
+      }, 
       attrToSale: () => this.setState({ sale: !this.state.sale }),
       modalAprimore: false,
       aprimore: { ...initialScreenAprimore },
+      body:  { ...initialBody },
       sale: false }
   }
 
@@ -51,10 +55,12 @@ export default class Dashboard extends Component {
       .then(res => {
           const aprimore = { ...initialScreenAprimore }
           aprimore.engine = true
-          this.setState({ auth: res, ready: true, aprimore })
-        })
-
-     getAllParts()   
+          const body = { ...initialBody }
+          body.play = true
+          console.log(res)
+          this.setState({ auth: res, ready: true, aprimore, body })
+          // setTimeout(() => this.setState({ auth: res, ready: true, aprimore, body }), 2000)
+        }) 
   }
 
   openModal = () => this.setState({ modalAprimore : true })
@@ -62,7 +68,7 @@ export default class Dashboard extends Component {
   closeModal = () => this.setState({ modalAprimore : false })
 
   //Aprimore
-  change = (part, selected) => {
+  changeAprimore = (part, selected) => {
     document.querySelector('.Dashboard-Aprimorator-parts-ul').childNodes.forEach((li, indice) => {
       if (selected === indice) {
         li.style.borderBottom = '1.5px solid #fff'
@@ -80,18 +86,29 @@ export default class Dashboard extends Component {
     this.setState({ aprimore })
   }
 
+  renderBody(state) {
+    if (state.body.play) return <Play data={state.auth} />
+    if (state.body.profile) return <Profile data={state.auth} />
+  }
+
   render() {
     return this.state.ready? (
       <div className='Dashboard'>
         <Header data={this.state} openModal={this.openModal} />
         <Modal visible={this.state.modalAprimore} width="450" height="500" effect="fadeInUp" onClickAway={this.closeModal}>
           <div className='Dashboard-Aprimorator-content-inside'>
-            <Aprimorator data={this.state} change={this.change} closeModal={this.closeModal} />
+            <Aprimorator data={this.state} change={this.changeAprimore} closeModal={this.closeModal} />
           </div>
-        </Modal> 
+        </Modal>
+        <div className='Dashboard-content'>
+          {this.renderBody(this.state)}
+        </div>
+        <Footer />
       </div>
     ) : (
-      <h1>asdadds</h1>
+      <div className='Dashboard-loading'>
+        <img className='Dashboard-loading-img' src='./image/loading.gif' alt='Logo de carregamento' />
+      </div>
     )
   }
 }

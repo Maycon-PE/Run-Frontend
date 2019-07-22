@@ -10,7 +10,7 @@ export default ({ data, openModal }) =>
     <div className='Header-limit'>
       <div className='Header-limit-left'>
         <div className='Header-limit-left-img'>
-          <img src={`http://localhost:3001/files/pilots/${data.auth.user.src}.jpg`} alt='Imagem do usuário' />
+          <img src={`http://localhost:3001/files/users/${data.auth.user.src}.jpg`} alt='Imagem do usuário' />
         </div>
         <div className='Header-limit-left-fastInfos'>
           <span className='Header-limit-left-fastInfos-money'>R$ {transformAsCoint(data.auth.user.gold)}</span>

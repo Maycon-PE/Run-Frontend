@@ -1,15 +1,21 @@
 import React from 'react'
+import { AwesomeButton } from "react-awesome-button"
+import "react-awesome-button/dist/styles.css"
 
 import './css/index.css'
 
 import { firstLitterToUpperCase } from '../../../pages/Dashboard/functions'
 import { getAttr, getJoin, getFc } from './functions'
 
-export default ({ data }) =>
+export default ({ data, updatePhoto }) =>
   <div className='Dashboard-content-Profile'>
     <fieldset className='Dashboard-content-Profile-fieldset'>
       <legend>{firstLitterToUpperCase(data.user.name)}</legend>
       <div className='Dashboard-content-Profile-fieldset-content'>
+        <div className='Dashboard-content-Profile-fieldset-content-data'>
+          <label htmlFor='file'><AwesomeButton className='Dashboard-content-Profile-fieldset-content-data-changeProfile' size='large' type='primary' ripple action={() => document.getElementById('file').click()}>Trocar foto</AwesomeButton></label>
+          <input id='file' type='file' onChange={e => updatePhoto(e.target.files[0])} />
+        </div>
         <div className='Dashboard-content-Profile-fieldset-content-data'>
           <span>Nickname: </span>
           <span>{data.user.nickname}</span>

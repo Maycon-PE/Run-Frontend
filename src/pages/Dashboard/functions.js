@@ -2,7 +2,7 @@ import api from '../../requests'
 
 function updateMyCar(obj = Object, part = String) {
   return new Promise(resolve => {
-    api.put(`/auth/car/${part}`, obj, { headers: { 'Authorization': sessionStorage.getItem('token') } })
+    api.put(`/auth/car/${part}`, obj, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'application/json'} })
       .then(res => resolve(res.data))
       .catch(e => console.log(e))
   })
@@ -14,8 +14,18 @@ function changePart(part = String, table = String, field = String, gold = Number
   return new Promise(resolve => {
     const form = { field, part, costs: gold - price }
 
-    api.put(`/auth/changePart/${table}`, form, { headers: { 'Authorization': sessionStorage.getItem('token') } })
+    api.put(`/auth/changePart/${table}`, form, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'application/json'} })
       .then(res => resolve(res.data))
+      .catch(e => console.log(e))
+  })
+}
+
+function changePhoto(image) {
+  return new Promise(resolve => {
+    const formData = new FormData()
+    formData.append('image', image)
+    api.put('/auth/profile', formData, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'multipart/form-data' } })
+      .then(({ data }) => resolve(data))
       .catch(e => console.log(e))
   })
 }
@@ -57,4 +67,4 @@ function firstLitterToUpperCase(word = String) {
   return word.charAt(0).toUpperCase() + word.slice(1, word.length)
 }
 
-export { updateMyCar, transformAsCoint, reverseString, auth, changePart, firstLitterToUpperCase  }
+export { updateMyCar, transformAsCoint, reverseString, auth, changePart, firstLitterToUpperCase, changePhoto  }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Modal from 'react-awesome-modal'
 
-import { updateMyCar, auth, changePart } from './functions'
+import { updateMyCar, auth, changePart, changePhoto } from './functions'
 
 import './css/index.css'
 
@@ -33,10 +33,11 @@ export default class Dashboard extends Component {
     this.state = { 
       ready: false, 
       auth: {}, 
-      updatePart: (obj, field) => updateMyCar(obj, field).then(res => this.setState({ auth: res })),
+      updatePart: (obj, field) => updateMyCar(obj, field).then(auth => this.setState({ auth })),
+      updateProfile: file => changePhoto(file).then(auth => this.setState({ auth })),
       buyPart: (part, table, field, price) => {
           if (part === this.state.auth.car[field]) return
-          changePart(part, table, field, this.state.auth.user.gold, price).then(res => this.setState({ auth: res }))
+          changePart(part, table, field, this.state.auth.user.gold, price).then(auth => this.setState({ auth }))
         },
       changeBody: content => {
         const body = { ...initialBody }
@@ -57,7 +58,6 @@ export default class Dashboard extends Component {
           aprimore.engine = true
           const body = { ...initialBody }
           body.play = true
-          console.log(res)
           this.setState({ auth: res, ready: true, aprimore, body })
           // setTimeout(() => this.setState({ auth: res, ready: true, aprimore, body }), 2000)
         }) 
@@ -88,7 +88,7 @@ export default class Dashboard extends Component {
 
   renderBody(state) {
     if (state.body.play) return <Play data={state.auth} />
-    if (state.body.profile) return <Profile data={state.auth} />
+    if (state.body.profile) return <Profile data={state.auth} updatePhoto={this.state.updateProfile} />
   }
 
   render() {

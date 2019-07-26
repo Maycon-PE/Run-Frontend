@@ -47,15 +47,13 @@ export default class Fakes extends Component {
             <tr><th>#</th><th>Nome</th><th>Gênero</th><th>Pais</th><th>Nível</th><th>Carro</th></tr>
           </thead>
           <tbody>
-            {this.state.allBots.pilots.map((pilot, index) => {
-              if (index >= this.state.pages.pilots.start && index < this.state.pages.pilots.end) {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td><td>{pilot.name}</td><td>{pilot.genre}</td><td>{pilot.country}</td><td>{pilot.nvl}</td><td>{this.state.allBots.cars.map(({ id, model }) => {if (id === pilot.car_id) return model} )}</td>
-                  </tr>
-                )
-              }
-            })}
+            {this.state.allBots.pilots.map((pilot, index) => (
+              (index >= this.state.pages.pilots.start && index < this.state.pages.pilots.end) && (
+                <tr key={index}>
+                  <td>{pilot.id}</td><td>{pilot.nickname}</td><td>{pilot.genre}</td><td>{pilot.country}</td><td>{pilot.nvl}</td><td>{this.state.allBots.cars.map(({ id, model }) => {if (id === pilot.car_id) return model })}</td>
+                </tr>
+              )
+            ))}
           </tbody>
         </table>
         <table cellSpacing='0' cellPadding='0' className='Home-table'>
@@ -66,15 +64,13 @@ export default class Fakes extends Component {
             <tr><th>#</th><th>Modelo</th><th>Motor</th><th>Câmbio</th><th>Cilindro</th><th>Rodas</th><th>Proteção</th></tr>
           </thead>
           <tbody>
-            {this.state.allBots.cars.map((car, index) => {
-              if (index >= this.state.pages.cars.start && index < this.state.pages.cars.end) {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td><td>{car.model}</td><td>{car.engine}</td><td>{car.transmission}</td><td>{car.cylinder}</td><td>{car.whells}</td><td>{car.protection}</td>
-                  </tr>
-                )
-              }
-            })}
+            {this.state.allBots.cars.map((car, index) => (
+              (index >= this.state.pages.cars.start && index < this.state.pages.cars.end) && (
+                <tr key={index}>
+                  <td>{car.id}</td><td>{car.model}</td><td>{car.engine}</td><td>{car.transmission}</td><td>{car.cylinder}</td><td>{car.whells}</td><td>{car.protection}</td>
+                </tr>
+              )
+            ))}
           </tbody>
         </table>
       </div>

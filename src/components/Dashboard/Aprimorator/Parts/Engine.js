@@ -22,7 +22,7 @@ function renderLiMarchas(config) {
 }
 
 function renderLiAttr(atrParam) {
-  const attr = { speed: atrParam.speed, acceleration: atrParam.acceleration, resistance: atrParam.resistance, turbo: atrParam.turbo }
+  const attr = { speed: atrParam.speed, acceleration: atrParam.acceleration, resistance: atrParam.resistance }
   const li = []
 
   Object.entries(attr).forEach((atr, indice) => li.push(<li className='Dashboard-Aprimorator-content-inside-body-ul-li' key={indice}>
@@ -34,7 +34,7 @@ function renderLiAttr(atrParam) {
 }
 
 function submit(gold, data, update) {
-  if (gold < data.update_config.price) return
+  if (gold < data.update_config.price || data.ups >= 10) return
 
   const speed = data.speed + data.update_config.speed
   const acceleration = data.acceleration + data.update_config.acceleration
@@ -95,9 +95,6 @@ function renderProducts(my, toBuy, gold) {
               <span>Resis.<span> </span>+{part.update_config.resistance}</span>
             </span>
             <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value-update'>
-              <span>Turbo</span> <span>+{part.update_config.turbo}</span>
-            </span>
-            <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value-update'>
               <span>Preço</span> <span>R$ {transformAsCoint(part.update_config.price)}</span>
             </span>
           </span>
@@ -127,14 +124,13 @@ function renderBody(attr, config) {
           {renderLiMarchas(config.data)}
         </ul>
       </div>
-      <p className='Dashboard-Aprimorator-content-inside-body-partName'>Motor '{config.name}' equipada! <br /> R$ {transformAsCoint(config.data.update_config.price)}</p>
-      <Attributes data={config.data} submit={() => submit(config.gold, config.data, config.update)} render={renderLiAttr} />
+      <p className='Dashboard-Aprimorator-content-inside-body-partName'>Motor '{config.name}' equipada!</p>
+      <Attributes message={config.message} data={config.data} submit={() => submit(config.gold, config.data, config.update)} render={renderLiAttr} />
     </>
   )
 }
 
-export default ({ buyPart, sale, gold, name, data, update }) =>
-  <div className='Dashboard-Aprimorator-content-inside-body'>
-    <span className='Dashboard-Aprimorator-content-goldUser'>R$ {transformAsCoint(gold)}</span>
-    {renderBody(sale, { buyPart, gold, name, data, update })}
-  </div>
+export default ({ message, buyPart, sale, gold, name, data, update }) =>
+  <>
+    {renderBody(sale, { message, buyPart, gold, name, data, update })}
+  </>

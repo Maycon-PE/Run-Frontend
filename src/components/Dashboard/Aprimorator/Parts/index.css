@@ -51,28 +51,6 @@
 }
 /* FIM DA EXCEÇÃO */
 
-.Dashboard-Aprimorator-content-inside-body {
-  position: relative;
-  background: #222;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.Dashboard-Aprimorator-content-goldUser {
-  position: absolute;
-  right: 0px;
-  top: 5px;
-  background: #9c8c8c;
-  z-index: 2;
-  padding: 10px;
-  border-radius: 10px;
-}
-
-
 .Dashboard-Aprimorator-content-inside-body-partName {
   font-size: 25px;
   color: white;

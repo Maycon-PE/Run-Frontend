@@ -4,6 +4,16 @@
   height: 500px;
 }
 
+.Dashboard-Aprimorator-content-goldUser {
+  position: absolute;
+  right: 0px;
+  top: 55px;
+  background: #9c8c8c;
+  z-index: 2;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 .Dashboard-Aprimorator-parts {
   padding-top: 5px;
 }
@@ -68,4 +78,15 @@
 .Dashboard-Aprimorator-content {
   background: yellow;
   height: 450px;
+}
+
+.Dashboard-Aprimorator-content-inside-body {
+  position: relative;
+  background: #222;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

@@ -11,12 +11,14 @@ import Attributes from '../subComponents/Attributes'
 import Sale from '../subComponents/Sale'
 
 function renderLiAttr(atrParam) {
+  console.log(atrParam)
   const attr = { speed: atrParam.speed, acceleration: atrParam.acceleration, resistance: atrParam.resistance }
+  // console.log(attr)
     const li = []
 
     Object.entries(attr).forEach((atr, indice) => li.push(<li className='Dashboard-Aprimorator-content-inside-body-ul-li' key={indice}>
         <span className='attrName'><img src={`http://localhost:3001/files/icons/aprimore/attributes/${atr[0]}.png`} alt='Ícone do atributo' /></span>
-        <span className='attrValue'>{atr[1].toFixed(1)} + {atrParam.update_config[atr[0]]}</span>
+        <span className='attrValue'>{atr[1].toFixed(1)} {atrParam.update_config[atr[0]]? '+' + atrParam.update_config[atr[0]]: ''}</span>
       </li>))
 
     return li
@@ -25,10 +27,9 @@ function renderLiAttr(atrParam) {
 function submit(gold, data, update) {
   if (gold < data.update_config.price) return
 
-
   const speed = data.speed + data.update_config.speed
   const acceleration = data.acceleration + data.update_config.acceleration
-  const resistance = data.resistance + data.update_config.resistance
+  const resistance = data.resistance
   const costs = gold - data.update_config.price
   const ups = data.ups + 1
 
@@ -63,10 +64,6 @@ function renderProducts(my, toBuy, gold) {
           <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>{part.resistance}</span>
         </div>
         <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>Turbo</span>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>{part.turbo}</span>
-        </div>
-        <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
           <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>Taxa de Atualização</span>
           <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>
             <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value-update'>
@@ -74,9 +71,6 @@ function renderProducts(my, toBuy, gold) {
             </span>
             <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value-update'>
               <span>Acel.</span ><span>+{part.update_config.acceleration}</span>
-            </span>
-            <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value-update'>
-              <span>Resis.<span> </span>+{part.update_config.resistance}</span>
             </span>
             <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value-update'>
               <span>Preço</span> <span>R$ {transformAsCoint(part.update_config.price)}</span>
@@ -102,15 +96,14 @@ function renderBody(attr, config) {
     <Sale name={config.name} renderProducts={renderProducts} gold={config.gold} buyPart={config.buyPart} />
   ) : (
     <>
-      <p className='Dashboard-Aprimorator-content-inside-body-partName'>Câmbio '{config.name}' equipada!" <br /> R$ {transformAsCoint(config.data.update_config.price)}</p>
-    <Attributes data={config.data} submit={() => submit(config.gold, config.data, config.update)} render={renderLiAttr} />
+      <p className='Dashboard-Aprimorator-content-inside-body-partName'>Câmbio '{config.name}' equipada!"</p>
+      <Attributes message={config.message} data={config.data} submit={() => submit(config.gold, config.data, config.update)} render={renderLiAttr} />
     </>
   )
 }
 
 
-export default ({sale, gold, name, data, update, buyPart }) => 
-  <div className='Dashboard-Aprimorator-content-inside-body'>
-    <span className='Dashboard-Aprimorator-content-goldUser'>R$ {transformAsCoint(gold)}</span>
-    {renderBody(sale, { gold, name, data, update, buyPart })}
-  </div>
+export default ({ message, sale, gold, name, data, update, buyPart }) => 
+  <>
+    {renderBody(sale, { message, gold, name, data, update, buyPart })}
+  </>

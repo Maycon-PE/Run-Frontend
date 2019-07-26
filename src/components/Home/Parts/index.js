@@ -52,15 +52,13 @@ export default class Parts extends Component {
             <tr><th>#</th><th>Nome</th><th>Marchas</th><th>Velocidade</th><th>Aceleração</th><th>Turbo</th><th>Resistência</th><th>Preço</th></tr>
           </thead>
           <tbody>
-            {this.state.allParts.engines.map((engine, index) => {
-              if (index >= this.state.pages.engines.start && index < this.state.pages.engines.end) {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td><td>{engine.name}</td><td>{engine.exchange}</td><td>{engine.speed}</td><td>{engine.acceleration}</td><td>{engine.turbo}</td><td>{engine.resistance}</td><td>R$ {transformAsCoint(engine.price)}</td>
-                  </tr>
-                )
-              }
-            })}
+            {this.state.allParts.engines.map((engine, index) => (
+              index >= this.state.pages.engines.start && index < this.state.pages.engines.end && (
+                <tr key={index}>
+                  <td>{index + 1}</td><td>{engine.name}</td><td>{engine.exchange}</td><td>{engine.speed}</td><td>{engine.acceleration}</td><td>{engine.turbo}</td><td>{engine.resistance}</td><td>R$ {transformAsCoint(engine.price)}</td>
+                </tr>
+              )
+            ))}
           </tbody>
         </table>
         <table cellSpacing='0' cellPadding='0' className='Home-table'>
@@ -71,15 +69,13 @@ export default class Parts extends Component {
             <tr><th>#</th><th>Nome</th><th>Velocidade</th><th>Aceleração</th><th>Turbo</th><th>Resistência</th><th>Preço</th></tr>
           </thead>
           <tbody>
-            {this.state.allParts.transmissions.map((transmission, index) => {
-              if (index >= this.state.pages.transmissions.start && index < this.state.pages.transmissions.end) {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td><td>{transmission.name}</td><td>{transmission.speed}</td><td>{transmission.acceleration}</td><td>{transmission.turbo}</td><td>{transmission.resistance}</td><td>R$ {transformAsCoint(transmission.price)}</td>
-                  </tr>
-                )
-              }
-            })}
+            {this.state.allParts.transmissions.map((transmission, index) => (
+              index >= this.state.pages.transmissions.start && index < this.state.pages.transmissions.end && (
+                <tr key={index}>
+                  <td>{index + 1}</td><td>{transmission.name}</td><td>{transmission.speed}</td><td>{transmission.acceleration}</td><td>{transmission.turbo}</td><td>{transmission.resistance}</td><td>R$ {transformAsCoint(transmission.price)}</td>
+                </tr>
+              )
+            ))}
           </tbody>
         </table>
         <table cellSpacing='0' cellPadding='0' className='Home-table'>
@@ -90,15 +86,13 @@ export default class Parts extends Component {
             <tr><th>#</th><th>Nome</th><th>Velocidade</th><th>Aceleração</th><th>Recuo</th><th>Preço</th></tr>
           </thead>
           <tbody>
-            {this.state.allParts.whells.map((circle, index) => {
-              if (index >= this.state.pages.whells.start && index < this.state.pages.whells.end) {
-                return (
+            {this.state.allParts.whells.map((circle, index) => (
+              index >= this.state.pages.whells.start && index < this.state.pages.whells.end && (
                   <tr key={index}>
                     <td>{index + 1}</td><td>{circle.name}</td><td>{circle.speed}</td><td>{circle.acceleration}</td><td>{circle.brake}</td><td>R$ {transformAsCoint(circle.price)}</td>
                   </tr>
                 )
-              }
-            })}
+            ))}
           </tbody>
         </table>
         <table cellSpacing='0' cellPadding='0' className='Home-table'>
@@ -109,15 +103,13 @@ export default class Parts extends Component {
             <tr><th>#</th><th>Nome</th><th>Velocidade</th><th>Aceleração</th><th>Turbo</th><th>Resistência</th><th>Preço</th></tr>
           </thead>
           <tbody>
-            {this.state.allParts.cylinders.map((cylinder, index) => {
-              if (index >= this.state.pages.cylinders.start && index < this.state.pages.cylinders.end) {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td><td>{cylinder.name}</td><td>{cylinder.speed}</td><td>{cylinder.acceleration}</td><td>{cylinder.turbo}</td><td>{cylinder.resistance}</td><td>R$ {transformAsCoint(cylinder.price)}</td>
-                  </tr>
-                )
-              }
-            })}
+            {this.state.allParts.cylinders.map((cylinder, index) => (
+              index >= this.state.pages.cylinders.start && index < this.state.pages.cylinders.end && (
+                <tr key={index}>
+                  <td>{index + 1}</td><td>{cylinder.name}</td><td>{cylinder.speed}</td><td>{cylinder.acceleration}</td><td>{cylinder.turbo}</td><td>{cylinder.resistance}</td><td>R$ {transformAsCoint(cylinder.price)}</td>
+                </tr>
+              )
+           ))}
           </tbody>
         </table>
         <table cellSpacing='0' cellPadding='0' className='Home-table'>
@@ -128,15 +120,13 @@ export default class Parts extends Component {
             <tr><th>#</th><th>Nome</th><th>Resistência</th><th>Preço</th></tr>
           </thead>
           <tbody>
-            {this.state.allParts.protections.map((protection, index) => {
-              if (index >= this.state.pages.protections.start && index < this.state.pages.protections.end) {
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td><td>{protection.name}</td><td>{protection.resistance}</td><td>R$ {transformAsCoint(protection.price)}</td>
-                  </tr>
-                )
-              }
-            })}
+            {this.state.allParts.protections.map((protection, index) => (
+              index >= this.state.pages.protections.start && index < this.state.pages.protections.end && (
+                <tr key={index}>
+                  <td>{index + 1}</td><td>{protection.name}</td><td>{protection.resistance}</td><td>R$ {transformAsCoint(protection.price)}</td>
+                </tr>
+              )
+            ))}
           </tbody>
         </table>
       </div>      

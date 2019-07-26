@@ -4,7 +4,7 @@ import "react-awesome-button/dist/styles.css"
 
 import './css/index.css'
 
-import { firstLitterToUpperCase } from '../../../pages/Dashboard/functions'
+import { firstLitterToUpperCase, transformAsCoint } from '../../../pages/Dashboard/functions'
 import { getAttr, getJoin, getFc } from './functions'
 
 export default ({ data, updatePhoto }) =>
@@ -30,7 +30,11 @@ export default ({ data, updatePhoto }) =>
         </div>
         <div className='Dashboard-content-Profile-fieldset-content-data'>
           <span>Experiência: </span>
-          <span>{data.user.xp}</span>
+          <span>Atual - {transformAsCoint(data.user.xp)} | Meta - {transformAsCoint(data.user.limit_xp)}</span>
+        </div>
+        <div className='Dashboard-content-Profile-fieldset-content-data'>
+          <span>Dinheiro: </span>
+          <span>R$ {transformAsCoint(data.user.gold)}</span>
         </div>
         <fieldset className='Dashboard-content-Profile-fieldset-content-data-car'>
           <legend>{data.car.model}</legend>

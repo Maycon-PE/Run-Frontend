@@ -81,14 +81,13 @@ function renderBody(attr, config) {
     <Sale name={config.name} renderProducts={renderProducts} gold={config.gold} buyPart={config.buyPart} />
   ) : (
     <>
-      <p className='Dashboard-Aprimorator-content-inside-body-partName'>Proteção '{config.name}' equipada! <br /> R$ {transformAsCoint(config.data.update_config.price)}</p>
-      <Attributes data={config.data} submit={() => submit(config.gold, config.data, config.update)} render={renderLiAttr} />
+      <p className='Dashboard-Aprimorator-content-inside-body-partName'>Proteção '{config.name}' equipada!</p>
+      <Attributes message={config.message} data={config.data} submit={() => submit(config.gold, config.data, config.update)} render={renderLiAttr} />
     </>
   )
 }
 
-export default ({ sale, gold, name, data, update, buyPart }) =>
-  <div className='Dashboard-Aprimorator-content-inside-body'>
-    <span className='Dashboard-Aprimorator-content-goldUser'>R$ {transformAsCoint(gold)}</span>
-    {renderBody(sale, { gold, name, data, update, buyPart })}
-  </div>
+export default ({ message, sale, gold, name, data, update, buyPart }) =>
+  <>
+    {renderBody(sale, { message, gold, name, data, update, buyPart })}
+  </>

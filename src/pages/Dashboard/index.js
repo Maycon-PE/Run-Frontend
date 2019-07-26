@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Modal from 'react-awesome-modal'
 
-import { updateMyCar, auth, changePart, changePhoto } from './functions'
+import { updateMyCar, auth, changePart, changePhoto, adv, partSelected, withdrawal, winOrLose } from './functions'
 
 import './css/index.css'
 
@@ -31,24 +31,79 @@ export default class Dashboard extends Component {
     super(props)
 
     this.state = { 
-      ready: false, 
-      auth: {}, 
-      updatePart: (obj, field) => updateMyCar(obj, field).then(auth => this.setState({ auth })),
-      updateProfile: file => changePhoto(file).then(auth => this.setState({ auth })),
-      buyPart: (part, table, field, price) => {
-          if (part === this.state.auth.car[field]) return
-          changePart(part, table, field, this.state.auth.user.gold, price).then(auth => this.setState({ auth }))
+      ready: false,
+      sale: false, 
+      auth: {},
+      adv: {},
+      play: {
+        played: false,
+        startStop: situation => {
+          if (situation) {
+            setTimeout(() => {
+              document.querySelector('.Dashboard-content-Play-game-area-btns').style.pointerEvents = 'painted'
+            }, 5000)
+          } else {
+            const gold = this.state.auth.user.gold - ((this.state.adv.bot.nvl * 200) - this.state.auth.user.nvl * 100)
+            withdrawal({ auth: this.state.auth, gold: gold < 0? 0: gold })
+              .then(auth => this.setState({ auth }))
+          }
+          const play = { ...this.state.play }
+          play.played = situation
+          this.setState({ play })
         },
+        changeAdv: async () => {
+          let advObject = {}
+          do {
+            advObject = await adv()
+          } while (advObject.bot.nickname === this.state.adv.bot.nickname)
+          this.setState({ adv: advObject })
+        },
+        win: (winner = Boolean) => {
+          const gold = winner? this.state.auth.user.gold + ((this.state.adv.bot.nvl * 1000) - this.state.auth.user.nvl * 500) : this.state.auth.user.gold + ((this.state.adv.bot.nvl * 300) - this.state.auth.user.nvl * 200)
+          const xp = winner? this.state.auth.user.xp + ((this.state.adv.bot.nvl * 10) - this.state.auth.user.nvl * 5) : this.state.auth.user.xp + ((this.state.adv.bot.nvl * 4) - this.state.auth.user.nvl * 2)
+
+          winOrLose({ auth: this.state.auth }, { gold: gold < 99999999? gold: 99999999, xp })
+            .then(auth => this.setState({ auth }))
+        }
+      },
+      profile: {
+        updateProfile: file => changePhoto({ auth: this.state.auth, file }).then(auth => this.setState({ auth }))
+      },
+      insideAprimore: {
+        modalAprimore: false,
+        messageUpdate: 'Pronto?',
+        updatePart: (obj, field) => updateMyCar({ auth: this.state.auth }, obj, field).then(auth => {
+          document.querySelector('.Dashboard-Aprimorator-content-inside-body-btn').style.pointerEvents = 'none'
+          const insideAprimore = { ...this.state.insideAprimore }
+          insideAprimore.messageUpdate = 'Sucesso'
+          this.setState({ auth, insideAprimore })
+          setTimeout(() => {
+            document.querySelector('.Dashboard-Aprimorator-content-inside-body-btn').style.pointerEvents = 'painted'
+            const insideAprimore = { ...this.state.insideAprimore }
+            insideAprimore.messageUpdate = 'Pronto?'
+            this.setState({ insideAprimore }) 
+          }, 1300)
+        }),
+        buyPart: (part, table, field, price) => {
+          if (part === this.state.auth.car[field]) return
+          changePart({ auth: this.state.auth }, part, table, field, this.state.auth.user.gold, price).then(auth => this.setState({ auth }))
+        },
+        attrToSale: () => this.setState({ sale: !this.state.sale }),
+        changeAprimore: (part, selected) => {
+          partSelected(selected)
+          const aprimore = { ...initialScreenAprimore }
+          aprimore[part] = true
+          this.setState({ aprimore })
+        }
+      },
       changeBody: content => {
         const body = { ...initialBody }
         body[content] = true
         this.setState({ body })
       }, 
-      attrToSale: () => this.setState({ sale: !this.state.sale }),
-      modalAprimore: false,
       aprimore: { ...initialScreenAprimore },
-      body:  { ...initialBody },
-      sale: false }
+      body:  { ...initialBody } 
+    }
   }
 
   componentDidMount() {
@@ -58,46 +113,38 @@ export default class Dashboard extends Component {
           aprimore.engine = true
           const body = { ...initialBody }
           body.play = true
-          this.setState({ auth: res, ready: true, aprimore, body })
-          // setTimeout(() => this.setState({ auth: res, ready: true, aprimore, body }), 2000)
+          adv(res.user.nvl)
+            .then(bot => {
+              console.log({ voce: res, oponente: bot })
+              this.setState({ auth: res, ready: true, aprimore, body, adv: bot })
+            })
         }) 
   }
 
-  openModal = () => this.setState({ modalAprimore : true })
+  openModal = () => {
+    const insideAprimore = { ...this.state.insideAprimore }
+    insideAprimore.modalAprimore = true
+    this.setState({ insideAprimore })
+  }
 
-  closeModal = () => this.setState({ modalAprimore : false })
-
-  //Aprimore
-  changeAprimore = (part, selected) => {
-    document.querySelector('.Dashboard-Aprimorator-parts-ul').childNodes.forEach((li, indice) => {
-      if (selected === indice) {
-        li.style.borderBottom = '1.5px solid #fff'
-        li.style.borderTop = '1.5px solid #fff'
-      } else {
-        li.style.border = '1px solid transparent'
-      }
-
-    })
-
-    const aprimore = { ...initialScreenAprimore }
-
-    aprimore[part] = true
-
-    this.setState({ aprimore })
+  closeModal = () => {
+    const insideAprimore = { ...this.state.insideAprimore }
+    insideAprimore.modalAprimore = false
+    this.setState({ insideAprimore })
   }
 
   renderBody(state) {
-    if (state.body.play) return <Play data={state.auth} />
-    if (state.body.profile) return <Profile data={state.auth} updatePhoto={this.state.updateProfile} />
+    if (state.body.play) return <Play play={state.play} data={state.auth} adv={state.adv} change={this.state.play.changeAdv} />
+    if (state.body.profile) return <Profile data={state.auth} updatePhoto={this.state.profile.updateProfile} />
   }
 
   render() {
     return this.state.ready? (
       <div className='Dashboard'>
         <Header data={this.state} openModal={this.openModal} />
-        <Modal visible={this.state.modalAprimore} width="450" height="500" effect="fadeInUp" onClickAway={this.closeModal}>
+        <Modal visible={this.state.insideAprimore.modalAprimore} width="450" height="500" effect="fadeInUp" onClickAway={this.closeModal}>
           <div className='Dashboard-Aprimorator-content-inside'>
-            <Aprimorator data={this.state} change={this.changeAprimore} closeModal={this.closeModal} />
+            <Aprimorator data={this.state} change={this.state.insideAprimore.changeAprimore} closeModal={this.closeModal} />
           </div>
         </Modal>
         <div className='Dashboard-content'>

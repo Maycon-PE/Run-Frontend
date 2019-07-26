@@ -4,10 +4,16 @@ import "react-awesome-button/dist/styles.css"
 
 import './css/index.css'
 
-export default ({ render, data, submit }) =>
+import { transformAsCoint } from '../../../../../pages/Dashboard/functions'
+
+export default ({ message, render, data, submit }) =>
   <>
     <ul className='Dashboard-Aprimorator-content-inside-body-ul'>
       {render(data)}
     </ul>
-    <AwesomeButton size='medium' type='primary' ripple action={submit}>Aprimorar</AwesomeButton>
+    <div className='Dashboard-Aprimorator-content-inside-body-btn'>
+      <span>R$ {transformAsCoint(data.update_config.price)}</span>
+      <AwesomeButton size='medium' type='primary' ripple action={submit}>Aprimorar</AwesomeButton>
+      <span>{message}</span>
+    </div>
   </>

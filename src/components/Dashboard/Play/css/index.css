@@ -1,0 +1,139 @@
+.Dashboard-content-Play {
+  border: 1px solid white;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Dashboard-content-Play-title {
+  color: white;
+  font-size: 40px;
+}
+
+.Dashboard-content-Play-divChallenge {
+  position: relative;
+  border: 1px solid red;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Dashboard-content-Play-divChallenge-card-area {
+  width: 100%;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Dashboard-content-Play-divChallenge-buttom-area {
+  background: #222;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Dashboard-content-Play-divChallenge-card {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.Dashboard-content-Play-divChallenge-card-info {
+  position: absolute;
+  background: #555;
+  color: white;
+  bottom: 0px;
+  right: 0px;
+  padding: 2px;
+  border-top-left-radius: 5px;
+}
+
+.Dashboard-content-Play-game-area {
+  border: 1px solid red;
+  margin-top: 20px;
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  height: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.titulo-lideranca {
+  grid-area: head-lideres;
+  position: relative;
+  padding: 0px 3px;
+  background: #111;
+  color: white;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.liderancas {
+  grid-area: body-lideres;
+  position: relative;
+  background: rgb(174, 242, 245);
+  border-bottom: 1px solid black;
+  padding: 0px 3px;
+}
+
+.liderancas p {
+  padding: 4px 0px;
+  margin: 0px;
+  position: absolute;
+  transition: all 1s ease-in;
+}
+
+.lideres {
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 90px;
+  width: 100%;
+  max-width: 320px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20px 1fr;
+  grid-template-areas: 
+  'head-lideres'
+  'body-lideres';
+}
+
+.Dashboard-content-Play-game-area-tables {
+  border: 1px solid red;
+  display: flex;
+  flex-flow: row wrap;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.Dashboard-content-Play-game-area-btns {
+  margin-top: 20px;
+  background: #222;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+}
+
+.Dashboard-content-Play-game-area-gif { width: 100%; height: 100%; }

@@ -2,8 +2,6 @@
 
 .Dashboard-content-Profile {
   width: 100%;
-  margin: 20px 0px;
-
   display: flex;
   justify-content: center;
 }

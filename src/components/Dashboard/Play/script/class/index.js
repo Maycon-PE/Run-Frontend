@@ -24,12 +24,12 @@ export const carro = () => {
       this.preTurbo = 0
       this.aproveitamento = 0
       this.distanciaPecorrida = 0.000
-      this.categoria = this.velocidade + this.delta + (this.qualidade * 2) + (this.nitro * 4)
+      this.categoria = (this.velocidade / 3) + (this.delta / 3) + (this.qualidade * 2) + (this.nitro * 4)
       this.categoriaFormatado = 'N'
     }
 
     //======Métodos======\\
-    acelerar(turbo = this.getArranque() * this.getDelta() / 2) {
+    acelerar(turbo = this.getArranque() * this.getDelta() / 4) {
 
       if (this.getMarcha() < this.getTotMarchas()) {
         if (this.getVelocidadeAtual() < this.getVelocidade() * (this.getPorcentoMarchas() * this.getMarcha()) / 100) {
@@ -40,11 +40,11 @@ export const carro = () => {
         }
       }
 
-      if (this.getVelocidadeAtual() + (0.02 * this.getDelta() / 2) <= this.getVelocidade()) {
+      if (this.getVelocidadeAtual() + (0.02 * this.getDelta() / 4) <= this.getVelocidade()) {
         this.setVelocidadeAtual(this.getVelocidadeAtual() + turbo)
       } else {
         this.setVelocidadeAtual(this.getVelocidade())
-        this.setResistencia(this.getResistencia() + 0.0166666666 * 3600 / 3600)
+        this.setResistencia(this.getResistencia() + 0.0166666666 * 3600 / 600)
         if (this.getResistencia() >= this.getQualidade()) {
           this.setResistencia(0)
           this.quebra()
@@ -80,7 +80,7 @@ export const carro = () => {
             this.setBtnNitro(true)
             this.setPreTurbo(this.getVelocidadeAtual())
           }
-        } else if (this.getBtnNitro() === true && this.getTanque() <= this.getNitro() / 8 + this.getNitro() && this.getCilindro() === true) {
+        } else if (this.getBtnNitro() === true && this.getTanque() <= this.getNitro() / 5 + this.getNitro() && this.getCilindro() === true) {
           this.setTanque(this.getTanque() + 0.0166666666)
           this.acelerar((this.getPreTurbo() / (this.getMarcha() * 2)) / this.getVelocidade())
         } else {

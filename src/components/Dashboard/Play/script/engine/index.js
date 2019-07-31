@@ -25,26 +25,17 @@ const tempo = new Conometro()
 const cerebro = new Brain()
 
 export default function instanciar(participants = Array, limit = Number, cb = Function) {
-  if (cerebro.startado === true) {
-    cerebro.parar = true
-    cerebro.startado = false
-    stop()
-    clearInterval(tempoAtual)
-    tempo.reset()
-    somCorrida(1)
-  } else {
-    const cars = []
-    const pilots = []
-    for (let p = 0; p < participants.length; p++) {
-      cars.push(transformToClass('car', participants[p].car))
-      pilots.push(transformToClass('pilot', participants[p].pilot))
-    }
-
-    cerebro.parar = false
-    cerebro.startado = true
-    corrida(pilots, cars, limit, cb)
-    setTimeout(() => somCorrida(0), 1900)
+  const cars = []
+  const pilots = []
+  for (let p = 0; p < participants.length; p++) {
+    cars.push(transformToClass('car', participants[p].car))
+    pilots.push(transformToClass('pilot', participants[p].pilot))
   }
+
+  start(pilots.length)
+  cerebro.parar = false
+  corrida(pilots, cars, limit, cb)
+  setTimeout(() => somCorrida(0), 1000)
 }
 
 function corrida(pilots, cars, limit, win) {
@@ -66,10 +57,12 @@ function corrida(pilots, cars, limit, win) {
     f++
     cf++
 
-    if (cf === pilots.length || c === 1) {
+    if (cf === pilots.length || c !== 0) {
+      console.log('Já perdeu')
       finish()
       win(false)
     } else if (c === 0) {
+      console.log('Já ganhou')
       finish()
       win(true)
     }
@@ -77,7 +70,6 @@ function corrida(pilots, cars, limit, win) {
 
   function finish() {
     cerebro.parar = true
-    cerebro.startado = false
     somCorrida(2)
     stop()
     clearInterval(tempoAtual)
@@ -131,7 +123,6 @@ function corrida(pilots, cars, limit, win) {
 
   setTimeout(() => {
     runs.forEach(run => window.requestAnimationFrame(run))
-    start()
  
     const freios = []
     pilots.forEach((pilot, index) => {

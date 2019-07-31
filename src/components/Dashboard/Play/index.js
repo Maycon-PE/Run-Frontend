@@ -6,7 +6,7 @@ import './css/index.css'
 
 import Table from './Components/Table'
 
-import { transformAsCoint, firstLitterToUpperCase } from '../../../pages/Dashboard/functions'
+import { transformAsCoint, firstLitterToUpperCase, victory, lose, shame } from '../../../pages/Dashboard/functions'
 import { setDistance, renderP } from './functions'
 import run from './script/engine'
 
@@ -17,19 +17,25 @@ export default ({ play, data, adv, change }) =>
       <div className='Dashboard-content-Play-divChallenge-card-area'>
         <div className='Dashboard-content-Play-divChallenge-card'>
           <img src={`http://localhost:3001/files/${data.user.src}.jpg`} alt='Foto do usuário' />
-          <span className='Dashboard-content-Play-divChallenge-card-info'>{firstLitterToUpperCase(data.user.name)} nivel {data.user.nvl}</span>
+          <span className='Dashboard-content-Play-divChallenge-card-info' nvl={data.user.nvl}>{firstLitterToUpperCase(data.user.name)}</span>
         </div>
-        <button className='Dashboard-content-Play-divChallenge-refresh' onClick={change}>Refresh</button>
-        <div className='Dashboard-content-Play-divChallenge-card'>
-          <img src={`http://localhost:3001/files/${adv.bot.src}.jpg`} alt='Foto do adversário' />
-          <span className='Dashboard-content-Play-divChallenge-card-info'>{adv.bot.nickname} nivel {adv.bot.nvl}</span>
+        <AwesomeButton size='large' type='secondary' ripple action={change}>Outro adversário</AwesomeButton>
+        <div className='Dashboard-content-Play-divChallenge-card-area-advs'>
+          {adv.map(({ pilot, car }, index) => {
+            return (
+              <div key={index} className='Dashboard-content-Play-divChallenge-card'>
+                <img src={`http://localhost:3001/files/${pilot.src}.jpg`} alt='Foto do adversário' />
+                <span className='Dashboard-content-Play-divChallenge-card-info' nvl={pilot.nvl}>{firstLitterToUpperCase(pilot.nickname)}</span>
+              </div>
+            )
+          })}
         </div>
       </div>
       <div className='Dashboard-content-Play-divChallenge-buttom-area'>
-        <span>Vitória R$ {transformAsCoint((adv.bot.nvl * 1000) - data.user.nvl * 500)} | Derrota R$ {transformAsCoint((adv.bot.nvl * 300) - data.user.nvl * 200)}</span>
+        <span>Vitória {transformAsCoint(victory('gold', data.user, adv))} | Derrota {transformAsCoint(lose('gold', data.user, adv))}</span>
         <AwesomeButton size='large' type='primary' ripple action={() => {
             play.startStop(true)
-            setTimeout(() => run([{ pilot: data.user, car: data.car }, { pilot: adv.bot, car: adv.car }], setDistance(data.user.nvl), play.win), 1000)
+            setTimeout(() => run([{ pilot: data.user, car: data.car }, ...adv], setDistance(data.user.nvl), play.win), 1000)
           }} >Correr</AwesomeButton>
       </div>
     </div>
@@ -46,15 +52,15 @@ export default ({ play, data, adv, change }) =>
               <span id='distancia'>{setDistance(data.user.nvl)} km/h</span>
             </div>
             <div className='liderancas' id="placar">
-              {renderP([{ pilot: data.user, car: data.car }, { pilot: adv.bot, car: adv.car }])}
+              {renderP([{ pilot: data.user, car: data.car }, ...adv])}
             </div>
           </div>
           <div className='Dashboard-content-Play-game-area-tables'>
             <Table pilot={data.user} car={data.car} index='0' />
-            <Table pilot={adv.bot} car={adv.car} index='1' />
+            {adv.map(({ pilot, car }, index) => <Table key={index} pilot={pilot} car={car} index={index + 1} /> )}
           </div>
           <div id='btn-stop' className='Dashboard-content-Play-game-area-btns'>
-            <span>Pejuizo - R$ {transformAsCoint((adv.bot.nvl * 200) - data.user.nvl * 100)}</span>
+            <span>Pejuizo - {transformAsCoint(shame(data.user, adv))}</span>
             <AwesomeButton size='large' type='secondary' ripple action={() => {
                 run()
                 setTimeout(() => play.startStop(false), 2000)

@@ -13,8 +13,6 @@ function updateMyCar({ auth } = Object, obj = Object, part = String) {
 }
 
 function changePart({ auth = Object } = Object, part = String, table = String, field = String, gold = Number, price = Number) {
-  if (gold < price) return 
-
   return new Promise(resolve => {
     const form = { field, part, costs: gold - price }
 
@@ -67,27 +65,29 @@ function winOrLose({ auth } = Object, { gold, xp } = Object) {
 }
 
 function transformAsCoint(value = String || Number) {
+  return 'R$ ' + value
+    .toFixed(2)
+    .replace('.', ',')
+    .replace(/(\d)(?=(\d{3})+\,)/g, '$1.')
+}
+
+function transformAsNumberValid(value = Number || String) {
   value = value.toString()
-  let dinheiroFormatado = ''
+  let numero = ''
 
   let letraFrente = 0
   let letraTras = value.length - 1
 
   do {
-    dinheiroFormatado += letraFrente % 3 === 0 && letraFrente !== 0? Number.isInteger(Number.parseInt(value.charAt(letraTras)))? '.' + value.charAt(letraTras): value.charAt(letraTras): value.charAt(letraTras)
+    numero += letraFrente % 3 === 0 && letraFrente !== 0? Number.isInteger(Number.parseInt(value.charAt(letraTras)))? '.' + value.charAt(letraTras): value.charAt(letraTras): value.charAt(letraTras)
     letraFrente++
     --letraTras
   } while (letraTras >= 0)
 
-  return reverseString(dinheiroFormatado)
-}
-
-function reverseString(str){
-  let revstr = "";
-  for(let i = str.length - 1; i >= 0; i--){
-    revstr = revstr + str[i];
-  }
-  return revstr;
+  return numero
+    .split('')
+    .reverse()
+    .join('')
 }
 
 function auth() {
@@ -98,10 +98,10 @@ function auth() {
   })
 }
 
-function adv() {
+function getAdv() {
   return new Promise(resolve => {
     api.get(`/auth/adversary`, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'application/json'} })
-    .then(res => resolve(res.data))
+    .then(res => resolve(res.data.allAdvs))
   })
 }
 
@@ -120,4 +120,33 @@ function partSelected(selected = Number) {
   })
 }
 
-export { updateMyCar, transformAsCoint, reverseString, auth, changePart, firstLitterToUpperCase, changePhoto, adv, partSelected, withdrawal, winOrLose  }
+function victory(waited = String, { nvl } = Object, advs = Array) {
+  let nvls = 0
+  advs.forEach(({ pilot }) => {
+    nvls += pilot.nvl
+  })
+
+  if (waited === 'gold') return (nvls * 1000) - nvl * 500
+
+  return (nvls * 20) - nvl * 5
+}
+
+function lose(waited = String, { nvl } = Object, advs = Array) {
+  let nvls = 0
+  advs.forEach(({ pilot }) => {
+    nvls += pilot.nvl
+  })
+
+  if (waited === 'gold') return (nvls * 300) - nvl * 200
+
+  return (nvls * 10) - nvl * 2
+}
+
+function shame({ nvl } = Object, advs = Array) {
+  let nvls = 0
+  advs.forEach(({ pilot }) => nvls += pilot.nvl)
+
+  return (nvls * 500) - nvl * 100
+}
+
+export { updateMyCar, transformAsCoint, transformAsNumberValid, auth, changePart, firstLitterToUpperCase, changePhoto, getAdv, partSelected, withdrawal, winOrLose, victory, lose, shame }

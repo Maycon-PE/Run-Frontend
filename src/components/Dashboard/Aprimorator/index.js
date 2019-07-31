@@ -35,7 +35,7 @@ export default ({ data, closeModal, change }) =>
       </ul>
     </div>
     <div className='Dashboard-Aprimorator-content'>
-      <span className='Dashboard-Aprimorator-content-goldUser'>R$ {transformAsCoint(data.auth.user.gold)}</span>
+      <span className='Dashboard-Aprimorator-content-goldUser'>{transformAsCoint(data.auth.user.gold)}</span>
       <div className='Dashboard-Aprimorator-content-inside-body'>
         {renderContent(data)}
       </div>

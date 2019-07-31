@@ -95,16 +95,16 @@ function renderProducts(my, toBuy, gold) {
               <span>Resis.<span> </span>+{part.update_config.resistance}</span>
             </span>
             <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value-update'>
-              <span>Preço</span> <span>R$ {transformAsCoint(part.update_config.price)}</span>
+              <span>Preço</span> <span>{transformAsCoint(part.update_config.price)}</span>
             </span>
           </span>
         </div>
         <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
           <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>Valor</span>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>R$ {transformAsCoint(part.price)}</span>
+          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>{transformAsCoint(part.price)}</span>
         </div>
         <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
-          <span>R$ {transformAsCoint(gold)}</span><AwesomeButton size='medium' type='primary' ripple action={() => toBuy(part.name, 'engines', 'engine', part.price)}>Comprar</AwesomeButton>
+          <span>{transformAsCoint(gold)}</span><AwesomeButton size='medium' type='primary' ripple action={() => toBuy(part.name, 'engines', 'engine', part.price)}>Comprar</AwesomeButton>
         </div>
       </div>
     </div>

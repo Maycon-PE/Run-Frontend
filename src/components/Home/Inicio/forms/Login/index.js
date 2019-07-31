@@ -9,7 +9,7 @@ export default class Login extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { history: this.props.push, message: '', invalid: this.props.invalid }
+    this.state = { history: props.push, message: '', invalid: props.invalid }
   }
 
   sign = () => {

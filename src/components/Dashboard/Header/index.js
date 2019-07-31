@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import "react-awesome-button/dist/styles.css"
 
-import { transformAsCoint } from '../../../pages/Dashboard/functions'
+import { transformAsCoint, transformAsNumberValid } from '../../../pages/Dashboard/functions'
 
 export default ({ data, openModal }) => 
   <header className='Header'>
@@ -13,9 +13,9 @@ export default ({ data, openModal }) =>
           <img src={`http://localhost:3001/files/${data.auth.user.src}.jpg`} alt='Imagem do usuário' />
         </div>
         <div className='Header-limit-left-fastInfos'>
-          <span className='Header-limit-left-fastInfos-money'>R$ {transformAsCoint(data.auth.user.gold)}</span>
+          <span className='Header-limit-left-fastInfos-money'>{transformAsCoint(data.auth.user.gold)}</span>
           <span className='Header-limit-left-fastInfos-nvl'>nivel: {data.auth.user.nvl}</span>
-          <span className='Header-limit-left-fastInfos-xp'>Experiência: {transformAsCoint(data.auth.user.xp)}/{transformAsCoint(data.auth.user.limit_xp)}</span>
+          <span className='Header-limit-left-fastInfos-xp'>Experiência: {transformAsNumberValid(data.auth.user.xp)}/{transformAsNumberValid(data.auth.user.limit_xp)}</span>
         </div>
       </div>
       <div className='Header-limit-right'>

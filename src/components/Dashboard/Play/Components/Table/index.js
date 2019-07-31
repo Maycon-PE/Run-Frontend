@@ -42,7 +42,7 @@ export default ({ pilot, car, index }) => {
       </div>
       <div className='Dashboard-content-Play-game-area-block-modeloArea'>
         <span id={`modelo-${index}`}>{car.model} </span>
-        <span id={`modelo-olho-${index}`}><i className="fa fa-eye"></i></span>
+        <span id={`modelo-olho-${index}`} className='modelo-olho'><i className="fa fa-eye"></i></span>
         <div id={`modelo-info-rapida-carro${index}`} className='info-rapida'>
           <div id={`modelo-info-rapida-velocidade${index}`}>Vel.: {(getForca(car, { res: 'attr', value: 0 })).toFixed(1)} km/h</div>
           <div id={`modelo-info-rapida-aceleracao${index}`}>Ace.: {(getForca(car, { res: 'attr', value: 1 })).toFixed(1)} cav.</div>

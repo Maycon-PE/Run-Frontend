@@ -125,6 +125,7 @@
 	grid-area: modelo;
 	position: relative;
 	background: #111;
+	pointer-events: painted;
 	color: white;
 	display: flex;
 	justify-content: space-between;
@@ -143,6 +144,8 @@
 	display: none;
 	z-index: 5;
 }
+
+.Dashboard-content-Play-game-area-block-modeloArea .modelo-olho { color: red; }
 
 .Dashboard-content-Play-game-area-block-grau {
 	grid-area: grau;
@@ -167,6 +170,7 @@
 	margin: 10px 20px;
 	width: 247px;
 	height: 150px;
+	pointer-events: none;
 	display: grid;
 	grid-template-columns: 50% 50%;
 	grid-template-rows: 25px 100px 20px 10px;
@@ -176,191 +180,3 @@
 	'distancia modelo'
 	'grau grau';
 }
-
-
-
-
-
-
-/* @import url('https://fonts.googleapis.com/css?family=Coustard&display=swap');
-
-.participantes {
-  position: relative;
-	text-align: center;
-  font-family: 'Arvo', serif;
-  font-size: 14px;
-	width: 247px;
-  height: 176px;
-	color: white;
-  cursor: default;
-  margin: 10px;
-	background: linear-gradient(100deg, rgba(90, 90, 90, .4), rgb(90, 90, 90), rgba(90, 90, 90, .4));
-}
-
-.participantes thead tr,
-.participantes .tr-base {
-  background-color: #222;
-}
-
-.participantes td {
-  position: relative;
-  width: 50%;
-}
-
-.participantes tr {
-  position: relative;
-}
-
-.participantes .td-principal {
-  height: 110px;
-}
-
-.participantes .td-menor {
-  height: 27px;
-}
-
-.aproveitamento {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	right: 0px;
-	bottom: 0px;
-}
-
-.ligar {
-	background: linear-gradient(to bottom, #909090, white);
-}
-
-.grau {
-	position: relative;
-  width: 100%;
-}
-
-.quebra {
-	position: absolute;
-	left: 1px;
-	top: 1px;
-}
-
-.cambio {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  top: 0px;
-  left: 0px;
-  border: 1px solid red;
-	left: 24%;
-	top: 20%; 
-}
-
-.categoria {
-	position: absolute;
-	bottom: 1px;
-	left: 1px;
-	padding: 5px;
-	border-radius: 5px;
-}
-
-.nitro {
-	position: absolute;
-	width: 14px;
-	height: 100%;
-	top: 0px;
-	right: 0px;
-	bottom: 0px;
-}
-
-.velocimetro {
-	position: relative;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-}
-
-.div-ponteiro {
-  position: absolute;
-  z-index: 1;
-  top: 41px;
-  left: 25px;
-}
-
-.ponteiro {
-  transform: translate(0px, 0px) rotate(0deg);
-  width: 160%;
-}
-
-.barras-nitros {
-	position: absolute;
-	right: 0;
-	top: 0;
-	width: 14px;
-	height: 100%;
-	background-color: transparent;
-	z-index: 1;
-}
-
-.barras-nitros img {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-	display: none;
-}
-
-.efeito-barra-nitro {
-	width: 14px;
-	height: 100%;
-	position: absolute;
-	right: 0;
-	top: 0;
-	background: linear-gradient(to top, blue, yellow, red);
-	border-radius: 10px;
-  display: none;
-}
-
-.nomes-modelos span {
-	position: absolute;
-	font-size: 17px;
-	right: 0px;
-	color: red;
-	opacity: .7;
-}
-
-
-.grau span {
-	position: absolute;
-	background-color: springgreen;
-	left: 0px;
-	width: 0%;
-	font-size: 7px;
-	text-align: center;
-	height: 4px;
-	border: 0.2px	dashed black;
-}
-
-.velocidade {
-	position: absolute;
-	bottom: 6px;
-	z-index: 1;
-	left: 23%;
-	top: 75%;
-	font-size: 15px;
-	color: black;
-
-  font-family: 'Coustard', serif;
-}
-
-.info-rapida {
-	display: none;
-  text-align: left;
-	position: absolute;
-	border: 1px solid black;
-  width: 155px;
-	padding: 6px;
-	border-radius: 10px;
-	box-shadow: 1px 1px 10px white;
-	background: linear-gradient(100deg, rgba(90, 90, 90, .7), rgb(90, 90, 90), rgba(90, 90, 90, .7));
-	color: white;
-  font-family: 'Coustard', serif;
-
-  z-index: 10;
-} */ 

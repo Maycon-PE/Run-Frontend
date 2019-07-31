@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Modal from 'react-awesome-modal'
 
-import { updateMyCar, auth, changePart, changePhoto, adv, partSelected, withdrawal, winOrLose } from './functions'
+import { updateMyCar, auth, changePart, changePhoto, getAdv, partSelected, withdrawal, winOrLose, victory, lose, shame } from './functions'
 
 import './css/index.css'
 
@@ -34,16 +34,18 @@ export default class Dashboard extends Component {
       ready: false,
       sale: false, 
       auth: {},
-      adv: {},
+      adv: [],
       play: {
         played: false,
         startStop: situation => {
           if (situation) {
+            document.querySelector('.Dashboard-content-Play-divChallenge').style.pointerEvents = 'none'
+            document.querySelector('.Header-limit-right-menu').style.pointerEvents = 'none'
             setTimeout(() => {
               document.querySelector('.Dashboard-content-Play-game-area-btns').style.pointerEvents = 'painted'
             }, 5000)
           } else {
-            const gold = this.state.auth.user.gold - ((this.state.adv.bot.nvl * 200) - this.state.auth.user.nvl * 100)
+            const gold = this.state.auth.user.gold - shame(this.state.auth.user, this.state.adv)
             withdrawal({ auth: this.state.auth, gold: gold < 0? 0: gold })
               .then(auth => this.setState({ auth }))
           }
@@ -52,18 +54,28 @@ export default class Dashboard extends Component {
           this.setState({ play })
         },
         changeAdv: async () => {
-          let advObject = {}
+          let advs = []
           do {
-            advObject = await adv()
-          } while (advObject.bot.nickname === this.state.adv.bot.nickname)
-          this.setState({ adv: advObject })
+            advs = await getAdv()
+          } while (advs[0].pilot.nickname === this.state.adv[0].pilot.nickname)
+          console.log(advs)
+          this.setState({ adv: advs })
         },
         win: (winner = Boolean) => {
-          const gold = winner? this.state.auth.user.gold + ((this.state.adv.bot.nvl * 1000) - this.state.auth.user.nvl * 500) : this.state.auth.user.gold + ((this.state.adv.bot.nvl * 300) - this.state.auth.user.nvl * 200)
-          const xp = winner? this.state.auth.user.xp + ((this.state.adv.bot.nvl * 10) - this.state.auth.user.nvl * 5) : this.state.auth.user.xp + ((this.state.adv.bot.nvl * 4) - this.state.auth.user.nvl * 2)
+          const gold = winner? this.state.auth.user.gold + victory('gold', this.state.auth.user, this.state.adv) : this.state.auth.user.gold + lose('gold', this.state.auth.user, this.state.adv)
+          const xp = winner? this.state.auth.user.xp + victory(null, this.state.auth.user, this.state.adv) : this.state.auth.user.xp + lose(null, this.state.auth.user, this.state.adv)
 
           winOrLose({ auth: this.state.auth }, { gold: gold < 99999999? gold: 99999999, xp })
-            .then(auth => this.setState({ auth }))
+            .then(auth => {
+              const play = { ...this.state.play }
+              play.played = false
+              this.setState({ auth })
+              setTimeout(() => {
+                document.querySelector('.Dashboard-content-Play-divChallenge').style.pointerEvents = 'painted'
+                document.querySelector('.Header-limit-right-menu').style.pointerEvents = 'painted'
+                this.setState({ play })
+              }, 2000)
+            })
         }
       },
       profile: {
@@ -86,6 +98,7 @@ export default class Dashboard extends Component {
         }),
         buyPart: (part, table, field, price) => {
           if (part === this.state.auth.car[field]) return
+          if (this.state.auth.user.gold < price) return
           changePart({ auth: this.state.auth }, part, table, field, this.state.auth.user.gold, price).then(auth => this.setState({ auth }))
         },
         attrToSale: () => this.setState({ sale: !this.state.sale }),
@@ -113,10 +126,10 @@ export default class Dashboard extends Component {
           aprimore.engine = true
           const body = { ...initialBody }
           body.play = true
-          adv(res.user.nvl)
-            .then(bot => {
-              console.log({ voce: res, oponente: bot })
-              this.setState({ auth: res, ready: true, aprimore, body, adv: bot })
+          getAdv()
+            .then(advs => {
+              console.log({ voce: res, oponentes: advs })
+              this.setState({ auth: res, ready: true, aprimore, body, adv: advs })
             })
         }) 
   }

@@ -11,17 +11,15 @@ import Attributes from '../subComponents/Attributes'
 import Sale from '../subComponents/Sale'
 
 function renderLiAttr(atrParam) {
-  console.log(atrParam)
   const attr = { speed: atrParam.speed, acceleration: atrParam.acceleration, resistance: atrParam.resistance }
-  // console.log(attr)
-    const li = []
+  const li = []
 
-    Object.entries(attr).forEach((atr, indice) => li.push(<li className='Dashboard-Aprimorator-content-inside-body-ul-li' key={indice}>
-        <span className='attrName'><img src={`http://localhost:3001/files/icons/aprimore/attributes/${atr[0]}.png`} alt='Ícone do atributo' /></span>
-        <span className='attrValue'>{atr[1].toFixed(1)} {atrParam.update_config[atr[0]]? '+' + atrParam.update_config[atr[0]]: ''}</span>
-      </li>))
+  Object.entries(attr).forEach((atr, indice) => li.push(<li className='Dashboard-Aprimorator-content-inside-body-ul-li' key={indice}>
+      <span className='attrName'><img src={`http://localhost:3001/files/icons/aprimore/attributes/${atr[0]}.png`} alt='Ícone do atributo' /></span>
+      <span className='attrValue'>{atr[1].toFixed(1)} {atrParam.update_config[atr[0]]? '+' + atrParam.update_config[atr[0]]: ''}</span>
+    </li>))
 
-    return li
+  return li
 }
 
 function submit(gold, data, update) {
@@ -73,16 +71,16 @@ function renderProducts(my, toBuy, gold) {
               <span>Acel.</span ><span>+{part.update_config.acceleration}</span>
             </span>
             <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value-update'>
-              <span>Preço</span> <span>R$ {transformAsCoint(part.update_config.price)}</span>
+              <span>Preço</span> <span>{transformAsCoint(part.update_config.price)}</span>
             </span>
           </span>
         </div>
         <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
           <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>Valor</span>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>R$ {transformAsCoint(part.price)}</span>
+          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>{transformAsCoint(part.price)}</span>
         </div>
         <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
-          <span>R$ {transformAsCoint(gold)}</span><AwesomeButton size='medium' type='primary' ripple action={() => toBuy(part.name, 'transmissions', 'transmission', part.price)}>Comprar</AwesomeButton>
+          <span>{transformAsCoint(gold)}</span><AwesomeButton size='medium' type='primary' ripple action={() => toBuy(part.name, 'transmissions', 'transmission', part.price)}>Comprar</AwesomeButton>
         </div>
       </div>
     </div>

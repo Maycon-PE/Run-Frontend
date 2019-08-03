@@ -59,7 +59,7 @@ const Home = ({ history }) => {
         </Loading>
       )
     )
-  }, [body])
+  }, [body, ready])
 
 
   return content

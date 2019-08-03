@@ -16,40 +16,11 @@ export const LogoReact = styled.img`
   :hover { cursor: pointer; }
 `
 
-export const Profile = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  :before {
-    content: '';
-    border-radius: 50%;
-    padding: 1px;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    border-top: 4px dashed ${({ border }) => border};
-    -webkit-animation: ${rotate} 1s linear infinite;
-    -moz-animation: ${rotate} 1s linear infinite;
-    -ms-animation: ${rotate} 1s linear infinite;
-    -o-animation: ${rotate} 1s linear infinite;
-    animation: ${rotate} 1s linear infinite;
-  }
-`
 
 export const Img = styled.img`
   width: 50px;
   height: 50px;
   border-radius 50%;
-`
-
-export const FastInfo = styled.div`
-  color: black;
-  font-weight: 900;
-
-  display: flex;
-  flex-direction: column;
 `
 
 export const Header = styled.header`
@@ -154,8 +125,6 @@ export const Menu = styled.nav`
 	@media (max-width: 759px) {
 		width: 100px;
     margin-bottom: 20px;
-    background: #222; 
-    border-radius: 10px;
 
     display: flex;
     flex-direction: column;
@@ -169,5 +138,5 @@ export const Menu = styled.nav`
 
 export const OpenMenu = styled.input`
 	@media (min-width: 760px) { :checked ~ div { left: 90%; } }
-	@media (max-width: 759px) { :checked ~ div { display: flex; top 0px; } }
+	@media (max-width: 759px) { :checked ~ div { display: flex; top 0px; background: #222; border-radius: 10px; } }
 `

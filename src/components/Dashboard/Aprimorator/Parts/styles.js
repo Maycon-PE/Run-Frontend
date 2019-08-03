@@ -59,4 +59,5 @@ export const AprimoreTitle = styled.p`
 	font-size: 25px;
   color: white;
   text-align: center;
+  margin: 2px;
 `

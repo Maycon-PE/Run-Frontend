@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Inicio = styled.div`
+  position: relative;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -8,6 +9,7 @@ export const Inicio = styled.div`
 `
 
 export const BlockForm = styled.div`
+  position: relative;
 	padding: 9px 0px;
 	width: 100%;
 
@@ -36,11 +38,12 @@ export const InsideBlock = styled.div`
 
 export const FormArea = styled.div`
 	border: 1px solid #999;
-  width: 422px;;
+  width: 422px;
+  max-width: 98vw;
   
   padding: 5px 10px;
   border-radius: 9px;
-  background-color: #f5f5f599;
+  background: #f5f5f599;
 
   display: flex;
   flex-direction: column;
@@ -70,33 +73,52 @@ export const FormHeader = styled.div`
 
 export const FormMessage = styled.span`
 	font-size: 15px;
+  margin: 10px 0px 0px 20px;
+
 `
 
 export const FormHeaderLabel = styled.label`
 	font-size: 25px;
-
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
 `
 
 export const AreaInput = styled.div`
 	margin: 5px 0px;
+  padding: 3px 0px;
 
   display: flex;
-  flex-direction: ${({ double }) => double? 'row': 'column'};
+  flex-direction: ${({ double }) => double? 'row': 'column-reverse'};
   ${({ double }) => {
-  		if (double) return 'justify-content: space-between'
-  	}
+    if (double) return 'justify-content: space-around;'
   }}
+  label {
+    position: relative;
+    :after {
+      content: '';
+      height: 10px;
+      width: 10px;
+      position: absolute;
+      background: black;
+      transform: rotate(45deg);
+      left: 0px;
+      bottom: -25px;
+    }
+  }
+
+  input:valid ~ label:after,
+  select ~ label:after { background: green; }
 `
 
 export const Input = styled.input`
 	border-radius: 5px;
   padding: 10px;
+  margin: 0px 5px;
   border: 1px solid rgb(139, 153, 231);
   height: 39px;
-  min-width: 191px;
+  width: 100%;
 
   :hover {
   	box-shadow: 0px  0px 10px rgb(139, 153, 231);
@@ -108,9 +130,18 @@ export const Select = styled.select`
   padding: 10px;
   border: 1px solid rgb(139, 153, 231);
   height: 39px;
-  min-width: 191px;
+  min-width: 147px;
+  margin-left: 5px;
 
   :hover {
   	box-shadow: 0px  0px 10px rgb(139, 153, 231);
   }
 `
+
+
+
+// -webkit-animation: ${rotate} 5s linear infinite;
+//   -moz-animation: ${rotate} 5s linear infinite;
+//   -ms-animation: ${rotate} 5s linear infinite;
+//   -o-animation: ${rotate} 5s linear infinite;
+//   animation: ${rotate} 5s linear infinite;

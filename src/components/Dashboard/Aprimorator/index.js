@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import { 
   Aprimore, Header, HeaderMenuItem,
@@ -13,14 +13,6 @@ import Transmission from './Parts/Transmission'
 import Whells from './Parts/Whells'
 import Cylinder from './Parts/Cylinder'
 import Protection from './Parts/Protection'
-
-const initialScreenAprimore = {
-  engine: false,
-  transmission: false,
-  whells: false,
-  cylinder: false,
-  protection: false
-}
 
 function renderContent(data) {
   if (data.aprimore.engine) return <Engine message={data.insideAprimore.messageUpdate} buyPart={data.insideAprimore.buyPart} update={data.insideAprimore.updatePart} sale={data.sale} gold={data.auth.user.gold} name={data.auth.car.engine} data={JSON.parse(data.auth.car.engine_object)} />

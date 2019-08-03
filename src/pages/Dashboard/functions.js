@@ -133,7 +133,7 @@ function victory(waited = String, { nvl } = Object, advs = Array) {
 
   if (waited === 'gold') return (nvls * 1000) - nvl * 500
 
-  return (nvls * 20) - nvl * 5
+  return (nvls * 100) - nvl * 5
 }
 
 function lose(waited = String, { nvl } = Object, advs = Array) {
@@ -144,7 +144,7 @@ function lose(waited = String, { nvl } = Object, advs = Array) {
 
   if (waited === 'gold') return (nvls * 300) - nvl * 200
 
-  return (nvls * 10) - nvl * 2
+  return (nvls * 80) - nvl * 5
 }
 
 function shame({ nvl } = Object, advs = Array) {

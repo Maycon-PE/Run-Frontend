@@ -13,7 +13,7 @@ export default ({ message, render, data, submit }) =>
     </Ul>
     <ButtonArea>
       <span>{transformAsCoint(data.update_config.price)}</span>
-      <AwesomeButton size='medium' type='primary' ripple action={submit}>Aprimorar</AwesomeButton>
+      <AwesomeButton className='Dashboard-Aprimorator-content-inside-body-btn' size='medium' type='primary' ripple action={submit}>Aprimorar</AwesomeButton>
       <span>{message}</span>
     </ButtonArea>
   </>

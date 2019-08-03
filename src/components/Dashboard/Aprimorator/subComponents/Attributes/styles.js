@@ -15,7 +15,7 @@ export const Ul = styled.ul`
 
 export const Li = styled.li`
 	height: 35px;
-  width: 150px;
+  width: 120px;
   margin: 10px;
   position: relative;
 

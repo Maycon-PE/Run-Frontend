@@ -25,7 +25,6 @@ const initialBody = {
   profile: false
 }
 
-
 export default class Dashboard extends Component {
 
   constructor(props) {
@@ -63,7 +62,7 @@ export default class Dashboard extends Component {
           const gold = winner? this.state.auth.user.gold + victory('gold', this.state.auth.user, this.state.adv) : this.state.auth.user.gold + lose('gold', this.state.auth.user, this.state.adv)
           const xp = winner? this.state.auth.user.xp + victory(null, this.state.auth.user, this.state.adv) : this.state.auth.user.xp + lose(null, this.state.auth.user, this.state.adv)
 
-          winOrLose({ auth: this.state.auth }, { gold: gold < 99999999? gold: 99999999, xp })
+          winOrLose({ auth: this.state.auth }, { gold: gold < 999999999? gold: 999999999, xp })
             .then(auth => {
               const play = { ...this.state.play }
               play.played = false

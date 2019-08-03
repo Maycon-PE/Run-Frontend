@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Aprimore = styled.div`
-	background: #777;
+	background: #9999;
   position: relative;
   height: 500px;
 `

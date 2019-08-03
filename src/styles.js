@@ -11,6 +11,8 @@ export const Global = createGlobalStyle`
 
 	input[type='checkbox'] { display: none; }
 
+	input[type='password'] { letter-spacing: 5px; }
+
 	button:hover { cursor: pointer; }
 
 	ul { list-style: none; padding: 0px; margin: 0px; }
@@ -84,10 +86,11 @@ export const Table = styled.table`
 export const Container = styled.div`
 	position: relative;
 	border: 1px solid white;
-  widows: 100%;
+  width: 100vw;
   max-width: 1200px;
   margin: auto;
-  padding: 40px 5px;
+  overflow: hidden;
+  padding: 40px 15px;
   border-radius: 10px;
   background: #222;
   box-shadow: 0px 0px 10px black;

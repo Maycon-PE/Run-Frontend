@@ -34,4 +34,12 @@ function validationModel(model = String) {
   return true
 }
 
-export { register, login, validationEmail, validationNickName, validationModel }
+function checkInvalid(id) {
+  const input = document.getElementById(id)
+  input.focus()
+  input.classList.add('input-invalid')
+
+  input.onchange = e => input.classList.remove('input-invalid')
+}
+
+export { register, login, validationEmail, validationNickName, validationModel, checkInvalid }

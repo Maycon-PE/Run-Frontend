@@ -1,11 +1,15 @@
-.Home-Parts {
+import styled from 'styled-components'
+
+export const Home = styled.div`
   width: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
 
-.Home-Parts h1 { color: white; }
+  > h1 {
+    color: white;
+  }
+`
 

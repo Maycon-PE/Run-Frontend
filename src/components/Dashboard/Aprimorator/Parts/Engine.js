@@ -2,7 +2,12 @@ import React from 'react'
 import { AwesomeButton } from "react-awesome-button"
 
 import "react-awesome-button/dist/styles.css"
-import './index.css'
+import { ExchangesArea, ExchangeQtd, LiLabel, LiData, AprimoreTitle } from './styles'
+import { Li } from '../subComponents/Attributes/styles'
+import { 
+  PreviewProduct, ProductName, InfoProductId,
+  InfoProductGlobal, InfoProductBlock
+} from '../subComponents/Sale/styles'
 
 import { setEffect } from '../functions'
 import { transformAsCoint } from '../../../../pages/Dashboard/functions'
@@ -14,8 +19,8 @@ function renderLiMarchas(config) {
   const li = []
 
     Object.values(config.exchange_rates).forEach((data, indice) => li.push(<li key={indice}>
-      <span className='Dashboard-Aprimorator-content-inside-body-exchanges-ul-li-span'>{indice + 1}</span>
-      <span className='Dashboard-Aprimorator-content-inside-body-exchanges-ul-li'>{data}</span>
+      <LiLabel className='Dashboard-Aprimorator-content-inside-body-exchanges-ul-li-span'>{indice + 1}</LiLabel>
+      <LiData className='Dashboard-Aprimorator-content-inside-body-exchanges-ul-li'>{data}</LiData>
     </li>))
 
     return li
@@ -25,10 +30,10 @@ function renderLiAttr(atrParam) {
   const attr = { speed: atrParam.speed, acceleration: atrParam.acceleration, resistance: atrParam.resistance }
   const li = []
 
-  Object.entries(attr).forEach((atr, indice) => li.push(<li className='Dashboard-Aprimorator-content-inside-body-ul-li' key={indice}>
+  Object.entries(attr).forEach((atr, indice) => li.push(<Li key={indice}>
       <span className='attrName'><img src={`http://localhost:3001/files/icons/aprimore/attributes/${atr[0]}.png`} alt='Ícone do atributo' /></span>
       <span className='attrValue'>{atr[1].toFixed(1)} + {atrParam.update_config[atr[0]]}</span>
-    </li>))
+    </Li>))
 
   return li
 }
@@ -54,61 +59,61 @@ function renderProducts(my, toBuy, gold) {
 
   const divs = []
 
-  sale.forEach(part => divs.push(<div key={part.id} className='Dashboard-Aprimorator-content-inside-body-inside-Sale'>
-    <span className={`Dashboard-Aprimorator-content-inside-body-inside-Sale-name ${my === part.name? 'myPartEquiped': ''}`} onClick={() => setEffect(part.id)}>{part.name}</span>
-    <div className={`Dashboard-Aprimorator-content-inside-body-inside-Sale-info thisIsProduct-${part.id}`}>
-      <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-global'>
-        <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>Peça</span>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>{part.name}</span>
-        </div>
-        <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>Velo.</span>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>{part.speed}</span>
-        </div>
-        <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>Acel.</span>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>{part.acceleration}</span>
-        </div>
-        <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>Resis.</span>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>{part.resistance}</span>
-        </div>
-        <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>Turbo</span>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>{part.turbo}</span>
-        </div>
-        <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>Marchas</span>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>{part.exchange}</span>
-        </div>
-        <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>Taxa de Atualização</span>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>
-            <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value-update'>
+  sale.forEach(part => divs.push(<PreviewProduct key={part.id}>
+    <ProductName className={`Dashboard-Aprimorator-content-inside-body-inside-Sale-name ${my === part.name? 'myPartEquiped': ''}`} onClick={() => setEffect(part.id)}>{part.name}</ProductName>
+    <InfoProductId className={`Dashboard-Aprimorator-content-inside-body-inside-Sale-info thisIsProduct-${part.id}`}>
+      <InfoProductGlobal>
+        <InfoProductBlock>
+          <span className='block-attr'>Peça</span>
+          <span className='block-value'>{part.name}</span>
+        </InfoProductBlock>
+        <InfoProductBlock>
+          <span className='block-attr'>Velo.</span>
+          <span className='block-value'>{part.speed}</span>
+        </InfoProductBlock>
+        <InfoProductBlock>
+          <span className='block-attr'>Acel.</span>
+          <span className='block-value'>{part.acceleration}</span>
+        </InfoProductBlock>
+        <InfoProductBlock>
+          <span className='block-attr'>Resis.</span>
+          <span className='block-value'>{part.resistance}</span>
+        </InfoProductBlock>
+        <InfoProductBlock>
+          <span className='block-attr'>Turbo</span>
+          <span className='block-value'>{part.turbo}</span>
+        </InfoProductBlock>
+        <InfoProductBlock>
+          <span className='block-attr'>Marchas</span>
+          <span className='block-value'>{part.exchange}</span>
+        </InfoProductBlock>
+        <InfoProductBlock>
+          <span className='block-attr'>Taxa de Atualização</span>
+          <span className='block-value'>
+            <span className='block-value-update'>
               <span>Velo.</span> <span>+{part.update_config.speed}</span>
             </span>
-            <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value-update'>
+            <span className='block-value-update'>
               <span>Acel.</span ><span>+{part.update_config.acceleration}</span>
             </span>
-            <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value-update'>
+            <span className='block-value-update'>
               <span>Resis.<span> </span>+{part.update_config.resistance}</span>
             </span>
-            <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value-update'>
+            <span className='block-value-update'>
               <span>Preço</span> <span>{transformAsCoint(part.update_config.price)}</span>
             </span>
           </span>
-        </div>
-        <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-attr'>Valor</span>
-          <span className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block-value'>{transformAsCoint(part.price)}</span>
-        </div>
-        <div className='Dashboard-Aprimorator-content-inside-body-inside-Sale-info-block'>
+        </InfoProductBlock>
+        <InfoProductBlock>
+          <span className='block-attr'>Valor</span>
+          <span className='block-value'>{transformAsCoint(part.price)}</span>
+        </InfoProductBlock>
+        <InfoProductBlock>
           <span>{transformAsCoint(gold)}</span><AwesomeButton size='medium' type='primary' ripple action={() => toBuy(part.name, 'engines', 'engine', part.price)}>Comprar</AwesomeButton>
-        </div>
-      </div>
-    </div>
-  </div>))
+        </InfoProductBlock>
+      </InfoProductGlobal>
+    </InfoProductId>
+  </PreviewProduct>))
 
   return divs
 }
@@ -118,13 +123,13 @@ function renderBody(attr, config) {
     <Sale name={config.name} buyPart={config.buyPart} gold={config.gold}  renderProducts={renderProducts} />
   ): (
     <>
-      <div className='Dashboard-Aprimorator-content-inside-body-exchanges'>
-        <span className='Dashboard-Aprimorator-content-inside-body-exchanges-qtdMarcha'>{config.data.exchange} marchas</span>
+      <ExchangesArea>
+        <ExchangeQtd>{config.data.exchange} marchas</ExchangeQtd>
         <ul>
           {renderLiMarchas(config.data)}
         </ul>
-      </div>
-      <p className='Dashboard-Aprimorator-content-inside-body-partName'>Motor '{config.name}' equipada!</p>
+      </ExchangesArea>
+      <AprimoreTitle>Motor '{config.name}' equipada!</AprimoreTitle>
       <Attributes message={config.message} data={config.data} submit={() => submit(config.gold, config.data, config.update)} render={renderLiAttr} />
     </>
   )

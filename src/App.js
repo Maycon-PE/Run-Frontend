@@ -1,14 +1,18 @@
 import React from 'react';
 
 import 'font-awesome/css/font-awesome.min.css'
-import './App.css';
+
+import { Global } from './styles'
 
 import Routes from './routes'
 
 function App() {
   return (
-    <Routes />
-  );
+  	<>
+  		<Global />
+    	<Routes />
+    </>
+  )
 }
 
 export default App;

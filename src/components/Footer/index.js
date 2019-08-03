@@ -1,14 +1,14 @@
 import React from 'react'
 
-import './css/index.css'
+import { Footer, LimitFooter, Links } from './styles'
 
 export default () =>
-  <footer className='App-Footer'>
-    <div className='App-Footer-div'>
+  <Footer>
+    <LimitFooter>
       <span>Desenvolvido por Maycon Silva</span>
-      <span className='App-Footer-div-redes'>
+      <Links>
         <a href='https://github.com/Maycon-PE' target='_blank' rel="noopener noreferrer"><i className="fa fa-github-square"></i> GitHub</a>
         <a href='https://www.facebook.com/profile.php?id=100008160376957' target='_blank' rel="noopener noreferrer"><i className="fa fa-facebook-square"></i> Facebook</a>
-      </span>
-    </div>
-  </footer>
+      </Links>
+    </LimitFooter>
+  </Footer>

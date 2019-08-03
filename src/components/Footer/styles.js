@@ -1,8 +1,7 @@
+import styled from 'styled-components'
 
-/* Footer */
-
-.App-Footer {
-  position: fixed;
+export const Footer = styled.footer`
+	position: fixed;
   bottom: 0px;
   left: 0px;
   height: 80px;
@@ -10,10 +9,10 @@
   display: flex;
   justify-content: center;
   z-index: 5;
-}
+`
 
-.App-Footer-div {
-  width: 100%;
+export const LimitFooter = styled.div`
+	width: 100%;
   max-width: 1100px;
   height: 59px;
   color: white;
@@ -26,12 +25,12 @@
   flex-flow: column wrap;
   justify-content: space-between;
   align-items: center;
-}
+`
 
-.App-Footer-div-redes {
-  width: 100%;
+export const Links = styled.span`
+	width: 100%;
   max-width: 300px;
 
   display: flex;
   justify-content: space-around;
-}
+`

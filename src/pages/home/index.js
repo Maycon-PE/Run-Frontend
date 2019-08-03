@@ -1,13 +1,12 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import './functions'
 
 //Estilos
-import './css/index.css'
+import { Container, Loading } from '../../styles'
 
 // Componentes
 import Nav from '../../components/Menu'
-import Footer from '../../components/Footer'
 import Inicio from '../../components/Home/Inicio'
 import Fakes from '../../components/Home/Fakes'
 import Parts from '../../components/Home/Parts'
@@ -20,47 +19,50 @@ const inicialStateScreen = {
   help: false
 }
 
+const Home = ({ history }) => {
+  const [body, setBody] = useState({ ...inicialStateScreen })
+  const [ready, setReady] = useState(false)
+  const [content, setContent] = useState(null)
 
-export default class Home extends Component {
-  constructor(props) {
-    super(props)
+  useEffect(() => {
+    const body = { ...inicialStateScreen }
+    body.inicio = true
+    setReady(true)
+    setBody(body)
+  }, [])
 
-    this.state = { render: inicialStateScreen, ready: false, history: props.history }
-  }
-
-  componentDidMount() {
+  const changeBody = aba => {
     const render = { ...inicialStateScreen }
-    render.inicio = true
-    this.setState({ render, ready: true })
+    render[aba] = true
+
+    setBody(render)
   }
 
-  changeBody = body => {
-    const render = { ...inicialStateScreen }
-    render[body] = true
-
-    this.setState({ render })
-  }
-
-  renderBody(render) {
-    if (render.inicio) return <Inicio push={this.state.history} />
+  const renderBody = render => {
+    if (render.inicio) return <Inicio push={history} />
     if (render.bots) return <Fakes />
     if (render.parts) return <Parts />
-    if (render.help) return <HowPlay />
+    return <HowPlay />
   }
 
-  render() {
-    return this.state.ready? (
-      <>
-        <Nav changeBody={this.changeBody} />
-        <div className='Home'>
-          {this.renderBody(this.state.render)}
-        </div>
-        <Footer />
-      </>
-    ) : (
-      <div className='Dashboard-loading'>
-        <img className='Dashboard-loading-img' src='./image/loading.gif' alt='Logo de carregamento' />
-      </div>
+  useEffect(() => {
+    setContent(ready? (
+        <React.Fragment>
+          <Nav changeBody={changeBody} />
+          <Container className='Home'>
+            {renderBody(body)}
+          </Container>
+        </React.Fragment>
+      ) : (
+        <Loading>
+          <img src='./image/loading.gif' alt='Logo de carregamento' />
+        </Loading>
+      )
     )
-  }
+  }, [body])
+
+
+  return content
 }
+
+export default Home

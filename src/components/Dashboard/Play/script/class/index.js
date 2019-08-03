@@ -4,14 +4,14 @@ export const carro = () => {
     constructor(modeloParam = String, { engine, transmission, whells, cylinder, protection } = Object) {
       //======Atributos principais======\\
       this.modelo = modeloParam
-      this.velocidade = (engine.speed + transmission.speed + whells.speed + cylinder.speed)
-      this.delta = (engine.acceleration + transmission.acceleration + whells.acceleration + cylinder.acceleration)
+      this.velocidade = engine.speed + transmission.speed + whells.speed + cylinder.speed
+      this.delta = engine.acceleration + transmission.acceleration + whells.acceleration + cylinder.acceleration
       this.porcentoMarchas = 100 / engine.exchange
       this.totMarchas = engine.exchange
       this.taxaFreio = whells.brake
       this.cambio = engine['exchange_rates']
-      this.qualidade = (engine.resistance + transmission.resistance + cylinder.resistance + protection.resistance)
-      this.nitro = cylinder.turbo
+      this.qualidade = engine.resistance + transmission.resistance + cylinder.resistance + protection.resistance
+      this.nitro = cylinder.turbo + engine.turbo
       //======Atributos extras======\\
       this.resistencia = 0
       this.freio = whells.brake * engine.exchange
@@ -24,8 +24,7 @@ export const carro = () => {
       this.preTurbo = 0
       this.aproveitamento = 0
       this.distanciaPecorrida = 0.000
-      this.categoria = (this.velocidade / 3) + (this.delta / 3) + (this.qualidade * 2) + (this.nitro * 4)
-      this.categoriaFormatado = 'N'
+      this.categoria = this.velocidade + this.delta + this.qualidade + this.nitro
     }
 
     //======Métodos======\\
@@ -82,7 +81,7 @@ export const carro = () => {
           }
         } else if (this.getBtnNitro() === true && this.getTanque() <= this.getNitro() / 5 + this.getNitro() && this.getCilindro() === true) {
           this.setTanque(this.getTanque() + 0.0166666666)
-          this.acelerar((this.getPreTurbo() / (this.getMarcha() * 2)) / this.getVelocidade())
+          this.acelerar((this.getPreTurbo() / this.getMarcha()) / this.getVelocidade())
         } else {
           this.setCilindro(false)
           this.getTanque(this.getNitro())
@@ -157,20 +156,15 @@ export const carro = () => {
     }
     getCategoriaFormatada() {
       if (this.categoria < 400) {
-        this.categoriaFormatado = 'C'
-        return this.categoriaFormatado
+        return 'C'
       } else if (this.categoria < 500) {
-        this.categoriaFormatado = 'R'
-        return this.categoriaFormatado
-      } else if (this.categoria < 590) {
-        this.categoriaFormatado = 'S'
-        return this.categoriaFormatado
-      } else if (this.categoria < 620) {
-        this.categoriaFormatado = 'SS'
-        return this.categoriaFormatado
+        return 'R'
+      } else if (this.categoria < 650) {
+        return 'S'
+      } else if (this.categoria < 800) {
+        return 'SS'
       } else {
-        this.categoriaFormatado = 'A'
-        return this.categoriaFormatado
+        return 'A'
       }
     }
 

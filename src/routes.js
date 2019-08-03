@@ -6,6 +6,7 @@ import Home from './pages/home'
 import Dashboard from './pages/Dashboard'
 import PrivateRoute from './auth'
 import Logout from './pages/Dashboard/logout'
+import Footer from './components/Footer'
 
 export default () =>
   <Router>
@@ -14,4 +15,5 @@ export default () =>
       <PrivateRoute path='/dashboard' component={Dashboard} />
       <Route exact path='/logout' component={Logout} />
     </Switch>
+    <Footer />
   </Router>

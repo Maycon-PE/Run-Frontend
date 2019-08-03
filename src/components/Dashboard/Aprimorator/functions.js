@@ -1,17 +1,17 @@
 
 function setEffect(key = Number) {
-  document.querySelectorAll(`.Dashboard-Aprimorator-content-inside-body-inside-Sale-info`).forEach((div, index) => {
+  document.querySelectorAll('.Dashboard-Aprimorator-content-inside-body-inside-Sale-info').forEach((div, index) => {
   	if (index + 1 !== key) div.style.display = 'none'
   	else div.style.display = div.style.display === 'block'? 'none': 'block'
   })
   document.querySelectorAll('.Dashboard-Aprimorator-content-inside-body-inside-Sale-name').forEach((span, index) => {
   	if (index + 1 !== key) {
-  		span.classList.remove('Dashboard-Aprimorator-content-inside-body-inside-Sale-name_selectedAndEquiped')
-  		span.classList.remove('Dashboard-Aprimorator-content-inside-body-inside-Sale-name_selected')
+  		span.classList.remove('name_selectedAndEquiped')
+  		span.classList.remove('name_selected')
   	}	else {
-  		span.classList.toggle('Dashboard-Aprimorator-content-inside-body-inside-Sale-name_selected')
+  		span.classList.toggle('name_selected')
   		if (span.getAttribute('class').indexOf('myPartEquiped') !== -1) {
-  			span.classList.toggle('Dashboard-Aprimorator-content-inside-body-inside-Sale-name_selectedAndEquiped')
+  			span.classList.toggle('name_selectedAndEquiped')
   		}
   	}
   })

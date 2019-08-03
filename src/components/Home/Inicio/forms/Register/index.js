@@ -1,16 +1,19 @@
 ﻿import React, { Component } from 'react'
-import { AwesomeButton } from "react-awesome-button";
-import "react-awesome-button/dist/styles.css";
+import { AwesomeButton } from "react-awesome-button"
+import "react-awesome-button/dist/styles.css"
+
+//Styles
+import { FormHeader, FormHeaderLabel, FormMessage, Form, AreaInput, Input, Select } from '../../styles'
 
 import  { countries } from './data/defaults.json'
-import { register, validationEmail, validationNickName, validationModel } from '../../functions'
+import { register, validationEmail, validationNickName, validationModel, checkInvalid } from '../../functions'
 
 export default class Register extends Component {
 
   constructor(props) {
     super(props)
 
-    this.state = { history: this.props.push, message: '', invalid: this.props.invalid }
+    this.state = { history: this.props.push, message: '' }
   }
 
   register = () => {
@@ -21,7 +24,7 @@ export default class Register extends Component {
     }
 
     if (!validationEmail(this.email)) {
-      this.state.invalid('email-register')
+      checkInvalid('email-register')
       const message = 'email: ...' + this.email.slice(this.email.indexOf('@'), this.email.length) + ' é inválido'
 
       this.setState({ message })
@@ -29,13 +32,13 @@ export default class Register extends Component {
     }
 
     if (!validationNickName(this.nickname)) {
-      this.state.invalid('nickname-register')
+      checkInvalid('nickname-register')
       this.setState({ message: 'Nickname inválido' })
       return
     }
 
     if (!validationModel(this.carName)) {
-      this.state.invalid('model-register')
+      checkInvalid('model-register')
       this.setState({ message: 'Nome do carro inválido' })
       return
     }
@@ -43,7 +46,7 @@ export default class Register extends Component {
     if (this.password.length < 5) return
 
     if (this.password !== this.password2) {
-      this.state.invalid('password-2-register')
+      checkInvalid('password-2-register')
       this.setState({ message: 'Senhas diferentes' })
       return
     }
@@ -62,7 +65,7 @@ export default class Register extends Component {
         if (!res.status) {
           if (res.error) {
             const key = res.error.slice(res.error.indexOf('key') + 5, res.error.length - 1)
-            this.state.invalid(`${key}-register`)
+            checkInvalid(`${key}-register`)
             this.setState({ message: key + ' já existe' })
           } else { this.setState({ message: res.message }) }
           
@@ -87,51 +90,51 @@ export default class Register extends Component {
   render() {
     return (
       <div className='Inicio-form-inputs-area-form'>
-        <div className='Inicio-form-inputs-form-header'>
-          <label className='Inicio-form-inputs-form-header-label'>Cadastro <span className='Inicio-form-inputs-form-header-label-span'>{this.state.message}</span></label>
-        </div>
-        <form className='Inicio-form-inputs-form' onSubmit={e => e.preventDefault()}>
-          <div className='Inicio-form-inputs-form-area-input'>
+        <FormHeader className='Inicio-form-inputs-form-header'>
+          <FormHeaderLabel className='Inicio-form-inputs-form-header-label'>Cadastro <FormMessage className='Inicio-form-inputs-form-header-label-span'>{this.state.message}</FormMessage></FormHeaderLabel>
+        </FormHeader>
+        <Form className='Inicio-form-inputs-form' onSubmit={e => e.preventDefault()}>
+          <AreaInput className='Inicio-form-inputs-form-area-input'>
             <label htmlFor='nome-register'>Nome</label>
-            <input id='nome-register' type='text' name='name' onChange={e => this.name = e.target.value} placeholder='Primeiro e segundo nome' required />  
-          </div>
-          <div className='Inicio-form-inputs-form-area-input'>
+            <Input id='nome-register' type='text' name='name' onChange={e => this.name = e.target.value} placeholder='Primeiro e segundo nome' required />  
+          </AreaInput>
+          <AreaInput className='Inicio-form-inputs-form-area-input'>
             <label htmlFor='email-register'>Email</label>
-            <input id='email-register' type='email' name='email' onChange={e => this.email = e.target.value} placeholder='...@...' required />  
-          </div>
-          <div className='Inicio-form-inputs-form-area-inputs'>
-            <div className='Inicio-form-inputs-form-area-input'>
+            <Input id='email-register' type='email' name='email' onChange={e => this.email = e.target.value} placeholder='...@...' required />  
+          </AreaInput>
+          <AreaInput double className='Inicio-form-inputs-form-area-inputs'>
+            <AreaInput className='Inicio-form-inputs-form-area-input'>
               <label htmlFor='model-register'>Nome do carro</label>
-              <input id='model-register' type='text' name='carName' onChange={e => this.carName = e.target.value} placeholder='Nomeie seu carro' required />  
-            </div>
-            <div className='Inicio-form-inputs-form-area-input'>
+              <Input id='model-register' type='text' name='carName' onChange={e => this.carName = e.target.value} placeholder='Nomeie seu carro' required />  
+            </AreaInput>
+            <AreaInput className='Inicio-form-inputs-form-area-input'>
               <label htmlFor='nickname-register'>Nickname</label>
-              <input id='nickname-register' type='text' name='nickname' onChange={e => this.nickname = e.target.value} placeholder='Seu nome no jogo' required />  
-            </div>
-          </div>
-          <div className='Inicio-form-inputs-form-area-inputs'>
-            <div className='Inicio-form-inputs-form-area-input'>
+              <Input id='nickname-register' type='text' name='nickname' onChange={e => this.nickname = e.target.value} placeholder='Seu nome no jogo' required />  
+            </AreaInput>
+          </AreaInput>
+          <AreaInput double className='Inicio-form-inputs-form-area-inputs'>
+            <AreaInput className='Inicio-form-inputs-form-area-input'>
               <label htmlFor='password-register'>Senha</label>
-              <input id='password-register' type='password' name='password' onChange={e => this.password = e.target.value } placeholder='*********' minLength='5' maxLength='15' required />
-            </div>
-            <div className='Inicio-form-inputs-form-area-input'>
+              <Input id='password-register' type='password' name='password' onChange={e => this.password = e.target.value } placeholder='*********' minLength='5' maxLength='15' required />
+            </AreaInput>
+            <AreaInput className='Inicio-form-inputs-form-area-input'>
               <label htmlFor='password-2-register'>Confirme a senha</label>
-              <input id='password-2-register' type='password' name='password2' onChange={e => this.password2 = e.target.value } placeholder='*********' minLength='5' maxLength='15' required />
-            </div>
-          </div>
-          <div className='Inicio-form-inputs-form-area-selects'>
-            <div className='Inicio-form-inputs-form-area-select'>
+              <Input id='password-2-register' type='password' name='password2' onChange={e => this.password2 = e.target.value } placeholder='*********' minLength='5' maxLength='15' required />
+            </AreaInput>
+          </AreaInput>
+          <AreaInput double className='Inicio-form-inputs-form-area-selects'>
+            <AreaInput className='Inicio-form-inputs-form-area-select'>
               <label htmlFor='genre-register'>Gênero</label>
-              <select name='genre' id='genre-register' onChange={e => this.genre = e.target.value} required>
+              <Select name='genre' id='genre-register' onChange={e => this.genre = e.target.value} required>
                 <optgroup label='Gêneros'>
                   <option value='Masculino'>Masculino</option>
                   <option value='Femilino'>Feminino</option>
                 </optgroup>
-              </select>
-            </div>
-            <div className='Inicio-form-inputs-form-area-select'>
+              </Select>
+            </AreaInput>
+            <AreaInput className='Inicio-form-inputs-form-area-select'>
               <label htmlFor='country-register'>Pais *Fictício</label>
-              <select name='country' id='country-register' onChange={e => this.country = e.target.value} required>
+              <Select name='country' id='country-register' onChange={e => this.country = e.target.value} required>
                 <optgroup label='América'>
                   {this.renderOptions('AM')}
                 </optgroup>
@@ -144,11 +147,11 @@ export default class Register extends Component {
                 <optgroup label='Africa'>
                   {this.renderOptions('AF')}
                 </optgroup>
-              </select>
-            </div>
-          </div>
+              </Select>
+            </AreaInput>
+          </AreaInput>
           <AwesomeButton className='Inicio-form-inputs-form-btn-submit' size='medium' type='secondary' ripple action={this.register}>Registrar</AwesomeButton>
-        </form>
+        </Form>
       </div>
     )
   }

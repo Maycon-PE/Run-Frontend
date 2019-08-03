@@ -1,10 +1,11 @@
 import React from 'react'
-import './css/index.css'
+
+import { Title, Products } from './styles'
 
 export default ({ name, renderProducts, gold, buyPart }) =>
   <>
-    <span className='Dashboard-Aprimorator-content-inside-body-title'>Loja</span>
-    <div className='Dashboard-Aprimorator-content-inside-body-produts'>
+    <Title>Loja</Title>
+    <Products>
       {renderProducts(name, buyPart, gold)}
-    </div>
+    </Products>
   </>

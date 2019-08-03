@@ -2,14 +2,17 @@ import React, { Component } from 'react'
 import { AwesomeButton } from "react-awesome-button"
 import "react-awesome-button/dist/styles.css"
 
-import { login } from '../../functions'
+//Styles
+import { FormHeader, FormHeaderLabel, FormMessage, Form, AreaInput, Input } from '../../styles'
+
+import { login, checkInvalid } from '../../functions'
 
 export default class Login extends Component {
 
   constructor(props) {
     super(props)
 
-    this.state = { history: props.push, message: '', invalid: props.invalid }
+    this.state = { history: props.push, message: '' }
   }
 
   sign = () => {
@@ -19,13 +22,13 @@ export default class Login extends Component {
     }
 
     if (!/^[a-z0-9.]+@(gmail|hotmail|outlook)+\.[a-z]+(\.[a-z]+)?$/g.test(this.email)) {
-      this.state.invalid('email-login')
+      checkInvalid('email-login')
       this.setState({ message: 'Email inválido!' })
       return
     }
 
     if (this.password.length < 5) {
-      this.state.invalid('password-login')
+      checkInvalid('password-login')
       this.setState({ message: 'Senha inválida' })
       return
     }
@@ -36,9 +39,9 @@ export default class Login extends Component {
       .then(res => {
         if (!res.status) {
           if (res.message.indexOf('Senha') !== -1) {
-            this.state.invalid('password-login')
+            checkInvalid('password-login')
           } else {
-            this.state.invalid('email-login')
+            checkInvalid('email-login')
           }
           this.setState({ message: res.message })
           return
@@ -52,20 +55,20 @@ export default class Login extends Component {
   render() {
     return (
       <div className='Inicio-form-inputs-area-form'>
-        <div className='Inicio-form-inputs-form-header'>
-          <label className='Inicio-form-inputs-form-header-label'>Login <span className='Inicio-form-inputs-form-header-label-span'>{this.state.message}</span></label>
-        </div>
-        <form className='Inicio-form-inputs-form' onSubmit={e => e.preventDefault()}>
-          <div className='Inicio-form-inputs-form-area-input'>
+        <FormHeader className='Inicio-form-inputs-form-header'>
+          <FormHeaderLabel className='Inicio-form-inputs-form-header-label'>Login <FormMessage className='Inicio-form-inputs-form-header-label-span'>{this.state.message}</FormMessage></FormHeaderLabel>
+        </FormHeader>
+        <Form className='Inicio-form-inputs-form' onSubmit={e => e.preventDefault()}>
+          <AreaInput className='Inicio-form-inputs-form-area-input'>
             <label htmlFor='email-login'>Email</label>
-            <input id='email-login' type='email' name='email' onChange={e => this.email = e.target.value} placeholder='Coloque seu email' required />  
-          </div>
-          <div className='Inicio-form-inputs-form-area-input'>
+            <Input id='email-login' type='email' name='email' onChange={e => this.email = e.target.value} placeholder='Coloque seu email' required />  
+          </AreaInput>
+          <AreaInput className='Inicio-form-inputs-form-area-input'>
             <label htmlFor='password-login'>Senha</label>
-            <input id='password-login' type='password' name='password' onChange={e => this.password = e.target.value } placeholder='Coloque sua senha' minLength='5' maxLength='15'  required />
-          </div>
+            <Input id='password-login' type='password' name='password' onChange={e => this.password = e.target.value } placeholder='Coloque sua senha' minLength='5' maxLength='15'  required />
+          </AreaInput>
           <AwesomeButton className='Inicio-form-inputs-form-btn-submit' size='medium' type='primary' ripple action={this.sign}>Entrar</AwesomeButton>
-        </form>
+        </Form>
       </div>
     )
   }

@@ -25,17 +25,24 @@ const tempo = new Conometro()
 const cerebro = new Brain()
 
 export default function instanciar(participants = Array, limit = Number, cb = Function) {
-  const cars = []
-  const pilots = []
-  for (let p = 0; p < participants.length; p++) {
-    cars.push(transformToClass('car', participants[p].car))
-    pilots.push(transformToClass('pilot', participants[p].pilot))
-  }
+  if (cerebro.startado) {
+    cerebro.parar = true
+    cerebro.startado = false
+    stop()
+  } else {
+    const cars = []
+    const pilots = []
+    for (let p = 0; p < participants.length; p++) {
+      cars.push(transformToClass('car', participants[p].car))
+      pilots.push(transformToClass('pilot', participants[p].pilot))
+    }
 
-  start(pilots.length)
-  cerebro.parar = false
-  corrida(pilots, cars, limit, cb)
-  setTimeout(() => somCorrida(0), 1000)
+    start(pilots.length)
+    cerebro.parar = false
+    cerebro.startado = true
+    corrida(pilots, cars, limit, cb)
+    setTimeout(() => somCorrida(0), 1000)
+  }
 }
 
 function corrida(pilots, cars, limit, win) {
@@ -58,11 +65,9 @@ function corrida(pilots, cars, limit, win) {
     cf++
 
     if (cf === pilots.length || c !== 0) {
-      console.log('Já perdeu')
       finish()
       win(false)
     } else if (c === 0) {
-      console.log('Já ganhou')
       finish()
       win(true)
     }
@@ -70,6 +75,7 @@ function corrida(pilots, cars, limit, win) {
 
   function finish() {
     cerebro.parar = true
+    cerebro.startado = false
     somCorrida(2)
     stop()
     clearInterval(tempoAtual)
@@ -137,12 +143,13 @@ function corrida(pilots, cars, limit, win) {
         freios.forEach(temporizador => {
           clearInterval(temporizador)
         })
+        clearInterval(tempoAtual)
       }
     }
 
     tempoAtual = setInterval(() => {
       tempo.setTempo()
-      document.querySelector('.display-time').innerHTML = tempo.getTempo()
+      try { document.querySelector('#display-time').innerHTML = tempo.getTempo() } catch(e) { console.log(e) }
     }, 1000)
   }, 2500)
 

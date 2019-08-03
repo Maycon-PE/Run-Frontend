@@ -112,12 +112,17 @@ function firstLitterToUpperCase(word = String) {
 function partSelected(selected = Number) {
   document.querySelector('.Dashboard-Aprimorator-parts-ul').childNodes.forEach((li, indice) => {
     if (selected === indice) {
-      li.style.borderBottom = '1.5px solid #fff'
-      li.style.borderTop = '1.5px solid #fff'
+      li.style.borderTop = '1.5px solid black'
+      li.style.borderBottom = '1.5px solid black'
     } else {
-      li.style.border = '1px solid transparent'
+      li.style.borderTop = '1.5px solid transparent'
+      li.style.borderBottom = '1.5px solid transparent'
     }
   })
+}
+
+function pointerEvents(click = Boolean, elements = Array) {
+  elements.forEach(classElement => document.querySelectorAll(`.${classElement}`).forEach(element => element.style.pointerEvents = click? 'painted': 'none'))
 }
 
 function victory(waited = String, { nvl } = Object, advs = Array) {
@@ -149,4 +154,4 @@ function shame({ nvl } = Object, advs = Array) {
   return (nvls * 500) - nvl * 100
 }
 
-export { updateMyCar, transformAsCoint, transformAsNumberValid, auth, changePart, firstLitterToUpperCase, changePhoto, getAdv, partSelected, withdrawal, winOrLose, victory, lose, shame }
+export { updateMyCar, transformAsCoint, transformAsNumberValid, auth, changePart, firstLitterToUpperCase, changePhoto, getAdv, partSelected, withdrawal, winOrLose, victory, lose, shame, pointerEvents }

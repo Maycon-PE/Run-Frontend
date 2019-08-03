@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Modal from 'react-awesome-modal'
 
-import { updateMyCar, auth, changePart, changePhoto, getAdv, partSelected, withdrawal, winOrLose, victory, lose, shame } from './functions'
+import { updateMyCar, auth, changePart, changePhoto, getAdv, partSelected, withdrawal, winOrLose, victory, lose, shame, pointerEvents } from './functions'
 
-import './css/index.css'
+//Estilos
+import { Container, Loading } from '../../styles'
 
 import Header from '../../components/Dashboard/Header'
-import Footer from '../../components/Footer'
 import Aprimorator from '../../components/Dashboard/Aprimorator'
 import Play from '../../components/Dashboard/Play'
 import Profile from '../../components/Dashboard/Profile'
@@ -25,6 +25,7 @@ const initialBody = {
   profile: false
 }
 
+
 export default class Dashboard extends Component {
 
   constructor(props) {
@@ -39,12 +40,10 @@ export default class Dashboard extends Component {
         played: false,
         startStop: situation => {
           if (situation) {
-            document.querySelector('.Dashboard-content-Play-divChallenge').style.pointerEvents = 'none'
-            document.querySelector('.Header-limit-right-menu').style.pointerEvents = 'none'
-            setTimeout(() => {
-              document.querySelector('.Dashboard-content-Play-game-area-btns').style.pointerEvents = 'painted'
-            }, 5000)
+            pointerEvents(false, ['Header-limit-right-menu', 'preparetion'])
+            setTimeout(() => pointerEvents(true, ['btn-stop']), 5000)
           } else {
+            pointerEvents(true, ['Header-limit-right-menu', 'preparetion'])
             const gold = this.state.auth.user.gold - shame(this.state.auth.user, this.state.adv)
             withdrawal({ auth: this.state.auth, gold: gold < 0? 0: gold })
               .then(auth => this.setState({ auth }))
@@ -58,7 +57,6 @@ export default class Dashboard extends Component {
           do {
             advs = await getAdv()
           } while (advs[0].pilot.nickname === this.state.adv[0].pilot.nickname)
-          console.log(advs)
           this.setState({ adv: advs })
         },
         win: (winner = Boolean) => {
@@ -71,8 +69,7 @@ export default class Dashboard extends Component {
               play.played = false
               this.setState({ auth })
               setTimeout(() => {
-                document.querySelector('.Dashboard-content-Play-divChallenge').style.pointerEvents = 'painted'
-                document.querySelector('.Header-limit-right-menu').style.pointerEvents = 'painted'
+                pointerEvents(true, ['preparetion', 'Header-limit-right-menu'])
                 this.setState({ play })
               }, 2000)
             })
@@ -85,12 +82,12 @@ export default class Dashboard extends Component {
         modalAprimore: false,
         messageUpdate: 'Pronto?',
         updatePart: (obj, field) => updateMyCar({ auth: this.state.auth }, obj, field).then(auth => {
-          document.querySelector('.Dashboard-Aprimorator-content-inside-body-btn').style.pointerEvents = 'none'
+          pointerEvents(false, ['Dashboard-Aprimorator-content-inside-body-btn', 'Dashboard-Aprimorator-buttonsBase'])
           const insideAprimore = { ...this.state.insideAprimore }
           insideAprimore.messageUpdate = 'Sucesso'
           this.setState({ auth, insideAprimore })
           setTimeout(() => {
-            document.querySelector('.Dashboard-Aprimorator-content-inside-body-btn').style.pointerEvents = 'painted'
+            pointerEvents(true, ['Dashboard-Aprimorator-content-inside-body-btn', 'Dashboard-Aprimorator-buttonsBase'])
             const insideAprimore = { ...this.state.insideAprimore }
             insideAprimore.messageUpdate = 'Pronto?'
             this.setState({ insideAprimore }) 
@@ -127,10 +124,7 @@ export default class Dashboard extends Component {
           const body = { ...initialBody }
           body.play = true
           getAdv()
-            .then(advs => {
-              console.log({ voce: res, oponentes: advs })
-              this.setState({ auth: res, ready: true, aprimore, body, adv: advs })
-            })
+            .then(advs => this.setState({ auth: res, ready: true, aprimore, body, adv: advs }))
         }) 
   }
 
@@ -153,22 +147,17 @@ export default class Dashboard extends Component {
 
   render() {
     return this.state.ready? (
-      <div className='Dashboard'>
-        <Header data={this.state} openModal={this.openModal} />
+      <Container>
+        <Header data={this.state} changeBody={this.state.changeBody} openModal={this.openModal} />
         <Modal visible={this.state.insideAprimore.modalAprimore} width="450" height="500" effect="fadeInUp" onClickAway={this.closeModal}>
-          <div className='Dashboard-Aprimorator-content-inside'>
-            <Aprimorator data={this.state} change={this.state.insideAprimore.changeAprimore} closeModal={this.closeModal} />
-          </div>
+          <Aprimorator data={this.state} change={this.state.insideAprimore.changeAprimore} closeModal={this.closeModal} />
         </Modal>
-        <div className='Dashboard-content'>
-          {this.renderBody(this.state)}
-        </div>
-        <Footer />
-      </div>
+        {this.renderBody(this.state)}
+      </Container>
     ) : (
-      <div className='Dashboard-loading'>
-        <img className='Dashboard-loading-img' src='./image/loading.gif' alt='Logo de carregamento' />
-      </div>
+      <Loading>
+        <img src='./image/loading.gif' alt='Logo de carregamento' />
+      </Loading>
     )
   }
 }

@@ -9,9 +9,9 @@ function getForca(car, config) {
   const attributeSpeed = engine.speed + transmition.speed + whells.speed + cylinder.speed
   const attributeAcceleration = engine.acceleration + transmition.acceleration + whells.acceleration + cylinder.acceleration
   const attributeTurbo = cylinder.turbo + engine.turbo
-  const attributeResistance = protection.resistance + engine.resistance + transmition.resistance - cylinder.resistance
+  const attributeResistance = protection.resistance + engine.resistance + transmition.resistance + cylinder.resistance
 
-  const power = attributeSpeed  + attributeAcceleration + (attributeResistance * 2) + (attributeTurbo * 4)
+  const power = attributeSpeed  + attributeAcceleration + attributeResistance + attributeTurbo
 
   if (config.res === 'numero') return power
 
@@ -23,7 +23,7 @@ function getForca(car, config) {
       r: 'linear-gradient(100deg, rgb(0, 255, 184), rgb(0, 0, 0), rgb(0, 255, 198))',
       // ciano
       s: 'linear-gradient(100deg, rgb(41, 0, 255), rgb(0, 0, 0), rgb(41, 0, 255))',
-      // cazul
+      // azul
       ss: 'linear-gradient(100deg, rgb(230, 0, 255), rgb(0, 0, 0), rgb(230, 0, 255))',
       // roxo
       a: 'linear-gradient(100deg, rgb(255, 0, 0), rgb(0, 0, 0), rgb(255, 0, 0))'
@@ -31,13 +31,13 @@ function getForca(car, config) {
     }
 
     function retorneLetra() {
-      if (power < 451) {
+      if (power < 400) {
         return 'C'
-      } else if (power < 501) {
+      } else if (power < 500) {
         return 'R'
-      } else if (power < 551) {
+      } else if (power < 650) {
         return 'S'
-      } else if (power < 601) {
+      } else if (power < 800) {
         return 'SS'
       } else {
         return 'A'

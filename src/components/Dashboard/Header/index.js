@@ -1,34 +1,38 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Modal from 'react-awesome-modal'
 
-import "react-awesome-button/dist/styles.css"
+//Estilos
+import { Img, Profile, FastInfo, Header, Limit, Left, Right, Menu, LimitMenu, OpenMenu } from '../../Menu/styles'
 
+import { border } from './functions'
 import { transformAsCoint, transformAsNumberValid } from '../../../pages/Dashboard/functions'
 
-export default ({ data, openModal }) => 
-  <header className='Header'>
-    <div className='Header-limit'>
-      <div className='Header-limit-left'>
-        <div className='Header-limit-left-img'>
-          <img src={`http://localhost:3001/files/${data.auth.user.src}.jpg`} alt='Imagem do usuário' />
-        </div>
-        <div className='Header-limit-left-fastInfos'>
+export default ({ data, changeBody, openModal }) =>
+  <Header className='Header'>
+    <Limit className='Header-limit'>
+      <Left className='Header-limit-left'>
+        <Profile border={border(data.auth.user.nvl)} className='Header-limit-left-img'>
+          <Img src={`http://localhost:3001/files/${data.auth.user.src}.jpg`} alt='Imagem do usuário' />
+        </Profile>
+        <FastInfo className='Header-limit-left-fastInfos'>
           <span className='Header-limit-left-fastInfos-money'>{transformAsCoint(data.auth.user.gold)}</span>
           <span className='Header-limit-left-fastInfos-nvl'>nivel: {data.auth.user.nvl}</span>
           <span className='Header-limit-left-fastInfos-xp'>Experiência: {transformAsNumberValid(data.auth.user.xp)}/{transformAsNumberValid(data.auth.user.limit_xp)}</span>
-        </div>
-      </div>
-      <div className='Header-limit-right'>
-        <input type='checkbox' id='open-settings' />
-        <div className='Header-limit-right-limitMenu'>
+        </FastInfo>
+      </Left>
+      <Right className='Header-limit-right'>
+        <OpenMenu type='checkbox' id='open-settings' />
+        <LimitMenu className='Header-limit-right-limitMenu'>
           <label htmlFor='open-settings'><i className="fa fa-cog"></i></label>
-          <div className='Header-limit-right-menu'>
-            <span onClick={() => data.changeBody('play')}>Jogar</span>
-            <span onClick={() => data.changeBody('profile')}>Meu perfil</span>
+          <Menu className='Header-limit-right-menu'>
+            <span onClick={() => changeBody('play')}>Jogar</span>
+            <span onClick={() => changeBody('profile')}>Meu perfil</span>
             <span onClick={openModal}>Meu carro</span>
             <span><Link to='/logout'>Sair</Link></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
+          </Menu>
+        </LimitMenu>
+      </Right>
+    </Limit>
+  </Header>
+

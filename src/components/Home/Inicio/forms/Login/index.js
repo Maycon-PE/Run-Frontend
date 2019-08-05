@@ -5,7 +5,7 @@ import "react-awesome-button/dist/styles.css"
 //Styles
 import { FormHeader, FormHeaderLabel, FormMessage, Form, AreaInput, Input } from '../../styles'
 
-import { login, checkInvalid } from '../../functions'
+import { login, validationEmail, checkInvalid } from '../../functions'
 
 const Login = ({ push: history }) => {
   const [email, setEmail] = useState(undefined)
@@ -18,7 +18,7 @@ const Login = ({ push: history }) => {
       return
     }
 
-    if (!/^[a-z0-9.]+@(gmail|hotmail|outlook)+\.[a-z]+(\.[a-z]+)?$/g.test(email)) {
+    if (!validationEmail(email)) {
       checkInvalid('email-login')
       setMessage('Email inválido!!!')
       return
@@ -51,15 +51,15 @@ const Login = ({ push: history }) => {
 
   return (
     <>
-      <FormHeader className='Inicio-form-inputs-form-header'>
-        <FormHeaderLabel className='Inicio-form-inputs-form-header-label'><span>Login</span> <FormMessage className='Inicio-form-inputs-form-header-label-span'>{message}</FormMessage></FormHeaderLabel>
+      <FormHeader>
+        <FormHeaderLabel><span>Login</span> <FormMessage>{message}</FormMessage></FormHeaderLabel>
       </FormHeader>
-      <Form className='Inicio-form-inputs-form' onSubmit={e => e.preventDefault()}>
-        <AreaInput className='Inicio-form-inputs-form-area-input'>
-          <Input id='email-login' type='email' name='email' onChange={e => setEmail(e.target.value)} placeholder='Coloque seu email' required />  
+      <Form onSubmit={e => e.preventDefault()}>
+        <AreaInput  verify={() => validationEmail(email)}>
+          <Input id='email-login' type='email' name='email' onChange={e => setEmail(e.target.value)} placeholder='Coloque seu email' maxLength='50' required />  
           <label htmlFor='email-login'>Email</label>
         </AreaInput>
-        <AreaInput className='Inicio-form-inputs-form-area-input'>
+        <AreaInput verify={() => true}>
           <Input id='password-login' type='password' name='password' onChange={e => setPassword(e.target.value)} placeholder='*********' minLength='5' maxLength='15'  required />
           <label htmlFor='password-login'>Senha</label>
         </AreaInput>

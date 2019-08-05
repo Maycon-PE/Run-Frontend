@@ -39,6 +39,18 @@ function changePhoto({ auth = Object, file = String } = Object) {
   })
 }
 
+function changeInfo({ auth, field, value, password }) {
+  return new Promise(resolve => {
+    api.put('/auth/info', { field, value, password }, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'application/json' } })
+      .then(({ data }) => {
+        if (!data.status) return resolve({ status: false })
+
+        auth.user[field] = data.message
+        resolve({ auth, status: true })
+      })
+  })
+}
+
 function withdrawal({ auth = Object, gold = Number } = Object) {
   return new Promise(resolve => {
     api.put('/auth/withdrawal', { gold }, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'application/json'} })
@@ -154,4 +166,10 @@ function shame({ nvl } = Object, advs = Array) {
   return (nvls * 500) - nvl * 100
 }
 
-export { updateMyCar, transformAsCoint, transformAsNumberValid, auth, changePart, firstLitterToUpperCase, changePhoto, getAdv, partSelected, withdrawal, winOrLose, victory, lose, shame, pointerEvents }
+export { 
+  updateMyCar, transformAsCoint, transformAsNumberValid, 
+  auth, changePart, firstLitterToUpperCase, 
+  changePhoto, getAdv, partSelected, 
+  withdrawal, winOrLose, victory, 
+  lose, shame, pointerEvents, 
+  changeInfo }

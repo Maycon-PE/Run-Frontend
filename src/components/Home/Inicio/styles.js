@@ -105,11 +105,17 @@ export const AreaInput = styled.div`
       transform: rotate(45deg);
       left: 0px;
       bottom: -25px;
+      border: 1px solid black;
     }
   }
 
-  input:valid ~ label:after,
-  select ~ label:after { background: green; }
+  input:focus ~ label:after { background: yellow; }
+  
+  input:focus:valid ~ label:after,
+  input:valid ~ label:after { background: ${({ double, verify }) => {
+    if (!double) return verify()? 'green': 'red'
+  }}; }
+  select ~ label:after { background: green; } 
 `
 
 export const Input = styled.input`
@@ -137,11 +143,3 @@ export const Select = styled.select`
   	box-shadow: 0px  0px 10px rgb(139, 153, 231);
   }
 `
-
-
-
-// -webkit-animation: ${rotate} 5s linear infinite;
-//   -moz-animation: ${rotate} 5s linear infinite;
-//   -ms-animation: ${rotate} 5s linear infinite;
-//   -o-animation: ${rotate} 5s linear infinite;
-//   animation: ${rotate} 5s linear infinite;

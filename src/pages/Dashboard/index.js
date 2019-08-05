@@ -1,7 +1,12 @@
 import React, { Component } from 'react'
 import Modal from 'react-awesome-modal'
 
-import { updateMyCar, auth, changePart, changePhoto, getAdv, partSelected, withdrawal, winOrLose, victory, lose, shame, pointerEvents } from './functions'
+import { 
+  updateMyCar, auth, changePart, 
+  changePhoto, getAdv, partSelected, 
+  withdrawal, winOrLose, victory, 
+  lose, shame, pointerEvents, 
+  changeInfo } from './functions'
 
 //Estilos
 import { Container, Loading } from '../../styles'
@@ -75,7 +80,15 @@ export default class Dashboard extends Component {
         }
       },
       profile: {
-        updateProfile: file => changePhoto({ auth: this.state.auth, file }).then(auth => this.setState({ auth }))
+        updateProfile: file => changePhoto({ auth: this.state.auth, file }).then(auth => this.setState({ auth })),
+        updateInfo: (field, value, password) => new Promise(resolve => {
+          changeInfo({ auth: this.state.auth, field, value, password })
+            .then(({ auth, status}) => {
+              status && this.setState({ auth })
+
+              resolve(status)
+            })
+          })
       },
       insideAprimore: {
         modalAprimore: false,
@@ -121,7 +134,7 @@ export default class Dashboard extends Component {
           const aprimore = { ...initialScreenAprimore }
           aprimore.engine = true
           const body = { ...initialBody }
-          body.play = true
+          body.profile = true
           getAdv()
             .then(advs => this.setState({ auth: res, ready: true, aprimore, body, adv: advs }))
         }) 
@@ -141,7 +154,7 @@ export default class Dashboard extends Component {
 
   renderBody(state) {
     if (state.body.play) return <Play play={state.play} data={state.auth} adv={state.adv} change={this.state.play.changeAdv} />
-    if (state.body.profile) return <Profile data={state.auth} updatePhoto={this.state.profile.updateProfile} />
+    if (state.body.profile) return <Profile data={state.auth} updatePhoto={this.state.profile.updateProfile} changeInfo={this.state.profile.updateInfo} />
   }
 
   render() {

@@ -89,36 +89,36 @@ const Register = ({ push: history }) => {
         <FormHeaderLabel><span>Cadastro</span> <FormMessage>{message}</FormMessage></FormHeaderLabel>
       </FormHeader>
       <Form onSubmit={e => e.preventDefault()}>
-        <AreaInput>
-          <Input id='nome-register' type='text' name='name' onChange={e => setName(e.target.value)} placeholder='Seu nome' required />  
+        <AreaInput verify={() => true}>
+          <Input id='nome-register' type='text' name='name' maxLength='14' minLength='4' onChange={e => setName(e.target.value)} placeholder='Seu nome' required />  
           <label htmlFor='nome-register'>Nome</label>
         </AreaInput>
-        <AreaInput>
-          <Input id='email-register' type='email' name='email' onChange={e => setEmail(e.target.value)} placeholder='...@...' required />  
+        <AreaInput verify={() => validationEmail(email)}>
+          <Input id='email-register' type='email' name='email'maxLength='50' onChange={e => setEmail(e.target.value)} placeholder='...@...' required />  
           <label htmlFor='email-register'>Email</label>
         </AreaInput>
         <AreaInput double>
-          <AreaInput>
-            <Input id='model-register' type='text' name='carName' onChange={e => setModel(e.target.value)} placeholder='Nomeie seu carro' required />  
+          <AreaInput verify={() => validationModel(model)}>
+            <Input id='model-register' type='text' name='carName' maxLength='9' minLength='4' onChange={e => setModel(e.target.value)} placeholder='Nomeie seu carro' required />  
             <label htmlFor='model-register'>Nome do carro</label>
           </AreaInput>
-          <AreaInput>
-            <Input id='nickname-register' type='text' name='nickname' onChange={e => setNickname(e.target.value)} placeholder='Seu nome no jogo' required />  
+          <AreaInput verify={() => validationNickName(nickname)}>
+            <Input id='nickname-register' type='text' name='nickname' maxLength='13' minLength='4' onChange={e => setNickname(e.target.value)} placeholder='Seu nome no jogo' required />  
             <label htmlFor='nickname-register'>Apelido</label>
           </AreaInput>
         </AreaInput>
         <AreaInput double>
-          <AreaInput>
+          <AreaInput verify={() => true}>
             <Input id='password-register' type='password' name='password' onChange={e => setPassword(e.target.value) } placeholder='*********' minLength='5' maxLength='15' required />
             <label htmlFor='password-register'>Senha</label>
           </AreaInput>
-          <AreaInput>
+          <AreaInput verify={() => password === password2}>
             <Input id='password-2-register' type='password' name='password2' onChange={e => setPassword2(e.target.value) } placeholder='*********' minLength='5' maxLength='15' required />
             <label htmlFor='password-2-register'>Confirme a senha</label>
           </AreaInput>
         </AreaInput>
         <AreaInput double>
-          <AreaInput>
+          <AreaInput verify={() => true}>
             <Select name='genre' id='genre-register' required>
               <optgroup label='Gêneros'>
                 <option value='Masculino'>Masculino</option>
@@ -127,7 +127,7 @@ const Register = ({ push: history }) => {
             </Select>
             <label htmlFor='genre-register'>Gênero</label>
           </AreaInput>
-          <AreaInput>            
+          <AreaInput verify={() => true}>            
             <Select name='country' id='country-register' required>
               <optgroup label='América'>
                 {renderOptions('AM')}

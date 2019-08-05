@@ -15,6 +15,8 @@ export const Global = createGlobalStyle`
 
 	button:hover { cursor: pointer; }
 
+	input, button { outline: none; }
+
 	ul { list-style: none; padding: 0px; margin: 0px; }
 
 	.pointerDefault { cursor: default !important; }

@@ -34,7 +34,7 @@ export const Profile = styled.div`
 export const Xp = styled.span`
 	position: relative;
 	:after {
-		content: '${({ start, end }) => Math.floor(100 - ((end - start) * 100 / (end / 2)))}%';
+		content: '${({ start, end }) => Math.floor(100 - ((end - start) * 100 / (end / 2))) > 0? Math.floor(100 - ((end - start) * 100 / (end / 2))): 0}%';
 		position: absolute;
 		text-align: center;
 		font-size: 12px;

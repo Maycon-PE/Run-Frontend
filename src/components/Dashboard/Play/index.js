@@ -49,7 +49,7 @@ export default ({ play, data, adv, change }) =>
             <HeaderLideres>
               <span id='display-time'>00:00:00</span>
               <span>Lideres</span>
-              <span>{setDistance(data.user.nvl)} km/h</span>
+              <span>{setDistance(data.user.nvl)} km</span>
             </HeaderLideres>
             <Lideres>
               {renderP([{ pilot: data.user, car: data.car }, ...adv])}

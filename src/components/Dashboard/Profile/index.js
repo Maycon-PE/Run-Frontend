@@ -35,7 +35,8 @@ const initialState = {
         return new Promise(resolve => {
           if (data.original !== data.other) {
               if (verify(data.other)) {
-                const password = prompt('Sua senha: ')
+                let password = prompt('Sua senha: ') 
+                if (password == null)  password = ''
                 execute(field, data.other, password)
                 .then(status => {
                   if (status) {
@@ -75,7 +76,7 @@ export default ({ data, updatePhoto, changeInfo }) => {
         <Data edit>
           <span>
             <span>Name: </span> <br />
-            <InputAsSpan id='change-name' defaultValue={data.user.name} onChange={e => setName({ ...name, other: e.target.value })} changing={name.state.edit} maxLength='13' minLength='3' />
+            <InputAsSpan id='change-name' defaultValue={data.user.name} onChange={e => setName({ ...name, other: e.target.value })} changing={name.state.edit} maxLength='20' minLength='3' />
           </span>
           <span>
             {name.message}

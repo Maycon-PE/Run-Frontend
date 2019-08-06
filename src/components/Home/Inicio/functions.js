@@ -17,19 +17,19 @@ function register(formData = String) {
 }
 
 function validationEmail(email = String) {
-  if (!/^[a-z0-9.]+@(gmail|hotmail|outlook)+\.[a-z]+(\.[a-z]+)?$/g.test(email)) return false
+  if (!/^[a-z0-9.]+@(gmail|hotmail|outlook)+\.[a-z]+(\.[a-z]+)?$/g.test(email) || email.length > 50) return false
 
   return true
 }
 
 function validationNickName(nickname = String) {
-  if (!Number.isNaN(Number.parseInt(nickname)) || nickname.length < 4) return false
+  if (!Number.isNaN(Number.parseInt(nickname)) || nickname.length < 4 || nickname.length > 15) return false
 
   return true
 }
 
 function validationModel(model = String) {
-  if (!Number.isNaN(Number.parseInt(model)) || model.length < 4) return false
+  if (!Number.isNaN(Number.parseInt(model)) || model.length < 4 || model.length > 10) return false
 
   return true
 }

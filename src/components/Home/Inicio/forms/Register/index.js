@@ -90,7 +90,7 @@ const Register = ({ push: history }) => {
       </FormHeader>
       <Form onSubmit={e => e.preventDefault()}>
         <AreaInput verify={() => true}>
-          <Input id='nome-register' type='text' name='name' maxLength='14' minLength='4' onChange={e => setName(e.target.value)} placeholder='Seu nome' required />  
+          <Input id='nome-register' type='text' name='name' maxLength='20' minLength='4' onChange={e => setName(e.target.value)} placeholder='Seu nome' required />  
           <label htmlFor='nome-register'>Nome</label>
         </AreaInput>
         <AreaInput verify={() => validationEmail(email)}>

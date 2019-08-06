@@ -30,11 +30,13 @@ function renderLiAttr(atrParam) {
 function submit(gold, data, update) {
   if (gold < data.update_config.price || data.ups >= 10) return
 
-  const resistance = data.resistance + data.update_config.resistance
-  const costs = gold - data.update_config.price
-  const ups = data.ups + 1
+  const part = {
+    resistance: data.resistance + data.update_config.resistance,
+    costs: gold - data.update_config.price,
+    ups: data.ups + 1
+  }  
 
-  const newProtection = { resistance, update_config: data.update_config, ups, costs }
+  const newProtection = { update_config: data.update_config, ...part }
 
   update(newProtection, 'protection_object')
 }

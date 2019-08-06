@@ -17,7 +17,7 @@ export default ({ play, data, adv, change }) =>
       <AllPlayers>
         <Card>
           <img src={`http://localhost:3001/files/${data.user.src}.jpg`} alt='Foto do usuário' />
-          <CardInfo nvl={data.user.nvl}>{firstLitterToUpperCase(data.user.name)}</CardInfo>
+          <CardInfo nvl={data.user.nvl}>{firstLitterToUpperCase(data.user.nickname)}</CardInfo>
         </Card>
         <AwesomeButton size='large' type='secondary' ripple action={change}>Outro adversário</AwesomeButton>
         <Advs>

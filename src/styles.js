@@ -88,12 +88,10 @@ export const Table = styled.table`
 export const Container = styled.div`
 	position: relative;
 	border: 1px solid white;
-  width: 100vw;
+  width: 100%;
   max-width: 1200px;
   margin: auto;
   overflow: hidden;
-  padding: 40px 15px;
-  border-radius: 10px;
   background: #222;
   box-shadow: 0px 0px 10px black;
 
@@ -101,6 +99,11 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (min-width: 620px) {
+  	border-radius: 10px;
+  	padding: 40px 15px;
+  }
 `
 
 export const Loading = styled.div`

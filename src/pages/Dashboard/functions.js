@@ -4,8 +4,10 @@ function updateMyCar({ auth } = Object, obj = Object, part = String) {
   return new Promise(resolve => {
     api.put(`/auth/car/${part}`, obj, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'application/json'} })
       .then(({ data }) => {
-        auth.user.gold = data.gold
-        auth.car[part] = data.part
+        if (data.status) {
+          auth.user.gold = data.gold
+          auth.car[part] = data.part
+        } else { alert(data.message) }
         resolve(auth)
       })
       .catch(e => console.log(e))
@@ -18,8 +20,10 @@ function changePart({ auth = Object } = Object, part = String, table = String, f
 
     api.put(`/auth/changePart/${table}`, form, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'application/json'} })
       .then(({ data }) => {
-        auth.user.gold = data.gold
-        auth.car = data.car
+        if (data.status) {
+          auth.user.gold = data.gold
+          auth.car = data.car
+        } else { alert(data.message) }
         resolve(auth)
       })
       .catch(e => console.log(e))
@@ -32,7 +36,9 @@ function changePhoto({ auth = Object, file = String } = Object) {
     formData.append('image', file)
     api.put('/auth/profile', formData, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'multipart/form-data' } })
       .then(({ data }) => {
-        auth.user.src = data.src
+        if (data.status) {
+          auth.user.src = data.src
+        } else { alert(data.message) }
         resolve(auth)
       })
       .catch(e => console.log(e))
@@ -43,10 +49,11 @@ function changeInfo({ auth, field, value, password }) {
   return new Promise(resolve => {
     api.put('/auth/info', { field, value, password }, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'application/json' } })
       .then(({ data }) => {
-        if (!data.status) return resolve({ status: false })
+        if (data.status) {
+          auth.user[field] = data.message
+        } else { alert(data.message) }
 
-        auth.user[field] = data.message
-        resolve({ auth, status: true })
+        resolve({ auth, status: data.status })
       })
   })
 }
@@ -55,7 +62,9 @@ function withdrawal({ auth = Object, gold = Number } = Object) {
   return new Promise(resolve => {
     api.put('/auth/withdrawal', { gold }, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'application/json'} })
     .then(({ data }) => {
-      auth.user.gold = data.gold
+      if (data.status) {
+        auth.user.gold = data.gold
+      }
       resolve(auth)
     })
     .catch(e => console.log(e))
@@ -66,18 +75,20 @@ function winOrLose({ auth } = Object, { gold, xp } = Object) {
   return new Promise(resolve => {
     api.put('/auth/winOrLose', { gold, xp }, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'application/json'} })
       .then(({ data }) => {
-        const { xp, gold, limit_xp, nvl } = data
-        auth.user.xp = xp
-        auth.user.gold = gold
-        auth.user.limit_xp = limit_xp
-        auth.user.nvl = nvl
+        if (data.status) {
+          const { xp, gold, limit_xp, nvl } = data
+          auth.user.xp = xp
+          auth.user.gold = gold
+          auth.user.limit_xp = limit_xp
+          auth.user.nvl = nvl  
+        }
         resolve(auth)
       })
   })
 }
 
 function transformAsCoint(value = String || Number) {
-  return 'R$ ' + value
+  return 'R$ ' + Number(value)
     .toFixed(2)
     .replace('.', ',')
     .replace(/(\d)(?=(\d{3})+\,)/g, '$1.')

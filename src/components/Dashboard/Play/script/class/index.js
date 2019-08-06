@@ -71,7 +71,7 @@ export const carro = () => {
 
     turbo() {
       if (this.getTanque() <= this.getNitro()) {
-        this.setTanque(this.getTanque() + 0.0166666666)
+        this.setTanque(this.getTanque() + 0.08)
       }
       if (this.getVelocidadeAtual() < this.getVelocidade()) {
         if (this.getBtnNitro() === false && this.getCilindro() === true) {
@@ -80,8 +80,8 @@ export const carro = () => {
             this.setPreTurbo(this.getVelocidadeAtual())
           }
         } else if (this.getBtnNitro() === true && this.getTanque() <= this.getNitro() / 5 + this.getNitro() && this.getCilindro() === true) {
-          this.setTanque(this.getTanque() + 0.0166666666)
-          this.acelerar((this.getPreTurbo() / this.getMarcha()) / this.getVelocidade())
+          this.setTanque(this.getTanque() + 0.08)
+          this.acelerar((this.getPreTurbo() / (this.getMarcha() / 2)) / this.getVelocidade())
         } else {
           this.setCilindro(false)
           this.getTanque(this.getNitro())

@@ -35,16 +35,17 @@ const initialState = {
         return new Promise(resolve => {
           if (data.original !== data.other) {
               if (verify(data.other)) {
-                let password = prompt('Sua senha: ') 
-                if (password == null)  password = ''
-                execute(field, data.other, password)
-                .then(status => {
-                  if (status) {
-                    resolve({ status: true, state: { ...initialState }, message: 'Alterado ' })
-                  } else  {
-                    resolve({ status: false })
-                  }
-                })
+                const password = prompt('Sua senha: ') 
+                if (password !== null && password.indexOf(' ') === -1) {
+                  execute(field, data.other, password)
+                  .then(status => {
+                    if (status) {
+                      resolve({ status: true, state: { ...initialState }, message: 'Alterado ' })
+                    } else  {
+                      resolve({ status: false })
+                    }
+                  })  
+                }
               } else {
                 resolve({ status: false })    
               }
@@ -185,45 +186,43 @@ export default ({ data, updatePhoto, changeInfo }) => {
             <span>Proteção: </span>
             <span>{data.car.protection}</span>
           </Data>
-          <div>
-            <Table cellSpacing='0' cellPadding='0'>
-              <thead>
-                <tr><th colSpan='7'>Visão geral</th></tr>
-                <tr><th>Atributo</th><th>Motor +{JSON.parse(data.car.engine_object).ups}</th><th>Câmbio +{JSON.parse(data.car.transmission_object).ups}</th><th>Rodas +{JSON.parse(data.car.whells_object).ups}</th><th>Cilindro +{JSON.parse(data.car.cylinder_object).ups}</th><th>Proteção +{JSON.parse(data.car.protection_object).ups}</th><th>Total</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Velocidade</td>
-                <td>{getAttr(JSON.parse(data.car.engine_object), 'speed')}</td>
-                <td>{getAttr(JSON.parse(data.car.transmission_object), 'speed')}</td>
-                <td>{getAttr(JSON.parse(data.car.whells_object), 'speed')}</td>
-                <td>{getAttr(JSON.parse(data.car.cylinder_object), 'speed')}</td>
-                <td>{getAttr(JSON.parse(data.car.protection_object), 'speed')}</td>
-                <td>{getJoin(data.car, 'speed')}</td></tr>
-                <tr><td>Aceleração</td>
-                <td>{getAttr(JSON.parse(data.car.engine_object), 'acceleration')}</td>
-                <td>{getAttr(JSON.parse(data.car.transmission_object), 'acceleration')}</td>
-                <td>{getAttr(JSON.parse(data.car.whells_object), 'acceleration')}</td>
-                <td>{getAttr(JSON.parse(data.car.cylinder_object), 'acceleration')}</td>
-                <td>{getAttr(JSON.parse(data.car.protection_object), 'acceleration')}</td>
-                <td>{getJoin(data.car, 'acceleration')}</td></tr>
-                <tr><td>Turbo</td>
-                <td>{getAttr(JSON.parse(data.car.engine_object), 'turbo')}</td>
-                <td>{getAttr(JSON.parse(data.car.transmission_object), 'turbo')}</td>
-                <td>{getAttr(JSON.parse(data.car.whells_object), 'turbo')}</td>
-                <td>{getAttr(JSON.parse(data.car.cylinder_object), 'turbo')}</td>
-                <td>{getAttr(JSON.parse(data.car.protection_object), 'turbo')}</td>
-                <td>{getJoin(data.car, 'turbo')}</td></tr>
-                <tr><td>Resistência</td>
-                <td>{getAttr(JSON.parse(data.car.engine_object), 'resistance')}</td>
-                <td>{getAttr(JSON.parse(data.car.transmission_object), 'resistance')}</td>
-                <td>{getAttr(JSON.parse(data.car.whells_object), 'resistance')}</td>
-                <td>{getAttr(JSON.parse(data.car.cylinder_object), 'resistance')}</td>
-                <td>{getAttr(JSON.parse(data.car.protection_object), 'resistance')}</td>
-                <td>{getJoin(data.car, 'resistance')}</td></tr>
-                <tr><td colSpan='5'>FC</td><td colSpan='2'>{getFc(data.car)}</td></tr>
-              </tbody>
-            </Table>
-          </div>
+          <Table cellSpacing='0' cellPadding='0'>
+            <thead>
+              <tr><th colSpan='7'>Visão geral</th></tr>
+              <tr><th>Atributo</th><th>Motor +{JSON.parse(data.car.engine_object).ups}</th><th>Câmbio +{JSON.parse(data.car.transmission_object).ups}</th><th>Rodas +{JSON.parse(data.car.whells_object).ups}</th><th>Cilindro +{JSON.parse(data.car.cylinder_object).ups}</th><th>Proteção +{JSON.parse(data.car.protection_object).ups}</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Velocidade</td>
+              <td>{getAttr(JSON.parse(data.car.engine_object), 'speed')}</td>
+              <td>{getAttr(JSON.parse(data.car.transmission_object), 'speed')}</td>
+              <td>{getAttr(JSON.parse(data.car.whells_object), 'speed')}</td>
+              <td>{getAttr(JSON.parse(data.car.cylinder_object), 'speed')}</td>
+              <td>{getAttr(JSON.parse(data.car.protection_object), 'speed')}</td>
+              <td>{getJoin(data.car, 'speed')}</td></tr>
+              <tr><td>Aceleração</td>
+              <td>{getAttr(JSON.parse(data.car.engine_object), 'acceleration')}</td>
+              <td>{getAttr(JSON.parse(data.car.transmission_object), 'acceleration')}</td>
+              <td>{getAttr(JSON.parse(data.car.whells_object), 'acceleration')}</td>
+              <td>{getAttr(JSON.parse(data.car.cylinder_object), 'acceleration')}</td>
+              <td>{getAttr(JSON.parse(data.car.protection_object), 'acceleration')}</td>
+              <td>{getJoin(data.car, 'acceleration')}</td></tr>
+              <tr><td>Turbo</td>
+              <td>{getAttr(JSON.parse(data.car.engine_object), 'turbo')}</td>
+              <td>{getAttr(JSON.parse(data.car.transmission_object), 'turbo')}</td>
+              <td>{getAttr(JSON.parse(data.car.whells_object), 'turbo')}</td>
+              <td>{getAttr(JSON.parse(data.car.cylinder_object), 'turbo')}</td>
+              <td>{getAttr(JSON.parse(data.car.protection_object), 'turbo')}</td>
+              <td>{getJoin(data.car, 'turbo')}</td></tr>
+              <tr><td>Resistência</td>
+              <td>{getAttr(JSON.parse(data.car.engine_object), 'resistance')}</td>
+              <td>{getAttr(JSON.parse(data.car.transmission_object), 'resistance')}</td>
+              <td>{getAttr(JSON.parse(data.car.whells_object), 'resistance')}</td>
+              <td>{getAttr(JSON.parse(data.car.cylinder_object), 'resistance')}</td>
+              <td>{getAttr(JSON.parse(data.car.protection_object), 'resistance')}</td>
+              <td>{getJoin(data.car, 'resistance')}</td></tr>
+              <tr><td colSpan='5'>FC</td><td colSpan='2'>{getFc(data.car)}</td></tr>
+            </tbody>
+          </Table>
         </Fieldset>
       </Fieldset>
     </Dashboard>

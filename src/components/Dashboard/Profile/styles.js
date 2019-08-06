@@ -21,6 +21,7 @@ export const ImgProfile = styled.div`
 
   label {
   	width: 100%;
+  	max-width: 200px;
   	display: flex;
   	flex-wrap: wrap;
   	justify-content: center;
@@ -39,6 +40,7 @@ export const Data = styled.div`
 	max-width: 99%;
   padding: 10px;
   margin: auto;
+  cursor: default;
   ${({ edit }) => {
   	if (edit) return `
 
@@ -102,7 +104,7 @@ export const Data = styled.div`
 
 export const SubTitle = styled.span`
 	display: block;
-	width: 100%;
+	width: 90%;
 	text-align: center;
 	padding: 5px 0px;
 	font-size: 40px;
@@ -118,7 +120,7 @@ export const InputAsSpan = styled.input`
 	color: white;
 	font-size: 20px;
 	background: transparent;
-	width: 100%;
+	width: 90%;
 `
 
 export const ButtonEdit = styled.button`

@@ -30,13 +30,15 @@ function renderLiAttr(atrParam) {
 function submit(gold, data, update) {
   if (gold < data.update_config.price || data.ups >= 10) return
 
-  const speed = data.speed + data.update_config.speed
-  const acceleration = data.acceleration + data.update_config.acceleration
-  const resistance = data.resistance
-  const costs = gold - data.update_config.price
-  const ups = data.ups + 1
+  const part = {
+    speed: data.speed + data.update_config.speed,
+    acceleration: data.acceleration + data.update_config.acceleration,
+    resistance: data.resistance,
+    costs: gold - data.update_config.price,
+    ups: data.ups + 1
+  }  
 
-  const newTransmission = { speed, acceleration, resistance, update_config: data.update_config, ups, costs }
+  const newTransmission = { update_config: data.update_config, ...part }
 
   update(newTransmission, 'transmission_object')
 }

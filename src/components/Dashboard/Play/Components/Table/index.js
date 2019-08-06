@@ -21,7 +21,7 @@ export default ({ pilot, car, index }) => {
 
   return (
     <Player>
-      <Header>{pilot.nickname} nvl <span>{pilot.nvl}</span></Header>
+      <Header>{pilot.nickname} <span>{pilot.nvl}</span></Header>
       <SpeedometerArea>
         <Harnessing className={`aproveitamento${index}`}></Harnessing>
         <Speedometer className='velocimetro' src={velocimetro} alt='velocimetro' />

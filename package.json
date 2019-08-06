@@ -1,37 +1,29 @@
 {
-  "name": "app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-   "styled-components": "^4.3.2",
-    "axios": "^0.19.0",
-    "font-awesome": "^4.7.0",
-    "react": "^16.8.6",
-    "react-awesome-button": "^6.1.2",
-    "react-awesome-modal": "^2.0.5",
-    "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1"
-  },
+  "name": "run-back-end",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Maycon-PE/Run-Back-end.git",
+  "author": "Maycon Silva <mayconprodigio@hotmail.com>",
+  "license": "MIT",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "nodemon src/server/index.js",
+    "database-start": "node src/services/database/build -start && nodemon src/server/index.js",
+    "database": "node src/services/database/build",
+    "database-code": "node src/services/database/build -code",
+    "database-code-start": "node src/services/database/build -code && nodemon src/server/index.js"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "multer": "^1.4.2",
+    "mysql2": "^1.6.5",
+    "sharp": "^0.22.1"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "cross-spawn": "^6.0.5",
+    "nodemon": "^1.19.1"
   }
 }

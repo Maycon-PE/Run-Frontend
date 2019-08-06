@@ -1,0 +1,604 @@
+{
+  "whells": [
+    {
+      "name": "w-1 Pure",
+      "speed": 10,
+      "acceleration": 10,
+      "brake": 10,
+      "price": 1,
+      "update": {
+        "speed": 0.2,
+        "acceleration": 0.2,
+        "price": 1000
+      }
+    },
+    {
+      "name": "w-2 Pure",
+      "speed": 10,
+      "acceleration": 10,
+      "brake": 9,
+      "price": 4000,
+      "update": {
+        "speed": 0.5,
+        "acceleration": 0.5,
+        "price": 2000
+      }
+    },
+    {
+      "name": "w-3 Pure",
+      "speed": 10,
+      "acceleration": 10,
+      "brake": 9,
+      "price": 8000,
+      "update": {
+        "speed": 0.5,
+        "acceleration": 1,
+        "price": 3000
+      }
+    },
+    {
+      "name": "w-4 Pure",
+      "speed": 10,
+      "acceleration": 10,
+      "brake": 8,
+      "price": 10000,
+      "update": {
+        "speed": 1,
+        "acceleration": 1.2,
+        "price": 4000
+      }
+    },
+    {
+      "name": "w-5 Pure",
+      "speed": 10,
+      "acceleration": 10,
+      "brake": 8,
+      "price": 12000,
+      "update": {
+        "speed": 1.2,
+        "acceleration": 1.5,
+        "price": 5000
+      }
+    },
+    {
+      "name": "w-6 Pure",
+      "speed": 10,
+      "acceleration": 10,
+      "brake": 7,
+      "price": 14000,
+      "update": {
+        "speed": 1.5,
+        "acceleration": 2,
+        "price": 6000
+      }
+    },
+    {
+      "name": "w-7 Pure",
+      "speed": 10,
+      "acceleration": 10,
+      "brake": 7,
+      "price": 16000,
+      "update": {
+        "speed": 2,
+        "acceleration": 2.1,
+        "price": 7000
+      }
+    },
+    {
+      "name": "w-8 Pure",
+      "speed": 10,
+      "acceleration": 10,
+      "brake": 6,
+      "price": 18000,
+      "update": {
+        "speed": 2.1,
+        "acceleration": 2.5,
+        "price": 8000
+      }
+    },
+    {
+      "name": "w-9 Pure",
+      "speed": 10,
+      "acceleration": 10,
+      "brake": 6,
+      "price": 20000,
+      "update": {
+        "speed": 3,
+        "acceleration": 3,
+        "price": 9000
+      }
+    },
+    {
+      "name": "w-10 Pure",
+      "speed": 10,
+      "acceleration": 10,
+      "brake": 5,
+      "price": 22000,
+      "update": {
+        "speed": 3.5,
+        "acceleration": 4,
+        "price": 10000
+      }
+    },
+    {
+      "name": "w-1 Super",
+      "speed": 20,
+      "acceleration": 20,
+      "brake": 9,
+      "price": 10000,
+      "update": {
+        "speed": 0.5,
+        "acceleration": 0.5,
+        "price": 3000
+      }
+    },
+    {
+      "name": "w-2 Super",
+      "speed": 20,
+      "acceleration": 20,
+      "brake": 8,
+      "price": 20000,
+      "update": {
+        "speed": 1,
+        "acceleration": 1,
+        "price": 6000
+      }
+    },
+    {
+      "name": "w-3 Super",
+      "speed": 20,
+      "acceleration": 20,
+      "brake": 8,
+      "price": 30000,
+      "update": {
+        "speed": 1.5,
+        "acceleration": 1.5,
+        "price": 9000
+      }
+    },
+    {
+      "name": "w-4 Super",
+      "speed": 20,
+      "acceleration": 20,
+      "brake": 7,
+      "price": 40000,
+      "update": {
+        "speed": 2,
+        "acceleration": 2,
+        "price": 12000
+      }
+    },
+    {
+      "name": "w-5 Super",
+      "speed": 20,
+      "acceleration": 20,
+      "brake": 7,
+      "price": 50000,
+      "update": {
+        "speed": 2.5,
+        "acceleration": 2.5,
+        "price": 15000
+      }
+    },
+    {
+      "name": "w-6 Super",
+      "speed": 20,
+      "acceleration": 20,
+      "brake": 6,
+      "price": 60000,
+      "update": {
+        "speed": 3,
+        "acceleration": 3,
+        "price": 18000
+      }
+    },
+    {
+      "name": "w-7 Super",
+      "speed": 20,
+      "acceleration": 20,
+      "brake": 6,
+      "price": 70000,
+      "update": {
+        "speed": 3.5,
+        "acceleration": 3.5,
+        "price": 21000
+      }
+    },
+    {
+      "name": "w-8 Super",
+      "speed": 20,
+      "acceleration": 20,
+      "brake": 5,
+      "price": 80000,
+      "update": {
+        "speed": 4,
+        "acceleration": 4,
+        "price": 24000
+      }
+    },
+    {
+      "name": "w-9 Super",
+      "speed": 20,
+      "acceleration": 20,
+      "brake": 5,
+      "price": 90000,
+      "update": {
+        "speed": 4.5,
+        "acceleration": 5,
+        "price": 27000
+      }
+    },
+    {
+      "name": "w-10 Super",
+      "speed": 20,
+      "acceleration": 20,
+      "brake": 4,
+      "price": 100000,
+      "update": {
+        "speed": 5,
+        "acceleration": 6,
+        "price": 30000
+      }
+    },
+    {
+      "name": "w-1 Flex",
+      "speed": 30,
+      "acceleration": 30,
+      "brake": 8,
+      "price": 20000,
+      "update": {
+        "speed": 1,
+        "acceleration": 1,
+        "price": 6000
+      }
+    },
+    {
+      "name": "w-2 Flex",
+      "speed": 30,
+      "acceleration": 30,
+      "brake": 7,
+      "price": 40000,
+      "update": {
+        "speed": 1.5,
+        "acceleration": 1.5,
+        "price": 12000
+      }
+    },
+    {
+      "name": "w-3 Flex",
+      "speed": 30,
+      "acceleration": 30,
+      "brake": 7,
+      "price": 60000,
+      "update": {
+        "speed": 2,
+        "acceleration": 2,
+        "price": 18000
+      }
+    },
+    {
+      "name": "w-4 Flex",
+      "speed": 30,
+      "acceleration": 30,
+      "brake": 6,
+      "price": 80000,
+      "update": {
+        "speed": 2.5,
+        "acceleration": 2.5,
+        "price": 34000
+      }
+    },
+    {
+      "name": "w-5 Flex",
+      "speed": 30,
+      "acceleration": 30,
+      "brake": 6,
+      "price": 100000,
+      "update": {
+        "speed": 3,
+        "acceleration": 3,
+        "price": 40000
+      }
+    },
+    {
+      "name": "w-6 Flex",
+      "speed": 30,
+      "acceleration": 30,
+      "brake": 5,
+      "price": 120000,
+      "update": {
+        "speed": 3.5,
+        "acceleration": 3.5,
+        "price": 46000
+      }
+    },
+    {
+      "name": "w-7 Flex",
+      "speed": 30,
+      "acceleration": 30,
+      "brake": 5,
+      "price": 140000,
+      "update": {
+        "speed": 4,
+        "acceleration": 4,
+        "price": 52000
+      }
+    },
+    {
+      "name": "w-8 Flex",
+      "speed": 30,
+      "acceleration": 30,
+      "brake": 4,
+      "price": 160000,
+      "update": {
+        "speed": 4.5,
+        "acceleration": 5,
+        "price": 59000
+      }
+    },
+    {
+      "name": "w-9 Flex",
+      "speed": 30,
+      "acceleration": 30,
+      "brake": 3,
+      "price": 180000,
+      "update": {
+        "speed": 5,
+        "acceleration": 5.5,
+        "price": 67000
+      }
+    },
+    {
+      "name": "w-10 Flex",
+      "speed": 30,
+      "acceleration": 30,
+      "brake": 3,
+      "price": 200000,
+      "update": {
+        "speed": 7,
+        "acceleration": 8,
+        "price": 75000
+      }
+    },
+    {
+      "name": "w-1 Turbo",
+      "speed": 40,
+      "acceleration": 40,
+      "brake": 7,
+      "price": 30000,
+      "update": {
+        "speed": 1,
+        "acceleration": 1,
+        "price": 5000
+      }
+    },
+    {
+      "name": "w-2 Turbo",
+      "speed": 40,
+      "acceleration": 40,
+      "brake": 6,
+      "price": 60000,
+      "update": {
+        "speed": 1.5,
+        "acceleration": 1.5,
+        "price": 10000
+      }
+    },
+    {
+      "name": "w-3 Turbo",
+      "speed": 40,
+      "acceleration": 40,
+      "brake": 6,
+      "price": 90000,
+      "update": {
+        "speed": 2,
+        "acceleration": 2,
+        "price": 15000
+      }
+    },
+    {
+      "name": "w-4 Turbo",
+      "speed": 40,
+      "acceleration": 40,
+      "brake": 5,
+      "price": 120000,
+      "update": {
+        "speed": 2.5,
+        "acceleration": 3,
+        "price": 20000
+      }
+    },
+    {
+      "name": "w-5 Turbo",
+      "speed": 40,
+      "acceleration": 40,
+      "brake": 5,
+      "price": 150000,
+      "update": {
+        "speed": 3,
+        "acceleration": 3.5,
+        "price": 25000
+      }
+    },
+    {
+      "name": "w-6 Turbo",
+      "speed": 40,
+      "acceleration": 40,
+      "brake": 4,
+      "price": 180000,
+      "update": {
+        "speed": 3.5,
+        "acceleration": 5,
+        "price": 30000
+      }
+    },
+    {
+      "name": "w-7 Turbo",
+      "speed": 40,
+      "acceleration": 40,
+      "brake": 4,
+      "price": 210000,
+      "update": {
+        "speed": 4,
+        "acceleration": 5.5,
+        "price": 35000
+      }
+    },
+    {
+      "name": "w-8 Turbo",
+      "speed": 40,
+      "acceleration": 40,
+      "brake": 3,
+      "price": 240000,
+      "update": {
+        "speed": 4.5,
+        "acceleration": 6,
+        "price": 40000
+      }
+    },
+    {
+      "name": "w-9 Turbo",
+      "speed": 40,
+      "acceleration": 40,
+      "brake": 2,
+      "price": 270000,
+      "update": {
+        "speed": 5,
+        "acceleration": 7,
+        "price": 45000
+      }
+    },
+    {
+      "name": "w-10 Turbo",
+      "speed": 40,
+      "acceleration": 40,
+      "brake": 2,
+      "price": 300000,
+      "update": {
+        "speed": 7,
+        "acceleration": 8,
+        "price": 55000
+      }
+    },
+    {
+      "name": "w-1 Shock",
+      "speed": 50,
+      "acceleration": 50,
+      "brake": 6,
+      "price": 60000,
+      "update": {
+        "speed": 2,
+        "acceleration": 2,
+        "price": 10000
+      }
+    },
+    {
+      "name": "w-2 Shock",
+      "speed": 50,
+      "acceleration": 50,
+      "brake": 5,
+      "price": 120000,
+      "update": {
+        "speed": 2.5,
+        "acceleration": 2.5,
+        "price": 20000
+      }
+    },
+    {
+      "name": "w-3 Shock",
+      "speed": 50,
+      "acceleration": 50,
+      "brake": 5,
+      "price": 180000,
+      "update": {
+        "speed": 3,
+        "acceleration": 3,
+        "price": 30000
+      }
+    },
+    {
+      "name": "w-4 Shock",
+      "speed": 50,
+      "acceleration": 50,
+      "brake": 4,
+      "price": 140000,
+      "update": {
+        "speed": 3.5,
+        "acceleration": 3.5,
+        "price": 40000
+      }
+    },
+    {
+      "name": "w-5 Shock",
+      "speed": 50,
+      "acceleration": 50,
+      "brake": 4,
+      "price": 200000,
+      "update": {
+        "speed": 4,
+        "acceleration": 4,
+        "price": 50000
+      }
+    },
+    {
+      "name": "w-6 Shock",
+      "speed": 50,
+      "acceleration": 50,
+      "brake": 3,
+      "price": 260000,
+      "update": {
+        "speed": 4.5,
+        "acceleration": 4.5,
+        "price": 60000
+      }
+    },
+    {
+      "name": "w-7 Shock",
+      "speed": 50,
+      "acceleration": 50,
+      "brake": 3,
+      "price": 320000,
+      "update": {
+        "speed": 5,
+        "acceleration": 6,
+        "price": 70000
+      }
+    },
+    {
+      "name": "w-8 Shock",
+      "speed": 50,
+      "acceleration": 50,
+      "brake": 2,
+      "price": 380000,
+      "update": {
+        "speed": 6,
+        "acceleration": 8,
+        "price": 80000
+      }
+    },
+    {
+      "name": "w-9 Shock",
+      "speed": 50,
+      "acceleration": 50,
+      "brake": 1,
+      "price": 440000,
+      "update": {
+        "speed": 6.5,
+        "acceleration": 8.5,
+        "price": 90000
+      }
+    },
+    {
+      "name": "w-10 Shock",
+      "speed": 50,
+      "acceleration": 50,
+      "brake": 1,
+      "price": 500000,
+      "update": {
+        "speed": 8,
+        "acceleration": 10,
+        "price": 100000
+      }
+    }
+  ]
+}

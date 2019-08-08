@@ -6,7 +6,7 @@ import Table from './Components/Table'
 import { Dashboard, ContentTitle } from '../../../pages/Dashboard/styles'
 import { Card, CardInfo, Advs, Game, Preparetion, AllPlayers, Buttons, Gif, DivLideres, Lideres, HeaderLideres, Players } from './styles'
 
-import { transformAsCoint, firstLitterToUpperCase, victory, lose, shame } from '../../../pages/Dashboard/functions'
+import { transformAsCoint, victory, lose, shame } from '../../../pages/Dashboard/functions'
 import { setDistance, renderP } from './functions'
 import run from './script/engine'
 
@@ -17,7 +17,7 @@ export default ({ play, data, adv, change }) =>
       <AllPlayers>
         <Card>
           <img src={`http://localhost:3001/files/${data.user.src}.jpg`} alt='Foto do usuário' />
-          <CardInfo nvl={data.user.nvl}>{firstLitterToUpperCase(data.user.nickname)}</CardInfo>
+          <CardInfo nvl={data.user.nvl}>{data.user.nickname}</CardInfo>
         </Card>
         <AwesomeButton size='large' type='secondary' ripple action={change}>Outro adversário</AwesomeButton>
         <Advs>
@@ -25,7 +25,7 @@ export default ({ play, data, adv, change }) =>
             return (
               <Card key={index}>
                 <img src={`http://localhost:3001/files/${pilot.src}.jpg`} alt='Foto do adversário' />
-                <CardInfo nvl={pilot.nvl}>{firstLitterToUpperCase(pilot.nickname)}</CardInfo>
+                <CardInfo nvl={pilot.nvl}>{pilot.nickname}</CardInfo>
               </Card>
             )
           })}

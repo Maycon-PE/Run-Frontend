@@ -5,7 +5,7 @@ import "react-awesome-button/dist/styles.css"
 //Styles
 import { FormHeader, FormHeaderLabel, FormMessage, Form, AreaInput, Input } from '../../styles'
 
-import { login, validationEmail, checkInvalid } from '../../functions'
+import { login, validationEmail, validationPassword, checkInvalid } from '../../functions'
 
 const Login = ({ push: history }) => {
   const [email, setEmail] = useState(undefined)
@@ -24,7 +24,7 @@ const Login = ({ push: history }) => {
       return
     }
 
-    if (password.length < 5) {
+    if (!validationPassword(password)) {
       checkInvalid('password-login')
       setMessage('Senha inválida!!!')
       return
@@ -59,7 +59,7 @@ const Login = ({ push: history }) => {
           <Input id='email-login' type='email' name='email' onChange={e => setEmail(e.target.value)} placeholder='Coloque seu email' maxLength='50' required />  
           <label htmlFor='email-login'>Email</label>
         </AreaInput>
-        <AreaInput verify={() => true}>
+        <AreaInput verify={() => validationPassword(password)}>
           <Input id='password-login' type='password' name='password' onChange={e => setPassword(e.target.value)} placeholder='*********' minLength='5' maxLength='15'  required />
           <label htmlFor='password-login'>Senha</label>
         </AreaInput>

@@ -132,6 +132,7 @@ export const ButtonEdit = styled.button`
 	margin: 0px 3px;
 	font-weight: 600;
 	margin: 2px;
+	margin-left: 10px;
 	width: 110px;
 	height: 29px;
 
@@ -152,6 +153,96 @@ export const ButtonEdit = styled.button`
 	}}
 `
 
-export const ComfirmPassword = styled.input`
+export const InputConfirm = styled.input`
+	position: relative;
+	width: 95%;
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 15px;
+	margin-bottom: 20px;
 
+	:after {
+		content: '';
+		background: black;
+		height: 2px;
+		width: 0px;
+		position: absolute;
+		bottom: -2px;
+		left: 0px;
+		right: 0px;
+		transform: scaleX(0);
+		transition: all 1s ease-in;
+	}
+
+	:focus:after {
+		tranform: scaleX(1);
+	}
+`
+
+export const AreaConfirm = styled.div`
+	position: relative;
+	width: 100%;
+	background: #222;
+	height: 100%;
+	padding-top: 20px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`
+
+export const ConfirmItem = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: ${({ flex }) => flex};
+	justify-content: space-around;
+	align-items: center;
+`
+
+export const ConfirmMessage = styled.span`
+	color: white;
+	font-weight: 600;
+	width: 100%;
+	text-align: center;
+`
+
+
+export const Span = styled.span`
+	margin: 5px 0px;
+  padding: 3px 0px;
+  display: flex;
+  flex-direction: column-reverse;
+
+  label {
+    position: relative;
+    ${({ edit }) => {
+    	if (edit) return `
+    		:after {
+	      content: '';
+	      height: 10px;
+	      width: 10px;
+	      position: absolute;
+	      background: black;
+	      transform: rotate(45deg);
+	      left: -10px;
+	      bottom: -20px;
+	      border: 1px solid black;
+	    }
+    	`
+    }}
+  }
+
+  input:focus ~ label:after { background: yellow; }
+  
+  input:focus:valid ~ label:after,
+  input:valid ~ label:after { background: ${({ verify }) => verify()? 'green': 'red' }; }
+`
+
+export const ButtonPadlock = styled.button`
+	position: relative;
+	background: none;
+	font-size: 25px;
+	color: white;
+	border: none;
+	padding-top: 2px;
 `

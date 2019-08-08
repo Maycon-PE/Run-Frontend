@@ -6,7 +6,7 @@ import "react-awesome-button/dist/styles.css"
 import { FormHeader, FormHeaderLabel, FormMessage, Form, AreaInput, Input, Select } from '../../styles'
 
 import  { countries } from './data/defaults.json'
-import { register, validationEmail, validationNickName, validationModel, checkInvalid } from '../../functions'
+import { register, validationEmail, validationNickName, validationModel, validationPassword, checkInvalid } from '../../functions'
 
 const Register = ({ push: history }) => {
   const [email, setEmail] = useState(undefined)
@@ -43,11 +43,9 @@ const Register = ({ push: history }) => {
       return
     }
 
-    if (password.length < 5) return
-
-    if (password.indexOf(' ') !== -1) {
+    if (!validationPassword(password)) {
       checkInvalid('password-register')
-      setMessage('A senha contêm espaços')
+      setMessage('Senha inválida')
       return
     }
 
@@ -114,11 +112,11 @@ const Register = ({ push: history }) => {
           </AreaInput>
         </AreaInput>
         <AreaInput double>
-          <AreaInput verify={() => true}>
+          <AreaInput verify={() => validationPassword(password)}>
             <Input id='password-register' type='password' name='password' onChange={e => setPassword(e.target.value) } placeholder='*********' minLength='5' maxLength='15' required />
             <label htmlFor='password-register'>Senha</label>
           </AreaInput>
-          <AreaInput verify={() => password === password2}>
+          <AreaInput verify={() => password === password2 && validationPassword(password)}>
             <Input id='password-2-register' type='password' name='password2' onChange={e => setPassword2(e.target.value) } placeholder='*********' minLength='5' maxLength='15' required />
             <label htmlFor='password-2-register'>Confirme a senha</label>
           </AreaInput>

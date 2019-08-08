@@ -1,3 +1,5 @@
+import api from '../../../requests'
+
 function getAttr(obj = Object, attr = String) {
   return obj[attr]? obj[attr].toFixed(1): (0).toFixed(1)
 }
@@ -28,4 +30,23 @@ function getFc(obj = Object) {
   return fc.toFixed(1)
 }
 
-export { getAttr, getJoin, getFc }
+function checkPassword(state, { password }) {
+  return new Promise(resolve => {
+    api.post('/auth/confirm', { password }, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'application/json'} })
+      .then(({ data }) => {
+        console.log(data)
+        if (data.status) {
+          state.valid = true
+          state.modal = false
+          state.message = data.message
+        } else {
+          state.waiting = false
+          state.message = data.message
+        }
+        resolve(state)
+      })
+      .catch(e => console.log(e))   
+  })
+}
+
+export { getAttr, getJoin, getFc, checkPassword }

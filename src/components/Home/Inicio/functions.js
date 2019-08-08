@@ -34,6 +34,10 @@ function validationModel(model = String) {
   return true
 }
 
+function validationPassword(password = String) {
+  return password.length > 4 && password.length < 15 && password.indexOf(' ') === -1
+}
+
 function checkInvalid(id) {
   const input = document.getElementById(id)
   input.focus()
@@ -42,4 +46,4 @@ function checkInvalid(id) {
   input.onchange = e => input.classList.remove('input-invalid')
 }
 
-export { register, login, validationEmail, validationNickName, validationModel, checkInvalid }
+export { register, login, validationEmail, validationNickName, validationModel, validationPassword, checkInvalid }

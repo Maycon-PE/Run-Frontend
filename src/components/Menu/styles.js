@@ -119,7 +119,13 @@ export const Menu = styled.nav`
     justify-content: space-around;
     align-items: center;
 
-    span { font-size: 16px; }
+    span { 
+      font-size: 16px;
+
+      :hover {
+        color: #888;
+      }
+    }
 	}
 
 	@media (max-width: 759px) {

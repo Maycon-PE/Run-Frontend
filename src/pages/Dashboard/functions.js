@@ -128,10 +128,6 @@ function getAdv() {
   })
 }
 
-function firstLitterToUpperCase(word = String) {
-  return word.charAt(0).toUpperCase() + word.slice(1, word.length)
-}
-
 function partSelected(selected = Number) {
   document.querySelector('.Dashboard-Aprimorator-parts-ul').childNodes.forEach((li, indice) => {
     if (selected === indice) {
@@ -179,7 +175,7 @@ function shame({ nvl } = Object, advs = Array) {
 
 export { 
   updateMyCar, transformAsCoint, transformAsNumberValid, 
-  auth, changePart, firstLitterToUpperCase, 
+  auth, changePart, 
   changePhoto, getAdv, partSelected, 
   withdrawal, winOrLose, victory, 
   lose, shame, pointerEvents, 

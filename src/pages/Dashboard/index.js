@@ -81,8 +81,8 @@ export default class Dashboard extends Component {
       },
       profile: {
         updateProfile: file => changePhoto({ auth: this.state.auth, file }).then(auth => this.setState({ auth })),
-        updateInfo: (field, value, password) => new Promise(resolve => {
-          changeInfo({ auth: this.state.auth, field, value, password })
+        updateInfo: (field, value) => new Promise(resolve => {
+          changeInfo({ auth: this.state.auth, field, value })
             .then(({ auth, status}) => {
               status && this.setState({ auth })
 
@@ -134,7 +134,7 @@ export default class Dashboard extends Component {
           const aprimore = { ...initialScreenAprimore }
           aprimore.engine = true
           const body = { ...initialBody }
-          body.profile = true
+          body.play = true
           getAdv()
             .then(advs => this.setState({ auth: res, ready: true, aprimore, body, adv: advs }))
         }) 

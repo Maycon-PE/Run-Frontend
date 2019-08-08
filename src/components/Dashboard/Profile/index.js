@@ -110,7 +110,7 @@ export default ({ data, updatePhoto, changeInfo }) => {
               setConfirm({ ...confirm, waiting: true })
               checkPassword(confirm, { password: confirm.value })
                 .then(state => setConfirm({ ...state })) 
-            }}>Proceguir</ButtonEdit>
+            }}>Prosseguir</ButtonEdit>
             <ButtonEdit bg='#d7ff00' onClick={() => setConfirm({ ...confirm, modal: false })}>Voltar</ButtonEdit>
           </ConfirmItem>
         </AreaConfirm>

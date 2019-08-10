@@ -1,5 +1,5 @@
 # Run-Frontend
-Project designed to be an interface to Run-Backend API.
+Projeto criado para ser o *client-side* do projeto **Run-Backend**.
 
-## Backend project
-- [Repository](https://github.com/Maycon-PE/Run-Backend).
+## Projeto server-side
+- [Repositório](https://github.com/Maycon-PE/Run-Backend).

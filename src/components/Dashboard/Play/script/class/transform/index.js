@@ -1,5 +1,4 @@
 /* Class carro e piloto */ import { carro, piloto } from '../'
-// /* Dados */ import data from '../../../../../data/index.json'
 
 export default function (cls, element) {
   const classCarro = carro()

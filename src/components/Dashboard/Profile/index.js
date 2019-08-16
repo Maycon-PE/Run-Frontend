@@ -97,28 +97,39 @@ export default ({ data, updatePhoto, changeInfo }) => {
     setState({ state: { ...initialState }, ...{ original: state.original, other: state.original, message: '' }})
   }
 
+  const takeOff = () => {
+    setConfirm({ ...initialStateConfirm })
+
+    nickname.state.edit && setNickname({ state: { ...initialState }, original: data.user.nickname, other: data.user.nickname })
+    name.state.edit && setName({ state: { ...initialState }, original: data.user.name, other: data.user.name })
+    email.state.edit && setEmail({ state: { ...initialState }, original: data.user.email, other: data.user.email })
+    password.state.edit && setPassword({ state: { ...initialState }, original: '', other: '' })
+  }
+
   return (
     <Dashboard>
-      <Modal visible={confirm.modal} width="250" height="150" effect="fadeInDown" onClickAway={() => setConfirm({ modal: false, value: '' })}>
-        <AreaConfirm>
+      <Modal visible={confirm.modal} width="250" height="150" effect="fadeInDown" onClickAway={() => setConfirm({ ...initialStateConfirm, modal: false })}>
+        <AreaConfirm onSubmit={e => {
+          e.preventDefault()
+
+          setConfirm({ ...confirm, waiting: true })
+          checkPassword(confirm, { password: confirm.value })
+            .then(state => setConfirm({ ...state })) 
+        }}>
           <ConfirmItem flex='column'>
             <ConfirmMessage>{confirm.message}</ConfirmMessage>
             <InputConfirm id='confirm-password' type='password' value={confirm.value} placeholder='Confirme sua senha' onChange={({ target }) => setConfirm({ ...confirm, value: target.value })} maxLength='15' minLength='5' />
           </ConfirmItem>
           <ConfirmItem flex='row'>
-            <ButtonEdit style={{ pointerEvents: confirm.valid || confirm.waiting? 'none': 'painted' }} bg='#20d800' onClick={() => {
-              setConfirm({ ...confirm, waiting: true })
-              checkPassword(confirm, { password: confirm.value })
-                .then(state => setConfirm({ ...state })) 
-            }}>Prosseguir</ButtonEdit>
-            <ButtonEdit bg='#d7ff00' onClick={() => setConfirm({ ...confirm, modal: false })}>Voltar</ButtonEdit>
+            <ButtonEdit type='submit' style={{ pointerEvents: confirm.valid || confirm.waiting? 'none': 'painted' }} bg='#20d800'>Prosseguir</ButtonEdit>
+            <ButtonEdit bg='#d7ff00' onClick={() => setConfirm({ ...initialStateConfirm, modal: false })}>Voltar</ButtonEdit>
           </ConfirmItem>
         </AreaConfirm>
       </Modal>
       <ContentTitle>Perfil</ContentTitle>
       <Fieldset>
         <SubTitle>{data.user.name}</SubTitle>
-         {confirm.valid? <ConfirmMessage>{ confirm.message } <ButtonPadlock title='Tirar permissão' onClick={() => setConfirm({ ...initialStateConfirm })}><i className="fa fa-expeditedssl"></i></ButtonPadlock></ConfirmMessage>
+         {confirm.valid? <ConfirmMessage>{ confirm.message } <ButtonPadlock title='Tirar permissão' onClick={ takeOff }><i className="fa fa-expeditedssl"></i></ButtonPadlock></ConfirmMessage>
          : <ButtonEdit bg='#20d800' onClick={() => {
          	document.getElementById('confirm-password').focus()
          	setConfirm({ ...confirm, modal: true })
@@ -128,7 +139,7 @@ export default ({ data, updatePhoto, changeInfo }) => {
           <img src={`http://localhost:3001/files/${data.user.src}.jpg`} alt='Sua foto do perfil' /><input id='file' type='file' onChange={e => updatePhoto(e.target.files[0])} />
         </ImgProfile>
         <Data edit>
-          <Span edit={name.state.edit} verify={ () => validationNickName(name.other) }>
+          <Span edit={name.state.edit} verify={ () => name.original !== name.other && validationNickName(name.other) }>
             <InputAsSpan id='change-name' defaultValue={data.user.name} onChange={e => setName({ ...name, other: e.target.value })} changing={name.state.edit} maxLength='20' minLength='3' />
             <label htmlFor='change-name'>Name: </label>
           </Span>
@@ -147,7 +158,7 @@ export default ({ data, updatePhoto, changeInfo }) => {
           </span>
         </Data>
         <Data edit>
-          <Span edit={nickname.state.edit} verify={ () => validationNickName(nickname.other) }>
+          <Span edit={nickname.state.edit} verify={ () => nickname.original !== nickname.other && validationNickName(nickname.other) }>
             <InputAsSpan id='change-nickname' defaultValue={data.user.nickname} onChange={e => setNickname({ ...nickname, other: e.target.value })} changing={nickname.state.edit} maxLength='13' minLength='3' />
             <label htmlFor='change-nickname'>Nickname: </label>
           </Span>
@@ -166,7 +177,7 @@ export default ({ data, updatePhoto, changeInfo }) => {
           </span>
         </Data>
         <Data edit>
-          <Span edit={email.state.edit} verify={ () => validationEmail(email.other) }>
+          <Span edit={email.state.edit} verify={ () => email.original !== email.other && validationEmail(email.other) }>
             <InputAsSpan id='change-email' defaultValue={data.user.email} onChange={e => setEmail({ ...email, other: e.target.value })} changing={email.state.edit} maxLength='50' />
             <label htmlFor='change-email'>Email: </label>
           </Span>

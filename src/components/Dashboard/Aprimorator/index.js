@@ -1,5 +1,11 @@
 import React from 'react'
 
+import engineImage from './images/parts/motor.png'
+import transmissionImage from './images/parts/cambio.png'
+import cylinderImage from './images/parts/cilindro.png'
+import protectionImage from './images/parts/protecao.png'
+import whellsImage from './images/parts/rodas.png'
+
 import { 
   Aprimore, Header, HeaderMenuItem,
   Content, InsideContent, Gold,
@@ -30,11 +36,11 @@ export default ({ data, closeModal, change }) =>
   <Aprimore>
     <Header>
       <ul className='Dashboard-Aprimorator-parts-ul'>
-        <HeaderMenuItem up={JSON.parse(data.auth.car.engine_object).ups} onClick={() => change('engine', 0)}><img src='http://localhost:3001/files/icons/aprimore/parts/motor.png' alt='Motor icon' /></HeaderMenuItem>
-        <HeaderMenuItem up={JSON.parse(data.auth.car.transmission_object).ups} onClick={() => change('transmission', 1)}><img src='http://localhost:3001/files/icons/aprimore/parts/cambio.png' alt='Câmbio icon' /> </HeaderMenuItem>
-        <HeaderMenuItem up={JSON.parse(data.auth.car.whells_object).ups} onClick={() => change('whells', 2)}><img src='http://localhost:3001/files/icons/aprimore/parts/rodas.png' alt='Rodas icon' /></HeaderMenuItem>
-        <HeaderMenuItem up={JSON.parse(data.auth.car.cylinder_object).ups} onClick={() => change('cylinder', 3)}><img src='http://localhost:3001/files/icons/aprimore/parts/cilindro.png' alt='Cilindro icon' /></HeaderMenuItem>
-        <HeaderMenuItem up={JSON.parse(data.auth.car.protection_object).ups} onClick={() => change('protection', 4)}><img src='http://localhost:3001/files/icons/aprimore/parts/protecao.png' alt='Proteção icon' /></HeaderMenuItem>
+        <HeaderMenuItem up={JSON.parse(data.auth.car.engine_object).ups} onClick={() => change('engine', 0)}><img src={engineImage} alt='Motor icon' /></HeaderMenuItem>
+        <HeaderMenuItem up={JSON.parse(data.auth.car.transmission_object).ups} onClick={() => change('transmission', 1)}><img src={transmissionImage} alt='Câmbio icon' /> </HeaderMenuItem>
+        <HeaderMenuItem up={JSON.parse(data.auth.car.whells_object).ups} onClick={() => change('whells', 2)}><img src={whellsImage} alt='Rodas icon' /></HeaderMenuItem>
+        <HeaderMenuItem up={JSON.parse(data.auth.car.cylinder_object).ups} onClick={() => change('cylinder', 3)}><img src={cylinderImage} alt='Cilindro icon' /></HeaderMenuItem>
+        <HeaderMenuItem up={JSON.parse(data.auth.car.protection_object).ups} onClick={() => change('protection', 4)}><img src={protectionImage} alt='Proteção icon' /></HeaderMenuItem>
       </ul>
     </Header>
     <Content>

@@ -179,7 +179,7 @@ export const InputConfirm = styled.input`
 	}
 `
 
-export const AreaConfirm = styled.div`
+export const AreaConfirm = styled.form`
 	position: relative;
 	width: 100%;
 	background: #222;

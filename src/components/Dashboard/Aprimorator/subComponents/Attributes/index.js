@@ -14,6 +14,6 @@ export default ({ message, render, data, submit }) =>
     <ButtonArea>
       <span>{transformAsCoint(data.update_config.price)}</span>
       <AwesomeButton className='Dashboard-Aprimorator-content-inside-body-btn' size='medium' type='primary' ripple action={submit}>Aprimorar</AwesomeButton>
-      <span>{message}</span>
+      <span>{data.ups === 10 ? 'Máximo': message}</span>
     </ButtonArea>
   </>

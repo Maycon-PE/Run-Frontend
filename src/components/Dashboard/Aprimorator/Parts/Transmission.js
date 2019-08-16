@@ -1,6 +1,8 @@
 import React from 'react'
 import { AwesomeButton } from "react-awesome-button"
 
+import images from './images_object'
+
 import "react-awesome-button/dist/styles.css"
 import { AprimoreTitle } from './styles'
 import { Li } from '../subComponents/Attributes/styles'
@@ -20,7 +22,7 @@ function renderLiAttr(atrParam) {
   const li = []
 
   Object.entries(attr).forEach((atr, indice) => li.push(<Li key={indice}>
-      <span className='attrName'><img src={`http://localhost:3001/files/icons/aprimore/attributes/${atr[0]}.png`} alt='Ícone do atributo' /></span>
+      <span className='attrName'><img src={images[atr[0]]} alt='Ícone do atributo' /></span>
       <span className='attrValue'>{atr[1].toFixed(1)} {atrParam.update_config[atr[0]]? '+' + atrParam.update_config[atr[0]]: ''}</span>
     </Li>))
 

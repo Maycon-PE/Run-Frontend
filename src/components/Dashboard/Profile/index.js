@@ -136,7 +136,7 @@ export default ({ data, updatePhoto, changeInfo }) => {
          }}>Sou eu!</ButtonEdit>}
         <ImgProfile>
           { confirm.valid &&  <label htmlFor='file'><AwesomeButton size='large' type='primary' ripple action={() => document.getElementById('file').click()}>Trocar foto</AwesomeButton></label> }
-          <img src={`http://localhost:3001/files/${data.user.src}.jpg`} alt='Sua foto do perfil' /><input id='file' type='file' onChange={e => updatePhoto(e.target.files[0])} />
+          <img src={`http://localhost:8080/files/${data.user.src}.jpg`} alt='Sua foto do perfil' /><input id='file' type='file' onChange={e => updatePhoto(e.target.files[0])} />
         </ImgProfile>
         <Data edit>
           <Span edit={name.state.edit} verify={ () => name.original !== name.other && validationNickName(name.other) }>

@@ -20,8 +20,8 @@ import Sale from '../subComponents/Sale'
 function renderLiMarchas(config) {
   const li = []
 
-    Object.values(config.exchange_rates).forEach((data, indice) => li.push(<li key={indice}>
-      <LiLabel className='Dashboard-Aprimorator-content-inside-body-exchanges-ul-li-span'>{indice + 1}</LiLabel>
+    Object.values(config.exchange_rates).forEach((data, index) => li.push(<li key={`info-exchange-${index}`}>
+      <LiLabel className='Dashboard-Aprimorator-content-inside-body-exchanges-ul-li-span'>{index + 1}</LiLabel>
       <LiData className='Dashboard-Aprimorator-content-inside-body-exchanges-ul-li'>{data}</LiData>
     </li>))
 
@@ -32,7 +32,7 @@ function renderLiAttr(atrParam) {
   const attr = { speed: atrParam.speed, acceleration: atrParam.acceleration, resistance: atrParam.resistance }
   const li = []
 
-  Object.entries(attr).forEach((atr, indice) => li.push(<Li key={indice}>
+  Object.entries(attr).forEach((atr, index) => li.push(<Li key={`images-attr-${index}`}>
       <span className='attrName'><img src={images[atr[0]]} alt='Ícone do atributo' /></span>
       <span className='attrValue'>{atr[1].toFixed(1)} + {atrParam.update_config[atr[0]]}</span>
     </Li>))
@@ -63,7 +63,7 @@ function renderProducts(my, toBuy, gold) {
 
   const divs = []
 
-  sale.forEach(part => divs.push(<PreviewProduct key={part.id}>
+  sale.forEach(part => divs.push(<PreviewProduct key={`sale-engine-${part.id}`}>
     <ProductName className={`Dashboard-Aprimorator-content-inside-body-inside-Sale-name ${my === part.name? 'myPartEquiped': ''}`} onClick={() => setEffect(part.id)}>{part.name}</ProductName>
     <InfoProductId className={`Dashboard-Aprimorator-content-inside-body-inside-Sale-info thisIsProduct-${part.id}`}>
       <InfoProductGlobal>

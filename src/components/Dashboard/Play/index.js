@@ -1,5 +1,8 @@
 import React from 'react'
 import { AwesomeButton } from "react-awesome-button"
+
+import baseUrl from '../../../baseUrl'
+
 import "react-awesome-button/dist/styles.css"
 
 import Table from './Components/Table'
@@ -16,15 +19,15 @@ export default ({ play, data, adv, change }) =>
     <Preparetion className='preparetion'>
       <AllPlayers>
         <Card>
-          <img src={`http://localhost:3001/files/${data.user.src}.jpg`} alt='Foto do usuário' />
+          <img src={`${baseUrl}/files/${data.user.src}.jpg`} alt='Foto do usuário' />
           <CardInfo nvl={data.user.nvl}>{data.user.nickname}</CardInfo>
         </Card>
         <AwesomeButton size='large' type='secondary' ripple action={change}>Outro adversário</AwesomeButton>
         <Advs>
           {adv.map(({ pilot, car }, index) => {
             return (
-              <Card key={index}>
-                <img src={`http://localhost:3001/files/${pilot.src}.jpg`} alt='Foto do adversário' />
+              <Card key={pilot.id}>
+                <img src={`${baseUrl}/files/${pilot.src}.jpg`} alt='Foto do adversário' />
                 <CardInfo nvl={pilot.nvl}>{pilot.nickname}</CardInfo>
               </Card>
             )
@@ -57,7 +60,7 @@ export default ({ play, data, adv, change }) =>
           </DivLideres>
           <Players>
             <Table pilot={data.user} car={data.car} index='0' />
-            {adv.map(({ pilot, car }, index) => <Table key={index} pilot={pilot} car={car} index={index + 1} /> )}
+            {adv.map(({ pilot, car }, index) => <Table key={pilot.id} pilot={pilot} car={car} index={index + 1} /> )}
           </Players>
           <Buttons desistir className='btn-stop'>
             <span>Pejuizo - {transformAsCoint(shame(data.user, adv))}</span>

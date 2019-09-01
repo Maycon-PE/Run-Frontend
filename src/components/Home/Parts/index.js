@@ -49,7 +49,7 @@ const Parts = () => {
         <tbody>
           {allParts.engines.map((engine, index) => (
             index >= pages.engines.start && index < pages.engines.end && (
-              <tr key={index}>
+              <tr key={`engine-${engine.id}`}>
                 <td>{index + 1}</td><td>{engine.name}</td><td>{engine.exchange}</td><td>{engine.speed}</td><td>{engine.acceleration}</td><td>{engine.turbo}</td><td>{engine.resistance}</td><td>{transformAsCoint(engine.price)}</td>
               </tr>
             )
@@ -66,7 +66,7 @@ const Parts = () => {
         <tbody>
           {allParts.transmissions.map((transmission, index) => (
             index >= pages.transmissions.start && index < pages.transmissions.end && (
-              <tr key={index}>
+              <tr key={`transmissions-${transmission.id}`}>
                 <td>{index + 1}</td><td>{transmission.name}</td><td>{transmission.speed}</td><td>{transmission.acceleration}</td><td>{transmission.resistance}</td><td>{transformAsCoint(transmission.price)}</td>
               </tr>
             )
@@ -83,7 +83,7 @@ const Parts = () => {
         <tbody>
           {allParts.whells.map((circle, index) => (
             index >= pages.whells.start && index < pages.whells.end && (
-                <tr key={index}>
+                <tr key={`whells-${circle.id}`}>
                   <td>{index + 1}</td><td>{circle.name}</td><td>{circle.speed}</td><td>{circle.acceleration}</td><td>{circle.brake}</td><td>{transformAsCoint(circle.price)}</td>
                 </tr>
               )
@@ -100,7 +100,7 @@ const Parts = () => {
         <tbody>
           {allParts.cylinders.map((cylinder, index) => (
             index >= pages.cylinders.start && index < pages.cylinders.end && (
-              <tr key={index}>
+              <tr key={`cylinder-${cylinder.id}`}>
                 <td>{index + 1}</td><td>{cylinder.name}</td><td>{cylinder.speed}</td><td>{cylinder.acceleration}</td><td>{cylinder.turbo}</td><td>{cylinder.resistance}</td><td>{transformAsCoint(cylinder.price)}</td>
               </tr>
             )
@@ -117,7 +117,7 @@ const Parts = () => {
         <tbody>
           {allParts.protections.map((protection, index) => (
             index >= pages.protections.start && index < pages.protections.end && (
-              <tr key={index}>
+              <tr key={`protection-${protection.id}`}>
                 <td>{index + 1}</td><td>{protection.name}</td><td>{protection.resistance}</td><td>{transformAsCoint(protection.price)}</td>
               </tr>
             )

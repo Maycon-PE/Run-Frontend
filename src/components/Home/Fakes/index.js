@@ -41,7 +41,7 @@ const Fakes = () => {
         <tbody>
           {allBots.pilots.map((pilot, index) => (
             (index >= pages.pilots.start && index < pages.pilots.end) && (
-              <tr key={index}>
+              <tr key={`pilot-${pilot.id}`}>
                 <td>{pilot.id}</td><td>{pilot.nickname}</td><td>{pilot.genre}</td><td>{pilot.country}</td><td>{pilot.nvl}</td><td>{allBots.cars.map(({ id, model }) => {if (id === pilot.car_id) return model })}</td>
               </tr>
             )
@@ -58,7 +58,7 @@ const Fakes = () => {
         <tbody>
           {allBots.cars.map((car, index) => (
             (index >= pages.cars.start && index < pages.cars.end) && (
-              <tr key={index}>
+              <tr key={`car-${car.id}`}>
                 <td>{car.id}</td><td>{car.model}</td><td>{car.engine}</td><td>{car.transmission}</td><td>{car.cylinder}</td><td>{car.whells}</td><td>{car.protection}</td>
               </tr>
             )

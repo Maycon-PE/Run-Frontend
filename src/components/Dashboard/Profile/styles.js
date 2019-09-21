@@ -246,3 +246,20 @@ export const ButtonPadlock = styled.button`
 	border: none;
 	padding-top: 2px;
 `
+
+export const Del = styled.button`
+	position: absolute;
+	top: 0;
+	left: 5px;
+	padding: 10px;
+	font-size: 18px;
+	background: rgba(200, 0, 0, .7);
+	border: none;
+	border-radius: 6px;
+	opacity: .5;
+
+	transition: opacity .4s ease-out;
+	:hover {
+		opacity: 1;
+	}
+`

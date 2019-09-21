@@ -36,6 +36,7 @@ export default class Dashboard extends Component {
     super(props)
 
     this.state = { 
+      push: props.history,
       ready: false,
       sale: false, 
       auth: {},
@@ -131,6 +132,7 @@ export default class Dashboard extends Component {
   componentDidMount() {
     auth()
       .then(res => {
+          if (!res) return this.state.push.push('/')
           const aprimore = { ...initialScreenAprimore }
           aprimore.engine = true
           const body = { ...initialBody }
@@ -153,8 +155,8 @@ export default class Dashboard extends Component {
   }
 
   renderBody(state) {
-    if (state.body.play) return <Play play={state.play} data={state.auth} adv={state.adv} change={this.state.play.changeAdv} />
-    if (state.body.profile) return <Profile data={state.auth} updatePhoto={this.state.profile.updateProfile} changeInfo={this.state.profile.updateInfo} />
+    if (state.body.play) return <Play play={state.play} data={state.auth} adv={state.adv} change={state.play.changeAdv} />
+    if (state.body.profile) return <Profile push={state.push} data={state.auth} updatePhoto={state.profile.updateProfile} changeInfo={state.profile.updateInfo} />
   }
 
   render() {

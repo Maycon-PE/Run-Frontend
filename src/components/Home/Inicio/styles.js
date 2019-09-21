@@ -33,6 +33,10 @@ export const InsideBlock = styled.div`
 	justify-content: center;
 	align-items: center;
 
+  > p  {
+    font-size: 2.5rem;
+  }
+
 	grid-area: ${({ side }) => side}
 `
 

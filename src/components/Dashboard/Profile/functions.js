@@ -34,7 +34,6 @@ function checkPassword(state, { password }) {
   return new Promise(resolve => {
     api.post('/auth/confirm', { password }, { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'application/json'} })
       .then(({ data }) => {
-        console.log(data)
         if (data.status) {
           state.valid = true
           state.modal = false
@@ -49,4 +48,14 @@ function checkPassword(state, { password }) {
   })
 }
 
-export { getAttr, getJoin, getFc, checkPassword }
+function doRemove() {
+  return new Promise(resolve => {
+    api.delete('/auth/delete', { headers: { 'Authorization': sessionStorage.getItem('token'), 'Content-type': 'application/json'} })
+      .then(({ data }) => {
+        resolve(data.status)
+      })
+      .catch(e => console.log(e))
+  })
+}
+
+export { getAttr, getJoin, getFc, checkPassword, doRemove }

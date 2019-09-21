@@ -117,7 +117,7 @@ function auth() {
   return new Promise(resolve => {
     api.post('/auth', {}, { headers: { 'Authorization': sessionStorage.getItem('token') } })
       .then(res => resolve(res.data))
-      .catch(e => console.log(e))
+      .catch(e => resolve(false))
   })
 }
 

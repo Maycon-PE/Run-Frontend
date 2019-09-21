@@ -11,11 +11,12 @@ import {
   Fieldset, ImgProfile, Data, 
   SubTitle, InputAsSpan, ButtonEdit, 
   InputConfirm, AreaConfirm, ConfirmItem,
-  ConfirmMessage, Span, ButtonPadlock
+  ConfirmMessage, Span, ButtonPadlock, 
+  Del
 } from './styles'
 
 import { transformAsCoint, transformAsNumberValid } from '../../../pages/Dashboard/functions'
-import { getAttr, getJoin, getFc, checkPassword } from './functions'
+import { getAttr, getJoin, getFc, checkPassword, doRemove } from './functions'
 import { validationNickName, validationEmail, validationPassword } from '../../Home/Inicio/functions'
 
 const initialState = {
@@ -71,7 +72,7 @@ const initialStateConfirm = {
 	waiting: false
 }
 
-export default ({ data, updatePhoto, changeInfo }) => {
+export default ({ push, data, updatePhoto, changeInfo }) => {
   const [confirm, setConfirm] = useState({ ...initialStateConfirm })
   const [nickname, setNickname] = useState({ state: { ...initialState }, original: data.user.nickname, other: data.user.nickname })
   const [email, setEmail] = useState({ state: { ...initialState }, original: data.user.email, other: data.user.email })
@@ -106,8 +107,14 @@ export default ({ data, updatePhoto, changeInfo }) => {
     password.state.edit && setPassword({ state: { ...initialState }, original: '', other: '' })
   }
 
+  const del = async () => {
+    console.log(push)
+    if (await doRemove()) push.push('/') 
+  }
+
   return (
     <Dashboard>
+      { confirm.valid && <Del onClick={del}>Excluir conta</Del> }
       <Modal visible={confirm.modal} width="250" height="150" effect="fadeInDown" onClickAway={() => setConfirm({ ...initialStateConfirm, modal: false })}>
         <AreaConfirm onSubmit={e => {
           e.preventDefault()

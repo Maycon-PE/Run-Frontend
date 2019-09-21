@@ -17,7 +17,6 @@ export default ({ changeBody }) =>
             <span onClick={() => changeBody('inicio')}>Inicio</span>
             <span onClick={() => changeBody('bots')}>Bots</span>
             <span onClick={() => changeBody('parts')}>Peças</span>
-            <span onClick={() => changeBody('help')}>Ajuda</span>
           </Menu>
         </LimitMenu>
       </Right>

@@ -10,7 +10,6 @@ import Nav from '../../components/Menu'
 import Inicio from '../../components/Home/Inicio'
 import Fakes from '../../components/Home/Fakes'
 import Parts from '../../components/Home/Parts'
-import HowPlay from '../../components/Home/HowPlay'
 
 const inicialStateScreen = {
   inicio: false,
@@ -42,7 +41,6 @@ const Home = ({ history }) => {
     if (render.inicio) return <Inicio push={history} />
     if (render.bots) return <Fakes />
     if (render.parts) return <Parts />
-    return <HowPlay />
   }
 
   useEffect(() => {
